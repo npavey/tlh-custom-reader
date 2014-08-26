@@ -261,23 +261,37 @@ ul.unstyled {
         opacity: 1;
     }
 
-.objective h2.objective-title {
-    color: #e5343a;
-    font-family: 'Intro';
-    font-size: 22px;
-    font-weight: normal;
-    text-transform: uppercase;
-}
+
 
 /* #endregion */
 
 /* #region page */
 
-.page .page-title {
+.page .title-wrapper {
+    border-left: 1px solid #413d4a;
+    padding: 13px 20px;
+}
+
+.page h2.objective-title {
+    color: #e5343a;
     font-family: 'Intro';
-    color: #57dcdb;
-    font-size: 16px;
+    font-size: 22px;
+    font-weight: normal;
+    margin: 0;
     text-transform: uppercase;
+}
+
+.page h3.page-title {
+    color: #57dcdb;
+    font-family: 'Intro';
+    font-size: 16px;
+    font-weight: normal;
+    margin: 20px 0 0;
+    text-transform: uppercase;
+}
+
+.page .content {
+    padding: 20px;
 }
 
 /* #endregion */
@@ -291,6 +305,7 @@ ul.unstyled {
     content: "";
     display: block;
     height: 5px;
+    padding: 40px 0;
     width: 100%;
 }
 

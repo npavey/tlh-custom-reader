@@ -2,7 +2,6 @@
 
     var ViewModel = function () {
         this.id = ko.observable();
-        this.title = ko.observable();
         this.pages = ko.observableArray([]);
         this.router = router.createChildRouter()
                 .makeRelative({
@@ -22,7 +21,6 @@
         var objective = dataContext.getObjective(objectiveId);
         
         this.id(objective.id);
-        this.title(objective.title);
         this.pages(objective.pages.map(function(page) {
             return page.id;
         }));
