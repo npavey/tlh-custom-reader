@@ -1,0 +1,31 @@
+﻿<section class="course">
+    <div class="finish-wrapper">
+        <button class="button default emphasize middle finish">Finish</button>
+    </div>
+
+
+    <div class="container">
+        <div class="course-title-wrapper">
+            <img class="course-image" src="../../css/img/reader.png" alt="" />
+            <h1 class="course-title" data-bind="text: title"></h1>
+            <span class="course-author clearfix">Created by: <span data-bind="text: author"></span></span>
+        </div>
+
+        <ul class="unstyled objectives">
+            <!-- ko foreach: objectives -->
+            <li class="objective">
+                <a href="#" data-bind="attr: { href: '#objective/' + id }">
+                    <div class="objective-thumbnail-wrapper">
+                    </div>
+                </a>
+                <div class="objective-title">
+                    <span data-bind="text: title, attr: { title: title }"></span>
+                </div>
+            </li>
+            <!-- /ko -->
+            <li class="clearfix"></li>
+        </ul>
+
+    </div>
+
+</section>
