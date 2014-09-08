@@ -1,17 +1,24 @@
-﻿<section class="objective" style="position: relative;">
+﻿<section class="objective">
 
+    <div class="content-table">
+        <div class="content-table-title">Articles</div>
+        <ul class="unstyled">
+            <!-- ko foreach: pages -->
+            <!-- ko if: isActive -->
+            <li class="content-table-article-title-wrapper active">
+                <span class="content-table-article-title active" data-bind="text: title"></span>
+            </li>
+            <!-- /ko -->
+            <!-- ko ifnot: isActive -->
+            <li class="content-table-article-title-wrapper">
+                <a href="#" class="content-table-article-title" data-bind="attr: { href: '#objective/' + $parent.id() +'/page/'+ id }, text: title"></a>
+            </li>
+            <!-- /ko -->
+            <!-- /ko -->
+        </ul>
+    </div>
 
-    <ul style="display: block; position: absolute; left: 0; top:0; width: 300px;height: 100%;">
-        <!-- ko foreach: pages -->
-
-        <li>
-            <a href="#" data-bind="attr: { href: '#objective/' + $parent.id() +'/page/'+ $data}, text: $data"></a>
-        </li>
-
-        <!-- /ko -->
-    </ul>
-
-    <div class=" container">
+    <div class="container">
         <div class=" back-wrapper">
             <a class="button emphasize back" href="#">Back to objectives</a>
         </div>

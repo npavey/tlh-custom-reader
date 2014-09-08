@@ -19,10 +19,19 @@
 
     ViewModel.prototype.activate = function (objectiveId) {
         var objective = dataContext.getObjective(objectiveId);
-        
         this.id(objective.id);
-        this.pages(objective.pages.map(function(page) {
-            return page.id;
+        this.pages(objective.pages.map(function (page) {
+            return {
+                id: page.id,
+                title: page.title,
+                isActive: ko.computed(function () {
+                    if (router.activeInstruction() && router.activeInstruction().fragment && router.activeInstruction().fragment.length) {
+                        var url = router.activeInstruction().fragment;
+                        return url.indexOf(page.id, url.length - page.id.length) !== -1;
+                    }
+                    return false;
+                })
+            }
         }));
 
     }

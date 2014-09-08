@@ -230,7 +230,7 @@ ul.unstyled {
 
 
 .objective .back-wrapper {
-    margin: 70px 0;
+    padding: 70px 0;
 }
 
 .objective .button.back {
@@ -261,7 +261,48 @@ ul.unstyled {
         opacity: 1;
     }
 
+.content-table {
+    display: block;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 300px;
+    height: 100%;
+    text-align: center;
+    background-color: #130e20;
+    padding: 70px 20px;
+    z-index: 1;
+}
 
+.content-table-title {
+    text-transform: uppercase;
+    color: #e5343a;
+    font-size: 16px;
+    font-family: 'Intro';
+}
+
+
+
+.content-table-article-title-wrapper {
+    padding-top: 50px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #d0d0d0;
+}
+
+    .content-table-article-title-wrapper.active {
+        border-color: #57dcdb;
+    }
+
+.content-table-article-title {
+    font-family: 'Intro';
+    font-size: 14px;
+    color: #d0d0d0;
+    text-decoration: none;
+}
+
+    .content-table-article-title.active {
+        color: #57dcdb;
+    }
 
 /* #endregion */
 
