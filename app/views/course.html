@@ -14,10 +14,20 @@
         <ul class="unstyled objectives">
             <!-- ko foreach: objectives -->
             <li class="objective">
-                <a href="#" data-bind="attr: { href: '#objective/' + id }">
-                    <div class="objective-thumbnail-wrapper">
+                <div class="objective-thumbnail-wrapper">
+                    <div class="objective-thumbnail">
+                        <div class="objective-thumbnail-image-wrapper">
+                            <div class="objective-thumbnail-image">
+                                <span class="objective-thumbnail-image-text" data-bind="text: title[0]"></span>
+                            </div>
+                        </div>
                     </div>
-                </a>
+                    <a href="#" class="objective-start-wrapper" data-bind="attr: { href: '#objective/' + id }">
+                        <div class="objective-start">
+                            <span class="button large emphasize primary">Start reader</span>
+                        </div>
+                    </a>
+                </div>
                 <div class="objective-title">
                     <span data-bind="text: title, attr: { title: title }"></span>
                 </div>
