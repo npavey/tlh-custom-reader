@@ -2,8 +2,7 @@
     paths: {
         'text': '../js/text',
         'durandal': '../js/durandal',
-        'plugins': '../js/durandal/plugins',
-        'transitions': '../js/durandal/transitions',
+        'plugins': '../js/durandal/plugins'
     },
     urlArgs: 'v=' + Math.random()
 });
