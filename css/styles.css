@@ -125,6 +125,10 @@ ul.unstyled {
         .button.default:hover {
             background-color: #919191;
             color: #2d2733;
+            -webkit-transition: ease-in-out all .25s;
+            -moz-transition: ease-in-out all .25s;
+            -ms-transition: ease-in-out all .25s;
+            transition: ease-in-out all .25s;
         }
 
     .button.primary {
@@ -137,6 +141,10 @@ ul.unstyled {
         .button.primary:hover {
             color: #2d2733;
             background-color: #57dcdb;
+            -webkit-transition: ease-in-out all .25s;
+            -moz-transition: ease-in-out all .25s;
+            -ms-transition: ease-in-out all .25s;
+            transition: ease-in-out all .25s;
         }
 
 
@@ -295,6 +303,11 @@ ul.unstyled {
 
 .objective-start-wrapper:hover {
     background-color: rgba(65, 61, 74, 0);
+    -webkit-transition: ease-in-out all .25s;
+    -moz-transition: ease-in-out all .25s;
+    -ms-transition: ease-in-out all .25s;
+    -o-transition: ease-in-out all .25s;
+    transition: ease-in-out all .25s;
 }
 
     .objective-start-wrapper:hover .objective-start {
