@@ -377,11 +377,18 @@ ul.unstyled {
     }
 
 .content-table-article-title {
+    color: #d0d0d0;
+    cursor: pointer;
+    display: inline-block;
     font-family: 'Intro';
     font-size: 14px;
-    color: #d0d0d0;
+    line-height: 22px;
     text-decoration: none;
 }
+
+    .content-table-article-title:hover {
+        color: #57dcdb;
+    }
 
     .content-table-article-title.active {
         color: #57dcdb;
