@@ -1,30 +1,38 @@
 ﻿<section class="objective">
 
-    <div class="content-table">
-        <div class="content-table-title">Articles</div>
-        <ul class="unstyled">
-            <!-- ko foreach: pages -->
-            <!-- ko if: isActive -->
-            <li class="content-table-article-title-wrapper active">
-                <span class="content-table-article-title active" data-bind="text: title"></span>
-            </li>
-            <!-- /ko -->
-            <!-- ko ifnot: isActive -->
-            <li class="content-table-article-title-wrapper">
-                <a href="#" class="content-table-article-title" data-bind="attr: { href: '#objective/' + $parent.id() +'/page/'+ id }, text: title"></a>
-            </li>
-            <!-- /ko -->
-            <!-- /ko -->
-        </ul>
-    </div>
-
     <div class="container">
-        <div class=" back-wrapper">
-            <a class="button emphasize back" href="#">Back to objectives</a>
+        <!-- ko if: isTableOfContentVisible -->
+        <div class="content-table-wrapper">
+            <div class="content-table">
+                <button class="button collapse" data-bind="click: hideTableOfContent"></button>
+                <div class="content-table-title">Articles</div>
+                <ul class="unstyled">
+                    <!-- ko foreach: pages -->
+                    <!-- ko if: isActive -->
+                    <li class="content-table-article-title-wrapper active">
+                        <span class="content-table-article-title active" data-bind="text: title"></span>
+                    </li>
+                    <!-- /ko -->
+                    <!-- ko ifnot: isActive -->
+                    <li class="content-table-article-title-wrapper">
+                        <a href="#" class="content-table-article-title" data-bind="attr: { href: '#objective/' + $parent.id() +'/page/'+ id }, text: title"></a>
+                    </li>
+                    <!-- /ko -->
+                    <!-- /ko -->
+                </ul>
+            </div>
         </div>
+        <!-- /ko -->
+        <div class="page-container-wrapper">
+            <div class="page-container">
+                <button class="button expand" data-bind="click: showTableOfContent"></button>
+                <div class="back-wrapper">
+                    <a class="button emphasize back" href="#">Back to objectives</a>
+                </div>
 
-        <div data-bind="router: {}"></div>
-
+                <div data-bind="router: { }"></div>
+            </div>
+        </div>
     </div>
 
 </section>

@@ -12,7 +12,7 @@
     });
 
     router.on('router:navigation:composition-complete').then(function () {
-        setTimeout(function () {
+        setTimeout(function () {            
             viewmodel.isViewReady(true);
         }, 250);
     });
