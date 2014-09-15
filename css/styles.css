@@ -51,7 +51,7 @@ body {
     -ms-user-select: none;
     -webkit-user-select: none;
     user-select: none;
-    min-width: 600px;
+    min-width: 640px;
     color: #fff;
     font-family: 'DaxlinePro', sans-serif;
     font-size: 14px;
@@ -156,73 +156,74 @@ ul.unstyled {
 
 /* #region course */
 
-
-.course .container {
-    max-width: 1560px;
-    margin: auto;
+.course {
+    padding: 30px;
 }
 
-
-.course .finish-wrapper {
-    height: 75px;
-    padding-top: 30px;
-    padding-right: 30px;
-    text-align: right;
-}
-
-.course .course-title-wrapper {
-    height: 120px;
-}
-
-.course .course-image {
-    float: left;
-    margin-right: 20px;
-    width: 120px;
-    height: 120px;
-}
-
-.course .course-title {
-    color: #57dcdb;
-    text-transform: uppercase;
-    padding: 10px 0;
-    margin: 0;
-    font-size: 18px;
-    font-family: 'Intro';
-    font-weight: bold;
-}
-
-.course .course-author {
-    color: #e7ded8;
-    font-size: 12px;
-    font-family: 'Intro';
-}
-
-.course .objectives {
-    margin: 20px auto;
-}
-
-.course .objective {
-    border-left: 1px solid #413d4a;
-    float: left;
-    margin: 20px 0;
-    overflow: hidden;
-    padding: 20px;
-    text-overflow: ellipsis;
-    width: 390px;
-}
+    .course .container {
+        max-width: 1560px;
+        margin: auto;
+    }
 
 
+    .course .finish-wrapper {
+        height: 75px;
+        text-align: right;
+    }
 
-.course .objective-title {
-    color: #e5343a;
-    font-family: 'Intro';
-    font-size: 16px;
-    overflow: hidden;
-    padding-top: 20px;
-    text-overflow: ellipsis;
-    text-transform: uppercase;
-    white-space: nowrap;
-}
+    .course .course-title-wrapper {
+        height: 120px;
+    }
+
+    .course .course-image {
+        float: left;
+        margin-right: 20px;
+        width: 120px;
+        height: 120px;
+    }
+
+    .course .course-title {
+        color: #57dcdb;
+        text-transform: uppercase;
+        padding: 10px 0;
+        margin: 0;
+        font-size: 18px;
+        font-family: 'Intro';
+        font-weight: bold;
+    }
+
+    .course .course-author {
+        color: #e7ded8;
+        font-size: 12px;
+        font-family: 'Intro';
+    }
+
+    .course .objectives {
+        margin: 20px auto;
+    }
+
+    .course .objective {
+        border-left: 1px solid #413d4a;
+        float: left;
+        margin: 20px 0;
+        overflow: hidden;
+        padding: 20px;
+        text-overflow: ellipsis;
+        width: 390px;
+    }
+
+
+
+    .course .objective-title {
+        color: #e5343a;
+        font-family: 'Intro';
+        font-size: 16px;
+        overflow: hidden;
+        padding-top: 20px;
+        text-overflow: ellipsis;
+        text-transform: uppercase;
+        white-space: nowrap;
+    }
 
 .objective-thumbnail-wrapper {
     background-color: rgba(65, 61, 74, 0.3);
@@ -528,3 +529,21 @@ ul.unstyled {
 
 
 /*#endregion*/
+
+@media (max-width: 1619px) {
+    .course .objectives {
+        width: 1170px;
+    }
+}
+
+@media (max-width: 1229px) {
+    .course .objectives {
+        width: 780px;
+    }
+}
+
+@media (max-width: 839px) {
+    .course .objectives {
+        width: 390px;
+    }
+}
