@@ -1,8 +1,7 @@
 ﻿<section class="objective">
 
     <div class="container">
-        <!-- ko if: isTableOfContentVisible -->
-        <div class="content-table-wrapper">
+        <div class="content-table-wrapper" data-bind="toggle: isTableOfContentVisible">
             <div class="content-table">
                 <button class="button collapse" data-bind="click: hideTableOfContent"></button>
                 <div class="content-table-title">Articles</div>
@@ -22,10 +21,11 @@
                 </ul>
             </div>
         </div>
-        <!-- /ko -->
         <div class="page-container-wrapper">
             <div class="page-container">
+                <!-- ko ifnot: isTableOfContentVisible -->
                 <button class="button expand" data-bind="click: showTableOfContent"></button>
+                <!-- /ko -->
                 <div class="back-wrapper">
                     <a class="button emphasize back" href="#">Back to objectives</a>
                 </div>

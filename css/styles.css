@@ -78,7 +78,7 @@ ul.unstyled {
 #applicationHost {
     overflow-x: hidden;
     overflow-y: scroll;
-    position: absolute;
+    position: fixed;
     left: 0;
     right: 0;
     bottom: 0;
@@ -96,6 +96,13 @@ ul.unstyled {
     outline: none;
     text-decoration: none;
 }
+
+    .button:hover {
+        -webkit-transition: ease-in-out all .15s;
+        -moz-transition: ease-in-out all .15s;
+        -ms-transition: ease-in-out all .15s;
+        transition: ease-in-out all .15s;
+    }
 
     .button::-moz-focus-inner {
         border: 0;
@@ -125,10 +132,6 @@ ul.unstyled {
         .button.default:hover {
             background-color: #919191;
             color: #2d2733;
-            -webkit-transition: ease-in-out all .25s;
-            -moz-transition: ease-in-out all .25s;
-            -ms-transition: ease-in-out all .25s;
-            transition: ease-in-out all .25s;
         }
 
     .button.primary {
@@ -141,10 +144,6 @@ ul.unstyled {
         .button.primary:hover {
             color: #2d2733;
             background-color: #57dcdb;
-            -webkit-transition: ease-in-out all .25s;
-            -moz-transition: ease-in-out all .25s;
-            -ms-transition: ease-in-out all .25s;
-            transition: ease-in-out all .25s;
         }
 
 
@@ -294,12 +293,13 @@ ul.unstyled {
 }
 
 .objective-start {
-    display: none;
+    display: table-cell;
     height: 100%;
     padding-top: 18px;
     text-align: center;
     vertical-align: middle;
     width: 100%;
+    visibility: hidden;
 }
 
 .objective-start-wrapper:hover {
@@ -307,7 +307,7 @@ ul.unstyled {
 }
 
     .objective-start-wrapper:hover .objective-start {
-        display: table-cell;
+        visibility: visible;
     }
 
 /* #endregion */

@@ -7,7 +7,7 @@
         activate: activate
     }
 
-    router.on('router:navigation:processing').then(function () {
+    router.on('router:route:activating').then(function () {
         viewmodel.isViewReady(false);
     });
 
