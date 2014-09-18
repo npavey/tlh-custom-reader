@@ -41,8 +41,10 @@ html {
     background-position: center bottom;
     background-repeat: no-repeat;
     background-size: cover;
+    -moz-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
 
 body {
@@ -97,6 +99,7 @@ ul.unstyled {
 }
 
     .button:hover {
+        -o-transition: ease-in-out all .15s;
         transition: ease-in-out all .15s;
         -moz-transition: ease-in-out all .15s;
         -ms-transition: ease-in-out all .15s;
@@ -206,6 +209,8 @@ ul.unstyled {
         margin: 20px 0;
         overflow: hidden;
         padding: 20px;
+        -ms-text-overflow: ellipsis;
+        -o-text-overflow: ellipsis;
         text-overflow: ellipsis;
         width: 390px;
     }
@@ -218,6 +223,8 @@ ul.unstyled {
         font-size: 16px;
         overflow: hidden;
         padding-top: 20px;
+        -ms-text-overflow: ellipsis;
+        -o-text-overflow: ellipsis;
         text-overflow: ellipsis;
         text-transform: uppercase;
         white-space: nowrap;
