@@ -23,9 +23,7 @@
         </div>
         <div class="page-container-wrapper">
             <div class="page-container">
-                <!-- ko ifnot: isTableOfContentVisible -->
-                <button class="button expand" data-bind="click: showTableOfContent"></button>
-                <!-- /ko -->
+                <button class="button expand" data-bind="click: showTableOfContent, visible: !isTableOfContentVisible()"></button>
                 <div class="back-wrapper">
                     <a class="button emphasize back" href="#">Back to objectives</a>
                 </div>
