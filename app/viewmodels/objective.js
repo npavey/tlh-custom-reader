@@ -2,7 +2,7 @@
 
     var ViewModel = function () {
         this.id = ko.observable();
-        this.isTableOfContentVisible = ko.observable(false);
+        this.isTableOfContentVisible = ko.observable(true);
         this.pages = ko.observableArray([]);
         this.router = router.createChildRouter()
                 .makeRelative({
