@@ -76,6 +76,11 @@ ul.unstyled {
 }
 
 
+p {
+    margin: 0 0 1em;
+    padding: 0;
+}
+
 #applicationHost {
     bottom: 0;
     left: 0;
@@ -502,7 +507,7 @@ ul.unstyled {
         content: "";
         display: block;
         height: 5px;
-        padding: 40px 0;
+        margin-top: 40px;
         width: 100%;
     }
 
