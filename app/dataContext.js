@@ -55,20 +55,24 @@
             course = new Course(response.id, response.title, response.createdBy || 'Anonymous');
 
             if (Array.isArray(response.objectives)) {
-                course.objectives = response.objectives.map(function (dobj) {
+                response.objectives.forEach(function (dobj) {
                     var objective = new Objective(dobj.id, dobj.title);
-
-                    objective.pages = dobj.questions.map(function (dq) {
-                        var page = new Page(dq.id, dq.title);
-
-                        page.contents = dq.learningContents.map(function (dc) {
-                            return new Content(dc.id, 'content/' + dobj.id + '/' + dq.id + '/' + dc.id + '.html?v=' + Math.random());
+                    if (Array.isArray(dobj.questions)) {
+                        dobj.questions.forEach(function (dq) {
+                            var page = new Page(dq.id, dq.title);
+                            if (Array.isArray(dq.learningContents)) {
+                                dq.learningContents.forEach(function (dc) {
+                                    page.contents.push(new Content(dc.id, 'content/' + dobj.id + '/' + dq.id + '/' + dc.id + '.html?v=' + Math.random()));
+                                });
+                            }
+                            if (page.contents.length) {
+                                objective.pages.push(page);
+                            }
                         });
-
-                        return page;
-                    });
-
-                    return objective;
+                    }
+                    if (objective.pages.length) {
+                        course.objectives.push(objective);
+                    }
                 });
             }
 
