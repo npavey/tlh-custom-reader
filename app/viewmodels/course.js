@@ -19,6 +19,9 @@
 
     function finish() {
         window.close();
+        setTimeout(function () {
+            alert('Thank you. It is now safe to close this page.');
+        }, 250);
     }
 
 })
