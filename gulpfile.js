@@ -15,7 +15,7 @@ gulp.task('styles', ['clean'], function () {
     gulp.src('./css/fonts/**')
       .pipe(gulp.dest(output + '/css/fonts'));
 
-    return gulp.src(['./css/styles.css'])
+    return gulp.src(['./css/styles.min.css'])
         .pipe(minify({ keepBreaks: true }))
         .pipe(gulp.dest(output + '/css'));
 });
