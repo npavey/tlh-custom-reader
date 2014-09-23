@@ -12,6 +12,7 @@
 
         viewModel.title = course.title;
         viewModel.author = course.author;
+        viewModel.logo = course.logo;
         viewModel.objectives = course.objectives.map(function (objective) {
             return { id: objective.id, title: objective.title };
         });

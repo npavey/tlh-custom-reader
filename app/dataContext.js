@@ -46,16 +46,24 @@
     function initialize() {
         var dfd = Q.defer();
 
-        $.ajax({
+        $.when($.ajax({
             url: 'content/data.js?v=' + Math.random(),
             contentType: 'application/json',
             dataType: 'json'
-        }).done(function (response) {
+        }), $.ajax({
+            url: 'settings.js?v=' + Math.random(),
+            contentType: 'application/json',
+            dataType: 'json'
+        })).done(function (data, settings) {
 
-            course = new Course(response.id, response.title, response.createdBy || 'Anonymous');
+            course = new Course(data[0].id, data[0].title, data[0].createdBy || 'Anonymous');
 
-            if (Array.isArray(response.objectives)) {
-                response.objectives.forEach(function (dobj) {
+            if (settings[0] && settings[0].logo && settings[0].logo.url) {
+                course.logo = settings[0].logo.url;
+            }
+
+            if (Array.isArray(data[0].objectives)) {
+                data[0].objectives.forEach(function (dobj) {
                     var objective = new Objective(dobj.id, dobj.title);
                     if (Array.isArray(dobj.questions)) {
                         dobj.questions.forEach(function (dq) {

@@ -40,7 +40,22 @@ gulp.task('vendor', ['clean'], function () {
 });
 
 
-gulp.task('default', ['app', 'styles', 'vendor'], function () {
+gulp.task('settings', ['clean'], function () {
+    gulp.src('./settings/js/vendor.min.js')
+      .pipe(gulp.dest(output + '/settings/js'));
+    gulp.src('./settings/js/settings.min.js')
+      .pipe(gulp.dest(output + '/settings/js'));
+
+    gulp.src('./settings/css/fonts/**')
+      .pipe(gulp.dest(output + '/settings/css/fonts'));
+    gulp.src('./settings/css/settings.min.css')
+      .pipe(gulp.dest(output + '/settings/css'));
+
+    gulp.src('./settings/settings.html')
+      .pipe(gulp.dest(output + '/settings'));
+});
+
+gulp.task('default', ['app', 'styles', 'vendor', 'settings'], function () {
     gulp.src('./index.html')
       .pipe(gulp.dest(output));
 });
