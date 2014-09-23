@@ -15,6 +15,9 @@ gulp.task('application', ['clean'], function () {
     gulp.src('./index.html')
       .pipe(gulp.dest(output));
 
+    gulp.src('./settings.js')
+      .pipe(gulp.dest(output));
+
     gulp.src('./css/fonts/**')
       .pipe(gulp.dest(output + '/css/fonts'));
 
