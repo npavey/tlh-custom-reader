@@ -1,4 +1,4 @@
-var output = "./__output";
+var output = "./.output";
 
 var
     gulp = require('gulp'),
@@ -8,37 +8,37 @@ var
 ;
 
 gulp.task('clean', function (cb) {
-    del(['./__output'], cb);
+    del([output], cb);
 });
 
-gulp.task('styles', ['clean'], function () {
+gulp.task('application', ['clean'], function () {
+    gulp.src('./index.html')
+      .pipe(gulp.dest(output));
+
     gulp.src('./css/fonts/**')
       .pipe(gulp.dest(output + '/css/fonts'));
 
-    return gulp.src(['./css/styles.min.css'])
+    gulp.src(['./css/styles.min.css'])
         .pipe(minify({ keepBreaks: true }))
         .pipe(gulp.dest(output + '/css'));
-});
 
-gulp.task('app', ['clean'], function () {
-    return durandal({
+    gulp.src('./js/vendor.min.js')
+     .pipe(gulp.dest(output + '/js'));
+    gulp.src('./js/require.js')
+      .pipe(gulp.dest(output + '/js'));
+
+    durandal({
         baseDir: 'app',
         main: 'main.js',
         output: 'main.js',
         almond: false,
         minify: true,
-        verbose: false
+        rjsConfigAdapter: function (config) {
+            config.generateSourceMaps = false;
+            return config;
+        }
     }).pipe(gulp.dest(output + '/app'));
 });
-
-
-gulp.task('vendor', ['clean'], function () {
-    gulp.src('./js/vendor.min.js')
-      .pipe(gulp.dest(output + '/js'));
-    gulp.src('./js/require.js')
-      .pipe(gulp.dest(output + '/js'));
-});
-
 
 gulp.task('settings', ['clean'], function () {
     gulp.src('./settings/js/vendor.min.js')
@@ -55,7 +55,8 @@ gulp.task('settings', ['clean'], function () {
       .pipe(gulp.dest(output + '/settings'));
 });
 
-gulp.task('default', ['app', 'styles', 'vendor', 'settings'], function () {
-    gulp.src('./index.html')
-      .pipe(gulp.dest(output));
+
+
+gulp.task('default', ['application', 'settings'], function () {
+
 });
