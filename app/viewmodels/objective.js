@@ -15,7 +15,8 @@
         if (typeof page != "string") {
             return { 'redirect': 'objective/' + objectiveId + '/page/' + dataContext.getObjective(objectiveId).pages[0].id };
         }
-        return true;
+
+        return dataContext.getObjective(objectiveId) ? true : { 'redirect': '404' };
     }
 
     ViewModel.prototype.activate = function (objectiveId) {

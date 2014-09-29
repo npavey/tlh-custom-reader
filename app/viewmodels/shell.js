@@ -27,6 +27,7 @@
             { route: 'objective/:id*page', moduleId: 'viewmodels/objective' }
         ]);
 
+        router.mapUnknownRoutes('viewmodels/404');
         return router.activate().then(function () {
             viewmodel.isViewReady(true);
         });

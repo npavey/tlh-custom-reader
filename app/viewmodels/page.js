@@ -6,6 +6,10 @@
         this.contents = ko.observableArray([]);
     }
 
+    ViewModel.prototype.canActivate = function (objectiveId, pageId) {
+        return dataContext.getObjective(objectiveId) && dataContext.getPage(objectiveId, pageId) ? true : { 'redirect': '404' };
+    }
+
     ViewModel.prototype.activate = function (objectiveId, pageId) {
         var
             objective = dataContext.getObjective(objectiveId),
