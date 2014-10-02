@@ -46,24 +46,15 @@
     function initialize() {
         var dfd = Q.defer();
 
-        $.when($.ajax({
+        $.ajax({
             url: 'content/data.js?v=' + Math.random(),
             contentType: 'application/json',
             dataType: 'json'
-        }), $.ajax({
-            url: 'settings.js?v=' + Math.random(),
-            contentType: 'application/json',
-            dataType: 'json'
-        })).done(function (data, settings) {
+        }).done(function (data) {
+            course = new Course(data.id, data.title, data.createdBy || 'Anonymous');
 
-            course = new Course(data[0].id, data[0].title, data[0].createdBy || 'Anonymous');
-
-            if (settings[0] && settings[0].logo && settings[0].logo.url) {
-                course.logo = settings[0].logo.url;
-            }
-
-            if (Array.isArray(data[0].objectives)) {
-                data[0].objectives.forEach(function (dobj) {
+            if (Array.isArray(data.objectives)) {
+                data.objectives.forEach(function (dobj) {
                     var objective = new Objective(dobj.id, dobj.title);
                     if (Array.isArray(dobj.questions)) {
                         dobj.questions.forEach(function (dq) {
@@ -84,7 +75,18 @@
                 });
             }
 
-            dfd.resolve();
+            $.ajax({
+                url: 'settings.js?v=' + Math.random(),
+                contentType: 'application/json',
+                dataType: 'json'
+            }).done(function (settings) {
+                if (settings && settings.logo && settings.logo.url) {
+                    course.logo = settings.logo.url;
+                }
+            }).always(function () {
+                dfd.resolve();
+            })
+
         });
 
         return dfd.promise;
