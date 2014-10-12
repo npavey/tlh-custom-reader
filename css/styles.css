@@ -129,6 +129,13 @@ p {
 .scrollable {
   overflow: hidden !important;
 }
+.course-wrapper {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
 .course {
   padding: 30px;
   padding-right: 10px;
