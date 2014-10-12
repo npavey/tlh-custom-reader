@@ -4,7 +4,8 @@ var
     gulp = require('gulp'),
     del = require('del'),
     minify = require('gulp-minify-css'),
-    durandal = require('gulp-durandal')
+    durandal = require('gulp-durandal'),
+    concat = require('gulp-concat')
 ;
 
 gulp.task('clean', function (cb) {
@@ -21,7 +22,7 @@ gulp.task('application', ['clean'], function () {
     gulp.src('./css/fonts/**')
       .pipe(gulp.dest(output + '/css/fonts'));
 
-    gulp.src(['./css/styles.min.css'])
+    gulp.src(['./css/styles.min.css', './css/jquery.mCustomScrollbar.min.css'])
         .pipe(minify({ keepBreaks: true }))
         .pipe(gulp.dest(output + '/css'));
 

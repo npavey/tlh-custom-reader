@@ -3,7 +3,7 @@
     <div class="container container-table">
         <div class="content-table-container-wrapper" data-bind="toggle: isTableOfContentVisible">
             <div class="content-table-container">
-                <div class="content-table-wrapper">
+                <div class="content-table-wrapper scrollable">
                     <div class="content-table">
                         <button class="button collapse" data-bind="click: hideTableOfContent"></button>
                         <div class="content-table-title">Articles</div>
@@ -28,21 +28,21 @@
         <div class="page-container-wrapper">
             <div class="page-container">
 
-                <div class="page-wrapper-outer">
+                <div class="page-wrapper-outer scrollable resettable">
                     <div class="page-wrapper-inner">
                         <div class="back-wrapper">
                             <a class="button emphasize back" href="#">Back to objectives</a>
                         </div>
                         <div data-bind="router: { }"></div>
                     </div>
-
-                    <!-- ko if: previousPage -->
-                    <a href="#" class="button previous" data-bind="attr: { href: '#objective/' + id() +'/page/'+ previousPage().id, title: previousPage().title }"></a>
-                    <!-- /ko -->
-                    <!-- ko if: nextPage -->
-                    <a href="#" class="button next" data-bind="attr: { href: '#objective/' + id() +'/page/'+ nextPage().id, title: nextPage().title }"></a>
-                    <!-- /ko -->
                 </div>
+
+                <!-- ko if: previousPage -->
+                <a href="#" class="button previous" data-bind="attr: { href: '#objective/' + id() +'/page/'+ previousPage().id, title: previousPage().title }"></a>
+                <!-- /ko -->
+                <!-- ko if: nextPage -->
+                <a href="#" class="button next" data-bind="attr: { href: '#objective/' + id() +'/page/'+ nextPage().id, title: nextPage().title }"></a>
+                <!-- /ko -->
 
                 <button class="button expand" data-bind="click: showTableOfContent, visible: !isTableOfContentVisible()"></button>
             </div>

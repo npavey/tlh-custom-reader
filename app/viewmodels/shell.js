@@ -12,8 +12,17 @@
     });
 
     router.on('router:navigation:composition-complete').then(function () {
-        setTimeout(function () {            
+        $('.scrollable').mCustomScrollbar({
+            alwaysShowScrollbar: true,
+            mouseWheel: {
+                scrollAmount: 300
+            },
+            scrollInertia: 950
+        });
+
+        setTimeout(function () {
             viewmodel.isViewReady(true);
+            $('.scrollable.resettable').mCustomScrollbar("scrollTo", 0);
         }, 250);
     });
 

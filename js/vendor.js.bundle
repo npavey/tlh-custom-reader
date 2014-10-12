@@ -12,6 +12,7 @@
   <files>
     <file>/js/knockout-3.1.0.js</file>
     <file>/js/jquery-1.9.1.js</file>
+    <file>/js/jquery.mCustomScrollbar.concat.min.js</file>
     <file>/js/q.js</file>
   </files>
 </bundle>
