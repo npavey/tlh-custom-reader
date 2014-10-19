@@ -51,7 +51,7 @@
             contentType: 'application/json',
             dataType: 'json'
         }).done(function (data) {
-            course = new Course(data.id, data.title, data.createdBy || 'Anonymous');
+            course = new Course(data.id, data.title, data.createdBy || 'Anonymous', data.hasIntroductionContent);
 
             if (Array.isArray(data.objectives)) {
                 data.objectives.forEach(function (dobj) {

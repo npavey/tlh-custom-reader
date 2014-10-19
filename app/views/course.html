@@ -39,6 +39,34 @@
                 <li class="clearfix"></li>
             </ul>
 
+            <!-- ko if: hasIntroductionContent -->
+            <div class="introduction-content-container-wrapper">
+
+                <div class="show-introduction-button" data-bind="click: showIntroduction, visible: !isIntroductionVisible()">
+                    Intro
+                </div>
+                
+                <div class="introduction-overlay" data-bind="visible: isIntroductionVisible, click: hideIntroduction"></div>
+
+                <div class="introduction-content-container scrollable" data-bind="toggle: isIntroductionVisible">
+                    <div class="course-title-wrapper">
+                        <div class="close-introduction-button" data-bind="click: hideIntroduction"></div>
+                        <div class="course-image-wrapper clearfix">
+                            <img class="course-image" alt="" data-bind="attr: { src: logo }" />
+                        </div>
+                        <h1 class="course-title" data-bind="text: title"></h1>
+                        <div class="course-author clearfix">Created by: <span data-bind="text: author"></span></div>
+                    </div>
+                    <div class="introduction-content" data-bind="html: introductionContent">
+                    </div>
+                    <div class="hide-introduction-button" data-bind="click: hideIntroduction">
+                        <span class="hide-introduction-button-text">Go to objectives</span>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /ko -->
+
         </div>
 
     </div>
