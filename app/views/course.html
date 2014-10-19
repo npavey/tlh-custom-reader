@@ -3,12 +3,17 @@
     <div class="course">
 
         <div class="container">
-            <div class="course-title-wrapper">
-                <img class="course-image" alt="" data-bind="attr: { src: logo }" />
-                <h1 class="course-title" data-bind="text: title"></h1>
-                <span class="course-author clearfix">Created by: <span data-bind="text: author"></span></span>
+            <div class="course-title-container-wrapper">
+                <div class="course-title-container">
+                    <div class="course-image-wrapper">
+                        <img class="course-image" alt="" data-bind="attr: { src: logo }" />
+                    </div>
+                    <div class="course-title-wrapper">
+                        <h1 class="course-title" data-bind="text: title"></h1>
+                        <span class="course-author clearfix">Created by: <span data-bind="text: author"></span></span>
+                    </div>
+                </div>
             </div>
-
 
             <ul class="unstyled objectives">
                 <!-- ko foreach: objectives -->

@@ -92,6 +92,11 @@ p {
     padding: 0;
 }
 
+img {
+    max-width: 100% !important;
+    height: auto !important;
+}
+
 .button {
     background: transparent;
     border: 0;
@@ -167,23 +172,38 @@ p {
 }
 
 .course {
-    padding: 0px 10px 30px 30px;
+    padding: 0 10px 30px 30px;
 
     .container {
         margin: 50px auto;
         max-width: 1640px;
     }
 
-    .course-title-wrapper {
+    .course-title-container-wrapper {
         margin: 50px 25px;
         min-height: 120px;
     }
 
+    .course-title-container {
+        display: table;
+        width: 100%;
+    }
+
+    .course-image-wrapper {
+        display: table-cell;
+        vertical-align: top;
+        width: 1%;
+    }
+
     .course-image {
-        float: left;
-        margin-right: 20px;
         max-height: 120px;
         max-width: 300px;
+    }
+
+    .course-title-wrapper {
+        display: table-cell;
+        padding-left: 20px;
+        vertical-align: top;
     }
 
     .course-title {
