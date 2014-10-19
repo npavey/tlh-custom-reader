@@ -51,7 +51,8 @@
             contentType: 'application/json',
             dataType: 'json'
         }).done(function (data) {
-            course = new Course(data.id, data.title, data.createdBy || 'Anonymous', data.hasIntroductionContent);
+
+            course = new Course(data.id, data.title, data.createdBy || 'Anonymous');
 
             if (Array.isArray(data.objectives)) {
                 data.objectives.forEach(function (dobj) {
@@ -75,7 +76,18 @@
                 });
             }
 
-            $.ajax({
+            var dataLoadPromises = [];
+
+            if (data.hasIntroductionContent) {
+                dataLoadPromises.push(Q($.ajax({
+                    url: 'content/content.html?v=' + Math.random(),
+                    dataType: 'html'
+                })).then(function (introductionContent) {
+                    course.introductionContent = introductionContent;
+                }));
+            }
+
+            dataLoadPromises.push(Q($.ajax({
                 url: 'settings.js?v=' + Math.random(),
                 contentType: 'application/json',
                 dataType: 'json'
@@ -83,9 +95,11 @@
                 if (settings && settings.logo && settings.logo.url) {
                     course.logo = settings.logo.url;
                 }
-            }).always(function () {
+            })));
+
+            Q.allSettled(dataLoadPromises).then(function () {
                 dfd.resolve();
-            })
+            });
 
         });
 

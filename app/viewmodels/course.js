@@ -16,21 +16,13 @@
         viewModel.title = course.title;
         viewModel.author = course.author;
         viewModel.logo = course.logo;
-        viewModel.hasIntroductionContent = course.hasIntroductionContent;
+        viewModel.hasIntroductionContent = course.introductionContent.length > 0;
+        viewModel.introductionContent = course.introductionContent;
         viewModel.isIntroductionVisible = ko.observable(false);
 
         viewModel.objectives = course.objectives.map(function (objective) {
             return { id: objective.id, title: objective.title };
         });
-
-        if (viewModel.hasIntroductionContent) {
-            return Q($.ajax({
-                url: 'content/content.html?v=' + Math.random(),
-                dataType: 'html'
-            })).then(function (introductionContent) {
-                viewModel.introductionContent = introductionContent;
-            });
-        }
     }
 
     function finish() {
