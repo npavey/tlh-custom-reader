@@ -2,17 +2,14 @@
 
     <div class="course">
 
-        <div class="finish-wrapper">
-            <button class="button default emphasize middle finish" data-bind="click: finish">Finish</button>
-        </div>
-
-
         <div class="container">
             <div class="course-title-wrapper">
                 <img class="course-image" alt="" data-bind="attr: { src: logo }" />
                 <h1 class="course-title" data-bind="text: title"></h1>
                 <span class="course-author clearfix">Created by: <span data-bind="text: author"></span></span>
             </div>
+            <style>
+            </style>
 
             <ul class="unstyled objectives">
                 <!-- ko foreach: objectives -->
@@ -25,15 +22,20 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="#" class="objective-start-wrapper" data-bind="attr: { href: '#objective/' + id }">
-                            <div class="objective-start">
-                                <span class="button large emphasize primary">Start reader</span>
+                    </div>
+                    <div class="objective-title-container-wrapper-tip">
+                        <div class="objective-title-container-wrapper">
+                            <div class="objective-title-container">
+                                <div class="objective-title-wrapper">
+                                    <span class="objective-title" data-bind="text: title"></span>
+                                </div>
                             </div>
-                        </a>
+                        </div>
                     </div>
-                    <div class="objective-title">
-                        <span data-bind="text: title, attr: { title: title }"></span>
-                    </div>
+
+                    <a class="objective-start-wrapper" href="#" data-bind=" attr: { href: '#objective/' + id, title: title }">
+                        <span class="button large emphasize primary objective-start">Start reader</span>
+                    </a>
                 </li>
                 <!-- /ko -->
                 <li class="clearfix"></li>
