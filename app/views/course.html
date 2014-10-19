@@ -48,8 +48,8 @@
             <!-- ko if: hasIntroductionContent -->
             <div class="introduction-content-container-wrapper">
 
-                <div class="show-introduction-button" data-bind="click: showIntroduction, visible: !isIntroductionVisible()">
-                    Intro
+                <div class="show-introduction-button-wrapper">
+                    <div class="show-introduction-button" data-bind="click: showIntroduction, visible: !isIntroductionVisible()">Intro</div>
                 </div>
 
                 <div class="introduction-overlay" data-bind="visible: isIntroductionVisible, click: hideIntroduction"></div>
