@@ -21,8 +21,8 @@
         });
 
         setTimeout(function () {
-            viewmodel.isViewReady(true);
             $('.scrollable.resettable').mCustomScrollbar("scrollTo", 0);
+            viewmodel.isViewReady(true);
         }, 250);
     });
 
@@ -38,7 +38,9 @@
 
         router.mapUnknownRoutes('viewmodels/404');
         return router.activate().then(function () {
-            viewmodel.isViewReady(true);
+            setTimeout(function () {
+                viewmodel.isViewReady(true);
+            }, 250);
         });
     }
 
