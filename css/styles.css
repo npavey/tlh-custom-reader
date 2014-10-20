@@ -670,6 +670,16 @@ img {
   margin-top: 40px;
   width: 100%;
 }
+.learning-content table {
+  max-width: 100% !important;
+}
+.learning-content iframe {
+  max-width: 100% !important;
+}
+.learning-content img {
+  max-width: 100% !important;
+  height: auto;
+}
 .not-found .container-wrapper {
   display: table;
   height: 100%;
