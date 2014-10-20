@@ -672,6 +672,7 @@ img {
 }
 .learning-content table {
   max-width: 100% !important;
+  width: 100% !important;
 }
 .learning-content iframe {
   max-width: 100% !important;
