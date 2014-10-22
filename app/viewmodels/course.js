@@ -18,7 +18,8 @@
         viewModel.logo = course.logo;
         viewModel.hasIntroductionContent = course.introductionContent.length > 0;
         viewModel.introductionContent = course.introductionContent;
-        viewModel.isIntroductionVisible = ko.observable(viewModel.hasIntroductionContent);
+        var wasIntroductionShown = sessionStorage.getItem('introductionWasShown') || false;
+        viewModel.isIntroductionVisible = ko.observable(viewModel.hasIntroductionContent && !wasIntroductionShown);
 
         viewModel.objectives = course.objectives.map(function (objective) {
             return { id: objective.id, title: objective.title };
@@ -38,6 +39,7 @@
 
     function hideIntroduction() {
         viewModel.isIntroductionVisible(false);
+        sessionStorage.setItem('introductionWasShown', true);
     }
 
 })
