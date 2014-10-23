@@ -30,6 +30,7 @@
     return viewmodel;
 
     function activate() {
+        sessionStorage.removeItem('introductionWasShown');
 
         router.map([
             { route: '', moduleId: 'viewmodels/course' },
