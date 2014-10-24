@@ -289,6 +289,10 @@ img {
   text-align: left;
   vertical-align: middle;
 }
+.course .objective-title {
+  max-height: 100px;
+  overflow: hidden;
+}
 .course .objective-start-wrapper {
   background-color: rgba(65, 61, 74, 0.3);
   height: 100%;
