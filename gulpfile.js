@@ -31,16 +31,12 @@ gulp.task('application', ['clean'], function () {
     gulp.src('./js/require.js')
       .pipe(gulp.dest(output + '/js'));
 
-    durandal({
+    return durandal({
         baseDir: 'app',
         main: 'main.js',
         output: 'main.js',
         almond: false,
-        minify: true,
-        rjsConfigAdapter: function (config) {
-            config.generateSourceMaps = false;
-            return config;
-        }
+        minify: true
     }).pipe(gulp.dest(output + '/app'));
 });
 
