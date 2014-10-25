@@ -15,13 +15,14 @@
         $('.scrollable').mCustomScrollbar({
             alwaysShowScrollbar: true,
             mouseWheel: {
-                scrollAmount: 300
+                scrollAmount: 'auto'
             },
-            scrollInertia: 950
+            scrollInertia: 0
         });
 
+        $('.scrollable.resettable').mCustomScrollbar("scrollTo", 0);
+
         setTimeout(function () {
-            $('.scrollable.resettable').mCustomScrollbar("scrollTo", 0);
             viewmodel.isViewReady(true);
         }, 250);
     });
