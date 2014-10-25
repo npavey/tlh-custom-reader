@@ -245,12 +245,12 @@ img {
   position: relative;
   text-align: center;
 }
-.course .objective-title-tip {
+.course .objective-title-container-wrapper-tip {
   background-color: rgba(0, 0, 0, 0.3);
   position: relative;
 }
-.course .objective-title-tip:before,
-.course .objective-title-tip:after {
+.course .objective-title-container-wrapper-tip:before,
+.course .objective-title-container-wrapper-tip:after {
   border-left: 15px solid transparent;
   border-right: 15px solid transparent;
   content: "";
@@ -262,10 +262,10 @@ img {
   top: -15px;
   width: 0;
 }
-.course .objective-title-tip:before {
+.course .objective-title-container-wrapper-tip:before {
   border-bottom: 15px solid #2f2c35;
 }
-.course .objective-title-tip:after {
+.course .objective-title-container-wrapper-tip:after {
   border-bottom: 15px solid rgba(0, 0, 0, 0.3);
 }
 .course .objective-title-container-wrapper {
@@ -285,7 +285,6 @@ img {
   display: table-cell;
   font-family: 'Intro';
   font-size: 14px;
-  line-height: 20px;
   padding: 0 15px;
   text-align: left;
   vertical-align: middle;
