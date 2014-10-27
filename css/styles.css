@@ -285,6 +285,7 @@ img {
   display: table-cell;
   font-family: 'Intro';
   font-size: 14px;
+  line-height: 20px;
   padding: 0 15px;
   text-align: left;
   vertical-align: middle;
