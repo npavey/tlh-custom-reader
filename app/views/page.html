@@ -2,13 +2,20 @@
 
     <div class="title-wrapper">
         <h2 class="objective-title" data-bind="text: objectiveTitle"></h2>
+        <!-- ko if: isViewReady -->
         <h3 class="page-title" data-bind="text: pageTitle"></h3>
+        <!-- /ko-->
     </div>
 
+    <!-- ko if: isViewReady -->
     <!-- ko foreach: contents -->
-
     <section class="learning-content" data-bind="html: $data"></section>
-
     <!-- /ko -->
+    <!-- /ko -->
+    <!-- ko ifnot: isViewReady -->
+    <div class="loader-wrapper">
+        <div class="loader"></div>
+    </div>
+    <!-- /ko-->
 
 </section>

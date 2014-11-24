@@ -4,6 +4,8 @@
         this.objectiveTitle = ko.observable();
         this.pageTitle = ko.observable();
         this.contents = ko.observableArray([]);
+
+        this.isViewReady = ko.observable(false);
     }
 
     ViewModel.prototype.canActivate = function (objectiveId, pageId) {
@@ -20,6 +22,7 @@
 
         this.objectiveTitle(objective.title);
         this.pageTitle(page.title);
+        this.isViewReady(false);
 
         page.contents.forEach(function (content, index) {
             promises.push(content.text().then(function (text) {
@@ -30,6 +33,7 @@
         var that = this;
         return Q.all(promises).then(function () {
             that.contents(contents);
+            that.isViewReady(true);
         });
     }
 
