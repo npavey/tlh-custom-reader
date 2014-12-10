@@ -33,7 +33,10 @@
         var that = this;
         return Q.all(promises).then(function () {
             that.contents(contents);
-            that.isViewReady(true);
+            setTimeout(function() {
+                that.isViewReady(true);
+            }, 250);
+
         });
     }
 

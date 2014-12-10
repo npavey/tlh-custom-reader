@@ -6,15 +6,19 @@
     }
 
     router.on('router:navigation:composition-complete').then(function () {
-        $('.scrollable').mCustomScrollbar({
-            alwaysShowScrollbar: true,
-            mouseWheel: {
-                scrollAmount: 'auto'
-            },
-            scrollInertia: 0
-        });
+        if ('ontouchstart' in window) {
+            $('html').addClass('touch');
+        } else {
+            $('.scrollable').mCustomScrollbar({
+                alwaysShowScrollbar: true,
+                mouseWheel: {
+                    scrollAmount: 'auto'
+                },
+                scrollInertia: 0
+            });
 
-        $('.scrollable.resettable').mCustomScrollbar("scrollTo", 0);
+            $('.scrollable.resettable').mCustomScrollbar("scrollTo", 0);
+        }
     });
 
 
