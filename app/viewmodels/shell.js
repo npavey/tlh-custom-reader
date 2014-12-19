@@ -14,7 +14,7 @@
                 mouseWheel: {
                     scrollAmount: 'auto'
                 },
-                scrollInertia: 0
+                scrollInertia: 200
             });
 
             $('.scrollable.resettable').mCustomScrollbar("scrollTo", 0);
