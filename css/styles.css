@@ -680,8 +680,8 @@ ul.unstyled > li:before {
   cursor: pointer;
   display: inline-block;
   font-family: 'Intro';
-  font-size: 14px;
-  line-height: 22px;
+  font-size: 16px;
+  line-height: 26px;
   text-decoration: none;
 }
 .objective .content-table-article-title:hover,
