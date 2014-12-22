@@ -6,9 +6,7 @@
     }
 
     router.on('router:navigation:composition-complete').then(function () {
-        if ('ontouchstart' in window) {
-            $('html').addClass('touch');
-        } else {
+        if ($('html').hasClass('touch')) {
             $('.scrollable').mCustomScrollbar({
                 alwaysShowScrollbar: true,
                 mouseWheel: {
