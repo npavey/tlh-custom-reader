@@ -128,7 +128,9 @@ ol li:before {
   counter-increment: ol-counter;
   font-size: 22px;
   left: 0;
+  line-height: 1;
   position: absolute;
+  top: 2px;
 }
 img {
   max-width: 100%;
@@ -174,6 +176,7 @@ cite:before {
 cite:after {
   bottom: -23px;
   content: "\201D";
+  margin-left: 5px;
 }
 a {
   color: #33b3e2;
@@ -395,7 +398,7 @@ ul.unstyled > li:before {
 }
 .introduction-content-container .course-title {
   color: #57dcdb;
-  font: 22px/18px 'Intro';
+  font: 22px/36px 'Intro';
   text-align: center;
   text-transform: uppercase;
   width: 100%;

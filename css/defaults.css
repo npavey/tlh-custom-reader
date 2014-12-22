@@ -128,7 +128,9 @@ ol li:before {
   counter-increment: ol-counter;
   font-size: 22px;
   left: 0;
+  line-height: 1;
   position: absolute;
+  top: 2px;
 }
 img {
   max-width: 100%;
@@ -174,6 +176,7 @@ cite:before {
 cite:after {
   bottom: -23px;
   content: "\201D";
+  margin-left: 5px;
 }
 a {
   color: #33b3e2;
