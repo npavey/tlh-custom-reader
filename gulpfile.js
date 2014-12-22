@@ -16,6 +16,9 @@ gulp.task('application', ['clean'], function () {
     gulp.src('./index.html')
       .pipe(gulp.dest(output));
 
+    gulp.src('./manifest.json')
+      .pipe(gulp.dest(output));
+
     gulp.src('./settings.js')
       .pipe(gulp.dest(output));
 
@@ -25,6 +28,9 @@ gulp.task('application', ['clean'], function () {
     gulp.src(['./css/styles.min.css', './css/jquery.mCustomScrollbar.min.css'])
         .pipe(minify({ keepBreaks: true }))
         .pipe(gulp.dest(output + '/css'));
+
+    gulp.src('./images/**')
+      .pipe(gulp.dest(output + '/images'));
 
     gulp.src('./js/vendor.min.js')
      .pipe(gulp.dest(output + '/js'));
