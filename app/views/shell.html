@@ -1,4 +1,6 @@
 ﻿<section>
-    <!-- ko router: { }-->
-    <!-- /ko -->
+    <div data-bind="style: { visibility: isViewReady()? 'visible': 'hidden' }">
+        <!-- ko router: { }-->
+        <!-- /ko -->
+    </div>
 </section>

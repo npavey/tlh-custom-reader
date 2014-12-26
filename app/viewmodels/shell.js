@@ -2,20 +2,26 @@
 
     var viewmodel = {
         router: router,
-        activate: activate
+        activate: activate, isViewReady: ko.observable(false)
     }
 
     router.on('router:navigation:composition-complete').then(function () {
-        if ($('html').hasClass('touch')) {
-            $('.scrollable').mCustomScrollbar({
-                alwaysShowScrollbar: true,
-                mouseWheel: {
-                    scrollAmount: 'auto'
-                },
-                scrollInertia: 200
-            });
+        if (!$('html').hasClass('touch')) {
+            $('.scrollable').each(function () {
+                var that = this;
 
-            $('.scrollable.resettable').mCustomScrollbar("scrollTo", 0);
+                $(that).mCustomScrollbar({
+                    alwaysShowScrollbar: true,
+                    mouseWheel: {
+                        scrollAmount: 'auto'
+                    },
+                    scrollInertia: 200
+                });
+
+                if ($(that).hasClass('resettable')) {
+                    $(that).mCustomScrollbar("scrollTo", 0);
+                }
+            });
         }
     });
 
@@ -31,7 +37,13 @@
         ]);
 
         router.mapUnknownRoutes('viewmodels/404');
-        return router.activate();
+        return router.activate().then(function () {
+            
+
+            setTimeout(function () {
+                viewmodel.isViewReady(true);
+            }, 250);
+        });
     }
 
 })

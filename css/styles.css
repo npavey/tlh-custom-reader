@@ -643,10 +643,12 @@ ul.unstyled > li:before {
   width: 300px;
 }
 .objective .content-table-container {
-  display: block;
+  display: inline-block;
   height: 100%;
   position: relative;
   width: 100%;
+  left: 0;
+  top: 0;
 }
 .objective .content-table-wrapper {
   background-color: #130e20;
@@ -717,7 +719,7 @@ ul.unstyled > li:before {
   vertical-align: top;
 }
 .objective .page-container {
-  display: block;
+  display: inline-block;
   height: 100%;
   position: relative;
   width: 100%;

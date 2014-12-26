@@ -33,9 +33,9 @@
         var that = this;
         return Q.all(promises).then(function () {
             that.contents(contents);
-            setTimeout(function() {
+            //setTimeout(function() {
                 that.isViewReady(true);
-            }, 250);
+            //}, 250);
 
         });
     }
