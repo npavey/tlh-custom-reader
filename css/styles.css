@@ -307,7 +307,7 @@ ul.unstyled > li:before {
 .show-introduction-button-wrapper {
   position: fixed;
   left: 0;
-  top: 48px;
+  top: 50px;
   z-index: 1;
 }
 .show-introduction-button {
@@ -972,7 +972,7 @@ ul.unstyled > li:before {
   .course {
     padding-top: 40px;
   }
-  .course .show-introduction-button-wrapper {
+  .show-introduction-button-wrapper {
     top: 20px;
   }
 }
