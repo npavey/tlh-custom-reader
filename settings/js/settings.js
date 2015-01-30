@@ -103,7 +103,34 @@ $(function () {
             viewModel.hasStarterPlan(false);
         }
     });
+    
+    ko.bindingHandlers.tabs = {
+        init: function (element) {
+		    var $element = $(element),
+				dataTabLink = 'data-tab-link',
+				dataTab = 'data-tab',
+				activeClass = 'active',
+				$tabLinks = $element.find('[' + dataTabLink + ']'),
+				$tabs = $element.find('[' + dataTab + ']');
 
+			$tabs.hide();
+
+			$tabLinks.first().addClass(activeClass);
+			$tabs.first().show();
+
+			$tabLinks.each(function (index, item) {
+				var $item = $(item);
+				$item.on('click', function () {
+					var key = $item.attr(dataTabLink),
+						currentContentTab = $element.find('[' + dataTab + '="' + key + '"]');
+					$tabLinks.removeClass(activeClass);
+					$item.addClass(activeClass);
+					$tabs.hide();
+					currentContentTab.show();
+				});
+			});
+		}
+	};
        
     ko.applyBindings(viewModel, $("#settingsForm")[0]);
 
