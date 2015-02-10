@@ -1,100 +1,79 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title>Template settings</title>
-
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link href="css/settings.css?v=1422614182833" rel="stylesheet" />
-    <script src="js/vendor.min.js?v=1422614182833"></script>
-    <script src="js/settings.js?v=1422614182833" type="text/javascript"></script>
+    <title>Adaptive template settings</title>
+    <link href="css/settings.min.css" rel="stylesheet" />
 </head>
 <body>
-    <div id="settingsForm" class="settings-container">
-        <div class="settings-header">
-            <div class="settings-title">Define template settings</div>
-            <button class="btn green uppercase apply-settings" data-bind="click: saveChanges">Apply settings</button>
-            <div class="save-message-wrapper success" data-bind="style: { display: isSaved() ? 'block' : 'none' }">
-                <span class="save-message">Settings have been saved successfully</span>
-            </div>
-            <div class="save-message-wrapper error" data-bind="style: { display: isFailed() ? 'block' : 'none' }">
-                <span class="save-message">Something went wrong. Try again</span>
-            </div>
-        </div>
-        <div class="clearfix"></div>
-        <div class="settings-content-wrapper">
-            <div class="settings-tabs-container" data-bind="tabs: {}">
-                <ul class="settings-tabs-wrapper unstyled">
-                    <li class="settings-tabs-item customization active" data-tab-link="customization">
-                        Graphical customization
-                    </li>
-                </ul>
-                <div class="settings-tab-container customization" data-tab="customization">
-                    <div class="settings-tab-wrapper">
-                        <div class="tab-header-container">
-                            <img src="img/graphical.png?v=1422614182833" />
-                            <div class="tab-header-wrapper">
-                                <h1 class="tab-header-title">Customize your course</h1>
-                                <div class="tab-header-content">
-                                    <span class="tab-header-content-text">Change the look and feel of the course</span>
-                                </div>
+    <div class="settings-container">
+        <div class="settings-tabs-container" data-bind="tabs: {}">
+            <ul class="settings-tabs-wrapper unstyled">
+                <li class="settings-tabs-item customization active" data-tab-link="customization">
+                    Graphical customization
+                </li>
+            </ul>
+            <div class="settings-tab-container customization" data-tab="customization">
+                <div class="settings-tab-wrapper">
+                    <div class="tab-header-container">
+                        <img src="img/graphical.png" />
+                        <div class="tab-header-wrapper">
+                            <h1 class="tab-header-title">Customize your course</h1>
+                            <div class="tab-header-content">
+                                <span class="tab-header-content-text">Change the look and feel of the course</span>
                             </div>
                         </div>
-                        <div class="tab-content-container">
-                            <div class="tab-content-row">
-                                <h1 class="template-logo-title">
-                                    Custom course logo:
-                                </h1>
-                                <div class="tab-content-wrapper">
-                                    <div class="has-access">
-                                        <div class="template-logo-url-container">
-                                            <input class="template-logo-url" type="text" placeholder="Paste image URL here..." id="imgUrl" data-bind="value: logo.url, valueUpdate: ['afterkeydown', 'afterpaste'], enable: hasStarterPlan" />
-                                            <span class="template-logo-or">or</span>
-                                            <form id="logoForm" method="post" enctype="multipart/form-data" encoding="multipart/form-data" target="logoFrame">
-                                                <a class="btn grey template-logo">
-                                                    Upload logo image
-                                                    <input type="file" id="logoInput" name="file" />
-                                                </a>
-                                            </form>
+                    </div>
+                    <div class="tab-content-container">
+                        <div class="tab-content-row">
+                            <h1 class="template-logo-title">
+                                Custom course logo:
+                            </h1>
+                            <div class="tab-content-wrapper">
+                                <div class="has-access">
+                                    <div class="template-logo-url-container">
+                                        <input class="template-logo-url" type="text" placeholder="Paste image URL here..." id="imgUrl" data-bind="value: logo.url, valueUpdate: ['afterkeydown', 'afterpaste'], enable: hasStarterPlan" />
+                                        <span class="template-logo-or">or</span>
+                                        <form id="logoForm" method="post" enctype="multipart/form-data" encoding="multipart/form-data" target="logoFrame">
+                                            <a class="btn grey template-logo">
+                                                Upload logo image
+                                                <input type="file" id="logoInput" name="file">
+                                            </a>
+                                        </form>
+                                    </div>
+                                    <div class="template-logo-container">
+                                        <div class="template-logo-wrapper" data-bind="style: { display: logo.hasLogo() || logo.isError() ? 'none' : 'inline-block' }">
+                                            <div class="template-logo-emty-img"></div>
+                                            <div class="template-logo-empty-text">
+                                                Your logo will appear here
+                                                <p>(recommended size 300 x 50 px)</p>
+                                            </div>
                                         </div>
-                                        <div class="template-logo-container">
-                                            <div class="template-logo-wrapper" data-bind="style: { display: logo.hasLogo() || logo.isError() ? 'none' : 'inline-block' }">
-                                                <div class="template-logo-empty">
-                                                    <div class="template-logo-emty-img"></div>
-                                                    <div class="template-logo-empty-text">
-                                                        Your logo will appear here
-                                                        <p>(recommended size 300 x 120 px)</p>
-                                                    </div>
-                                                </div>
+                                        <div class="template-logo-wrapper error" data-bind="style: { display: logo.isError() && logo.url() == '' ? 'inline-block' : 'none' }">
+                                            <div class="template-logo-emty-img"></div>
+                                            <div class="template-logo-empty-text">
+                                                <span data-bind="text: logo.errorText">Unsupported image format</span>
+                                                <p data-bind="text: logo.errorDescription">(Supported formats: jpg, png, bmp)</p>
                                             </div>
-                                            <div class="template-logo-wrapper error" data-bind="style: { display: logo.isError() && logo.url() == '' ? 'inline-block' : 'none' }">
-                                                <div class="template-logo-emty-img"></div>
-                                                <div class="template-logo-empty-text">
-                                                    <span data-bind="text: logo.errorText">Unsupported image format</span>
-                                                    <p data-bind="text: logo.errorDescription">(Supported formats: jpg, png, bmp)</p>
-                                                </div>
-                                            </div>
+                                        </div>
 
-                                            <div class="template-logo-wrapper not-empty" data-bind="style: { display: logo.hasLogo() ? 'inline-block' : 'none' }">
-                                                <img class="template-logo" src="" alt="" data-bind="attr: { src: logo.url }" />
-                                            </div>
-                                            <div class="template-logo-clear-wrapper" data-bind="style: { display: logo.hasLogo() ? 'inline-block' : 'none' }">
-                                                <div class="template-logo-clear-btn" data-bind="click: logo.clear">
-                                                    <div class="tooltip">
-                                                        <span class="tooltip-text">Clear logo</span>
-                                                    </div>
+                                        <div class="template-logo-wrapper not-empty" data-bind="style: { display: logo.hasLogo() ? 'inline-block' : 'none' }">
+                                            <img class="template-logo" src="" alt="" data-bind="attr: { src: logo.url }" />
+                                        </div>
+                                        <div class="template-logo-clear-wrapper" data-bind="style: { display: logo.hasLogo() ? 'inline-block' : 'none' }">
+                                            <div class="template-logo-clear-btn" data-bind="click: logo.clear">
+                                                <div class="tooltip">
+                                                    <span class="tooltip-text">Clear logo</span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="no-access" data-bind="fadeVisible: !hasStarterPlan()">
-                                        <div class="no-access-img"></div>
-                                        <div class="no-access-text">
-                                            You have to
-                                            <a target="_blank" href="/account/upgrade">upgrade your account</a>
-                                            in order to set custom course logo
-                                        </div>
+                                </div>
+                                <div class="no-access" data-bind="fadeVisible: !hasStarterPlan()">
+                                    <div class="no-access-img"></div>
+                                    <div class="no-access-text">
+                                        You have to
+                                        <a target="_blank" href="/account/upgrade">upgrade your account</a>
+                                        in order to set custom course logo
                                     </div>
                                 </div>
                             </div>
@@ -103,5 +82,8 @@
                 </div>
             </div>
         </div>
+    </div>
+    <script src="js/vendor.min.js"></script>
+    <script src="js/settings.min.js" type="text/javascript"></script>
 </body>
 </html>

@@ -59,6 +59,9 @@ gulp.task('settings', ['clean'], function () {
 
     gulp.src('./settings/settings.html')
       .pipe(gulp.dest(output + '/settings'));
+	  
+	 gulp.src('./settings/img/**')
+      .pipe(gulp.dest(output + '/settings/img'));
 });
 
 

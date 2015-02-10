@@ -4,6 +4,11 @@
     );
 }
 
+function sendPostMessage(message) {
+    var editorWindow = window.parent;
+    editorWindow.postMessage(message, window.location.href);
+}
+
 $(function () {
 
     ko.bindingHandlers.fadeVisible = {
@@ -24,16 +29,15 @@ $(function () {
         baseURL = location.protocol + "//" + location.host,
         settingsURL = baseURL + "/api/course/" + courseId + "/template/" + templateId,
 
+        currentSettings = null,
+
         starterAccessType = 1;
 
     var viewModel = {
-        isSaved: ko.observable(false),
-        isFailed: ko.observable(false),
-
         logo: (function () {
             var logo = {};
 
-            logo.url = ko.observable('').extend({ throttle: 300 });
+            logo.url = ko.observable('');
             logo.hasLogo = ko.computed(function () {
                 return logo.url() != '';
             });
@@ -52,41 +56,37 @@ $(function () {
     };
 
     viewModel.saveChanges = function () {
-        var settings = {
+        var settings = initSettings();
+
+        if (JSON.stringify(currentSettings) === JSON.stringify(settings)) {
+            return;
+        }
+
+        sendPostMessage({ type: 'startSave' });
+
+        $.post(settingsURL, { settings: JSON.stringify(settings) })
+            .done(function () {
+                currentSettings = settings;
+                sendPostMessage({ type: 'finishSave', data: { success: true, message: 'All changes are saved' } });
+            })
+            .fail(function () {
+                sendPostMessage({ type: 'finishSave', data: { success: false, message: 'Changes have NOT been saved. Please reload the page and change the settings again. Contact support@easygenerator.com if problem persists.' } });
+            });
+    };
+
+    function initSettings() {
+        return {
             logo: {
                 url: viewModel.hasStarterPlan() ? viewModel.logo.url() : ''
             }
         };
+    }
 
-        viewModel.isFailed(false);
-        viewModel.isSaved(false);
+    $(window).on('blur', viewModel.saveChanges);
 
-        $.post(settingsURL, { settings: JSON.stringify(settings) })
-            .done(function () {
-                viewModel.isSaved(true);
-            })
-            .fail(function () {
-                viewModel.isFailed(true);
-            });
-    };
+    //#region Ajax   
 
-    $.ajax({
-        cache: false,
-        url: settingsURL,
-        dataType: "json",
-        success: function (json) {
-            var settings;
-            try {
-                settings = JSON.parse(json);
-            } catch (e) {
-                settings = { logo: {} };
-            }
-            viewModel.logo.url(settings.logo.url || '');            
-        },
-
-    });
-
-    $.ajax({
+    var userInfoDeffered = $.ajax({
         url: baseURL + '/api/identify',
         type: 'POST',
         contentType: 'application/json',
@@ -103,38 +103,35 @@ $(function () {
             viewModel.hasStarterPlan(false);
         }
     });
-    
-    ko.bindingHandlers.tabs = {
-        init: function (element) {
-		    var $element = $(element),
-				dataTabLink = 'data-tab-link',
-				dataTab = 'data-tab',
-				activeClass = 'active',
-				$tabLinks = $element.find('[' + dataTabLink + ']'),
-				$tabs = $element.find('[' + dataTab + ']');
 
-			$tabs.hide();
+    $.ajax({
+        cache: false,
+        url: settingsURL,
+        dataType: "json",
+        success: function (json) {
+            var defaultSettings = { logo: {} };
+            var settings;
+            try {
+                settings = JSON.parse(json.settings) || defaultSettings;
+            } catch (e) {
+                settings = defaultSettings;
+            }
 
-			$tabLinks.first().addClass(activeClass);
-			$tabs.first().show();
+            viewModel.logo.url(settings.logo.url || '');
+        },
+        complete: function () {
+            userInfoDeffered.complete(function () {
+                currentSettings = initSettings();
+            });
+        }
+    });
 
-			$tabLinks.each(function (index, item) {
-				var $item = $(item);
-				$item.on('click', function () {
-					var key = $item.attr(dataTabLink),
-						currentContentTab = $element.find('[' + dataTab + '="' + key + '"]');
-					$tabLinks.removeClass(activeClass);
-					$item.addClass(activeClass);
-					$tabs.hide();
-					currentContentTab.show();
-				});
-			});
-		}
-	};
-       
+    //#endregion Ajax
+
     ko.applyBindings(viewModel, $("#settingsForm")[0]);
 
-    //----------------Upload logo functionality------------------
+    //#region Upload logo functionality
+
     var
         uploadImageApiUrl = baseURL + '/storage/image/upload',
         maxFileSize = 10, //MB
@@ -264,5 +261,7 @@ $(function () {
             imageUploadButton.enable();
         }
     }
+
+    //#endregion Upload logo functionality
 
 });
