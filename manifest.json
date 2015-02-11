@@ -1,7 +1,7 @@
 {
     "name": "Reader",
     "shortDescription": "Use this when you want to create a formal reading",
-    "thumbnail": "images/reader.png",
+    "thumbnail": "images/thumbnail.png",
     "previewImages": [
         "images/reader.png"
     ],	
