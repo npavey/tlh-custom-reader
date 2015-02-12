@@ -41,14 +41,14 @@
                                         </form>
                                     </div>
                                     <div class="template-logo-container">
-                                        <div class="template-logo-wrapper" data-bind="style: { display: logo.hasLogo() || logo.isError() ? 'none' : 'inline-block' }">
+                                        <div class="template-logo-wrapper" data-bind="style: { display: logo.hasLogo() || logo.isError() ? 'none' : 'table-cell' }">
                                             <div class="template-logo-emty-img"></div>
                                             <div class="template-logo-empty-text">
                                                 Your logo will appear here
-                                                <p>(recommended size 300 x 50 px)</p>
+                                                <p>(recommended size 300 x 120 px)</p>
                                             </div>
                                         </div>
-                                        <div class="template-logo-wrapper error" data-bind="style: { display: logo.isError() && logo.url() == '' ? 'inline-block' : 'none' }">
+                                        <div class="template-logo-wrapper error" data-bind="style: { display: logo.isError() && logo.url() == '' ? 'table-cell' : 'none' }">
                                             <div class="template-logo-emty-img"></div>
                                             <div class="template-logo-empty-text">
                                                 <span data-bind="text: logo.errorText">Unsupported image format</span>

@@ -392,9 +392,9 @@ ul.unstyled > li:before {
   width: 476px;
 }
 .introduction-content-container .course-image {
-  height: 120px;
   margin-top: 60px;
-  min-width: 120px;
+  max-height: 120px;
+  max-width: 300px;
 }
 .introduction-content-container .course-title {
   color: #57dcdb;
