@@ -14,5 +14,6 @@
     <file>/js/jquery-1.9.1.js</file>
     <file>/js/jquery.mCustomScrollbar.concat.min.js</file>
     <file>/js/q.js</file>
+    <file>/js/underscore.js</file>
   </files>
 </bundle>
