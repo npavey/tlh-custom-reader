@@ -1,11 +1,12 @@
 ﻿<section class="objective">
-
     <div class="container container-table">
         <div class="content-table-container-wrapper" data-bind="toggle: isTableOfContentVisible">
+            <a class="back-wrapper" href="#">
+                <span class="button emphasize back">Back to objectives</span>
+            </a>
             <div class="content-table-container">
                 <div class="content-table-wrapper scrollable">
                     <div class="content-table">
-                        <button class="button collapse" data-bind="click: hideTableOfContent"></button>
                         <div class="content-table-title">Articles</div>
                         <ul class="unstyled">
                             <!-- ko foreach: pages -->
@@ -27,24 +28,19 @@
         </div>
         <div class="page-container-wrapper">
             <div class="page-container">
-
                 <div class="page-wrapper-outer scrollable resettable">
                     <div class="page-wrapper-inner">
-                        <div class="back-wrapper">
-                            <a class="button emphasize back" href="#">Back to objectives</a>
-                        </div>
                         <div data-bind="router: { }"></div>
                     </div>
                 </div>
-
+                <a class="back-brief" data-bind="css: { visible: !isTableOfContentVisible() }" href="#"></a>
+                <button class="button toggle" data-bind="click: toggleTableOfContent"></button>
                 <!-- ko if: previousPage -->
                 <a href="#" class="button previous" data-bind="attr: { href: '#objective/' + id() +'/page/'+ previousPage().id, title: previousPage().title }"></a>
                 <!-- /ko -->
                 <!-- ko if: nextPage -->
                 <a href="#" class="button next" data-bind="attr: { href: '#objective/' + id() +'/page/'+ nextPage().id, title: nextPage().title }"></a>
                 <!-- /ko -->
-
-                <button class="button expand" data-bind="click: showTableOfContent, visible: !isTableOfContentVisible()"></button>
             </div>
         </div>
     </div>

@@ -48,12 +48,8 @@
         this.nextPage(null);
     }
 
-    ViewModel.prototype.showTableOfContent = function () {
-        this.isTableOfContentVisible(true);
-    };
-
-    ViewModel.prototype.hideTableOfContent = function () {
-        this.isTableOfContentVisible(false);
+    ViewModel.prototype.toggleTableOfContent = function () {
+        this.isTableOfContentVisible(!this.isTableOfContentVisible());
     };
 
     return ViewModel;
