@@ -5,7 +5,7 @@
             toggle(element, ko.unwrap(valueAccessor()), 0);
         },
         update: function (element, valueAccessor) {
-            toggle(element, ko.unwrap(valueAccessor()), 250);
+            toggle(element, ko.unwrap(valueAccessor()), 300);
         }
     }
 
