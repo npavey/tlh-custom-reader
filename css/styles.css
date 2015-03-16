@@ -359,7 +359,7 @@ ul.unstyled > li:before {
   width: 40px;
 }
 .back-brief.visible {
-  left: 0;
+  left: 7px;
   opacity: .6;
   visibility: visible;
   -webkit-transition: left .3s ease .5s, visibility .3s ease .5s, opacity 0s;
