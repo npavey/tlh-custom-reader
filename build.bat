@@ -1,1 +1,1 @@
-CALL gulp default
+CALL gulp build
