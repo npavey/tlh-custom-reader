@@ -12,8 +12,8 @@ define('jquery', function () { return window.jQuery; });
 define('Q', function () { return window.Q; });
 define('_', function () { return window._; });
 
-define(['durandal/system', 'durandal/app', 'durandal/viewLocator', 'components/bootstrapper', 'dataContext', 'settingsReader', 'modulesInitializer'],
-    function (system, app, viewLocator, bootstrapper, dataContext, settingsReader, modulesInitializer) {
+define(['durandal/system', 'durandal/app', 'durandal/viewLocator', 'components/bootstrapper', 'dataContext', 'settingsReader', 'translation', 'templateSettings', 'modulesInitializer'],
+    function (system, app, viewLocator, bootstrapper, dataContext, settingsReader, translation, templateSettings, modulesInitializer) {
         app.title = 'easygenerator';
 
         //system.debug(true);
@@ -29,11 +29,19 @@ define(['durandal/system', 'durandal/app', 'durandal/viewLocator', 'components/b
 
             return dataContext.initialize().then(function () {
                 return readPublishSettings().then(function () {
-                    modulesInitializer.register(modules);
+                    return settingsReader.readTemplateSettings();
+                }).then(function (settings) {
+                    return templateSettings.init(settings).then(function () {
+                        return initTranslations(settings);
+                    }).then(function () {
+                        modulesInitializer.register(modules);
 
-                    viewLocator.useConvention();
-                    app.setRoot('viewmodels/shell');
+                        viewLocator.useConvention();
+                        app.setRoot('viewmodels/shell');
+                    });
                 });
+            })['catch'](function (e) {
+                console.log(e);
             });
         });
 
@@ -44,5 +52,10 @@ define(['durandal/system', 'durandal/app', 'durandal/viewLocator', 'components/b
                 });
             });
         }
+
+        function initTranslations(settings) {
+            return translation.init(settings.languages.selected, settings.languages.customTranslations);
+        }
+
     }
 );
