@@ -120,26 +120,6 @@
             var defaultLanguage = getLanguage(defaultLanguageCode);
             var customLanguage = new app.LanguageModel(customLanguageCode, app.localize(customLanguageCode), defaultLanguage ? defaultLanguage.resourcesUrl : null, languagesSettings.customTranslations);
 
-            //if (languagesSettings && languagesSettings.customTranslations && !$.isEmptyObject(languagesSettings.customTranslations)) {
-            //    customLanguage.isLoaded = true;
-
-            //    defaultLanguage.load().then(function () {
-            //        var translations = {};
-            //        $.each(defaultLanguage.getNotMappedTranslations(), function (key, value) {
-            //            translations[key] = languagesSettings.customTranslations[key] || value;
-            //        });
-            //        customLanguage.setTranslations(translations);
-
-            //        addLanguage(customLanguage);
-
-            //        var selectedLanguageCode = (languagesSettings && languagesSettings.selected) ? languagesSettings.selected : defaultLanguageCode;
-            //        that.selectedLanguageCode(selectedLanguageCode);
-            //        _selectedLanguageCode.valueHasMutated();
-
-
-            //    });
-            //    return;
-            //}
             addLanguage(customLanguage);
 
             var selectedLanguageCode = (languagesSettings && languagesSettings.selected) ? languagesSettings.selected : defaultLanguageCode;

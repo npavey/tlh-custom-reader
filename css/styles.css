@@ -23,10 +23,10 @@
   font-style: normal;
 }
 @font-face {
-  font-family: 'Intro';
+  font-family: 'Ubuntu';
   font-style: normal;
   font-weight: normal;
-  src: url('fonts/intro-regular.woff') format('woff'), url('fonts/intro-regular.ttf') format('truetype'), url('fonts/intro-regular.svg#Intro') format('svg');
+  src: url('fonts/Ubuntu-Regular.woff') format('woff'), url('fonts/Ubuntu-Regular.ttf') format('truetype'), url('fonts/Ubuntu-Regular.svg#Ubuntu') format('svg');
 }
 .localized {
   overflow: hidden;
@@ -165,7 +165,7 @@ cite:before,
 cite:after {
   position: absolute;
   font-size: 60px;
-  font-family: 'Intro';
+  font-family: 'Ubuntu';
   color: #57dcdb;
   font-style: normal;
 }
@@ -246,7 +246,7 @@ ul.unstyled > li:before {
 .button {
   background: transparent;
   border: 0;
-  font-family: 'Intro';
+  font-family: 'Ubuntu';
   margin: 0;
   outline: none;
   padding: 0;
@@ -331,7 +331,7 @@ ul.unstyled > li:before {
   max-width: 200px;
   white-space: nowrap;
   color: #fff;
-  font-family: 'Intro';
+  font-family: 'Ubuntu';
   font-size: 16px;
   margin-right: 10px;
   margin-bottom: 5px;
@@ -411,7 +411,7 @@ ul.unstyled > li:before {
   border-top: 2px solid #57dcdb;
   color: #57dcdb;
   cursor: pointer;
-  font-family: 'Intro';
+  font-family: 'Ubuntu';
   font-size: 16px;
   height: 49px;
   line-height: 46px;
@@ -497,14 +497,14 @@ ul.unstyled > li:before {
 }
 .introduction-content-container .course-title {
   color: #57dcdb;
-  font: 22px/36px 'Intro';
+  font: 22px/36px 'Ubuntu';
   text-align: center;
   text-transform: uppercase;
   width: 100%;
 }
 .introduction-content-container .course-author {
   color: #ad2129;
-  font: 14px/18px 'Intro';
+  font: 14px/18px 'Ubuntu';
   margin-top: 20px;
   text-align: center;
 }
@@ -593,7 +593,7 @@ ul.unstyled > li:before {
 }
 .course .course-title {
   color: #57dcdb;
-  font-family: 'Intro';
+  font-family: 'Ubuntu';
   font-size: 18px;
   font-weight: bold;
   margin: 0;
@@ -602,7 +602,7 @@ ul.unstyled > li:before {
 }
 .course .course-author {
   color: #e7ded8;
-  font-family: 'Intro';
+  font-family: 'Ubuntu';
   font-size: 12px;
 }
 .course .objectives {
@@ -705,7 +705,7 @@ ul.unstyled > li:before {
 .course .objective-title-wrapper {
   color: #c8c8c8;
   display: table-cell;
-  font-family: 'Intro';
+  font-family: 'Ubuntu';
   font-size: 14px;
   line-height: 20px;
   padding: 0 15px;
@@ -739,6 +739,7 @@ ul.unstyled > li:before {
   white-space: nowrap;
   max-width: 90%;
   vertical-align: middle;
+  padding-top: 15px;
 }
 .objective .button.toggle {
   background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAoCAIAAABxU02MAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMDE0IDc5LjE1Njc5NywgMjAxNC8wOC8yMC0wOTo1MzowMiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTQgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjkxRjBFNUE3QzhBQjExRTQ5NjgyRDcwQkM3ODVDM0EzIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjkxRjBFNUE4QzhBQjExRTQ5NjgyRDcwQkM3ODVDM0EzIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6OTFGMEU1QTVDOEFCMTFFNDk2ODJENzBCQzc4NUMzQTMiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6OTFGMEU1QTZDOEFCMTFFNDk2ODJENzBCQzc4NUMzQTMiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz78tfivAAAAVUlEQVR42mJkY+FmIBcwMVAARjWPaiZfc2ZW+oFDe4AkHs2MuNL20eMHWFlZv3377mDnQrLNSxYv//79x8oVq8mxeTSqRqNqNKpGo2pU86hmFAAQYADhLzVjhU0wdgAAAABJRU5ErkJggg==') /*img/showHideMenuHover.png*/;
@@ -802,7 +803,7 @@ ul.unstyled > li:before {
 }
 .objective .content-table-title {
   color: #e5343a;
-  font-family: 'Intro';
+  font-family: 'Ubuntu';
   font-size: 18px;
   text-transform: uppercase;
 }
@@ -818,7 +819,7 @@ ul.unstyled > li:before {
   color: #d0d0d0;
   cursor: pointer;
   display: inline-block;
-  font-family: 'Intro';
+  font-family: 'Ubuntu';
   font-size: 16px;
   line-height: 26px;
   text-decoration: none;
@@ -914,7 +915,7 @@ ul.unstyled > li:before {
 }
 .page h2.objective-title {
   color: #e5343a;
-  font-family: 'Intro';
+  font-family: 'Ubuntu';
   font-size: 22px;
   font-weight: normal;
   margin: 0;
@@ -922,7 +923,7 @@ ul.unstyled > li:before {
 }
 .page h3.page-title {
   color: #57dcdb;
-  font-family: 'Intro';
+  font-family: 'Ubuntu';
   font-size: 16px;
   font-weight: normal;
   margin: 20px 0 0;
@@ -969,7 +970,7 @@ ul.unstyled > li:before {
 }
 .not-found h1 {
   color: #57dcdb;
-  font-family: 'Intro';
+  font-family: 'Ubuntu';
   font-size: 200px;
   line-height: 1;
   margin: 0;
@@ -981,19 +982,24 @@ ul.unstyled > li:before {
 }
 .not-found h2 {
   color: #e5343a;
-  font-family: 'Intro';
+  font-family: 'Ubuntu';
   font-size: 22px;
   line-height: 1;
   margin: 0;
   text-align: center;
   text-transform: uppercase;
+  white-space: nowrap;
+  max-width: 840px;
+  margin: 0 auto;
 }
 .not-found p {
   color: #d7d7d7;
   font-family: 'RobotoslabRegular';
   font-size: 16px;
-  margin: 30px 0;
+  margin: 30px auto;
   text-align: center;
+  white-space: nowrap;
+  max-width: 840px;
 }
 .not-found a {
   color: #57dcdb;
@@ -1001,7 +1007,7 @@ ul.unstyled > li:before {
 .not-found .button.home {
   display: inline-block;
   padding: 12px 40px;
-  max-width: 532px;
+  max-width: 400px;
 }
 .not-found .button.home:hover {
   color: #57dcdb;
