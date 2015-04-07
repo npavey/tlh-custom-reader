@@ -118,7 +118,7 @@
             });
 
             var defaultLanguage = getLanguage(defaultLanguageCode);
-            var customLanguage = new app.LanguageModel(customLanguageCode, app.localize(customLanguageCode), defaultLanguage ? defaultLanguage.resourcesUrl : null, languagesSettings.customTranslations);
+            var customLanguage = new app.LanguageModel(customLanguageCode, app.localize(customLanguageCode), defaultLanguage ? defaultLanguage.resourcesUrl : null, languagesSettings ? languagesSettings.customTranslations : null);
 
             addLanguage(customLanguage);
 
@@ -179,6 +179,10 @@
         that.setTranslations = setTranslations;
         that.getTranslations = getTranslations;
         that.getNotMappedTranslations = getNotMappedTranslations;
+
+        if (translations) {
+            that.setTranslations(translations);
+        }
 
         function setTranslations(translations) {
             _mappedTranslations = map(translations);
