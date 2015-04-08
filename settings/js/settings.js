@@ -14,7 +14,7 @@
     viewModel.getSettingsData = function () {
         return {
             logo: viewModel.logo.getData(),
-            languages: viewModel.languages.getData(),
+            languages: viewModel.languages.getData()
         };
     };
 

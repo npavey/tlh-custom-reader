@@ -25,10 +25,10 @@
     }
 
     function getTextByKey(key) {
-        if (translations[key]) {
-            return _.unescape(translations[key]);
+        if (typeof translations[key] != "string") {
+            throw 'Unable to localize ' + key;
         }
-        throw 'Unable to localize ' + key;
+		return _.unescape(translations[key]);
     }
 
     return {
