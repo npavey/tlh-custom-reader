@@ -201,7 +201,7 @@
                 if (_customTranslations) {
                     var translationsList = {};
                     $.each(resources, function (key, value) {
-                        translationsList[key] = _customTranslations[key] || value;
+                        translationsList[key] = typeof _customTranslations[key] == "string" ? _customTranslations[key] : value;
                     });
                     that.setTranslations(translationsList);
                 } else {
