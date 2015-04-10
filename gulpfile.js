@@ -61,6 +61,7 @@ gulp.task('application', ['clean'], function () {
       .pipe(gulp.dest(output + '/images'));
 
     gulp.src('./js/require.js')
+      .pipe(uglify())
       .pipe(gulp.dest(output + '/js'));
 
     gulp.src('lang/*.json')

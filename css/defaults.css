@@ -33,6 +33,7 @@
   text-overflow: ellipsis;
   max-width: 100%;
   word-wrap: break-word;
+  text-rendering: auto;
 }
 * {
   -moz-box-sizing: border-box;

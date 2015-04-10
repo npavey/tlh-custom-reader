@@ -192,7 +192,14 @@ ul.unstyled {
         color: #fff;
         font-size: 14px;
         line-height: 64px;
-        white-space: nowrap;
+
+        .button-text {
+            display: inline-block;
+            vertical-align: top;
+            max-width: 190px;
+            padding-right: 10px;
+            white-space: nowrap;
+        }
 
         &:before {
             background-image: @home-icon;

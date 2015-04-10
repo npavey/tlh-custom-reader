@@ -33,6 +33,7 @@
   text-overflow: ellipsis;
   max-width: 100%;
   word-wrap: break-word;
+  text-rendering: auto;
 }
 * {
   -moz-box-sizing: border-box;
@@ -386,6 +387,12 @@ ul.unstyled > li:before {
   color: #fff;
   font-size: 14px;
   line-height: 64px;
+}
+.button.back .button-text {
+  display: inline-block;
+  vertical-align: top;
+  max-width: 190px;
+  padding-right: 10px;
   white-space: nowrap;
 }
 .button.back:before {
