@@ -8,6 +8,7 @@
 
         'xx': 'Custom',
         'en': 'English',
+        'nl': 'Dutch',
         'ua': 'Ukrainian',
 
         'changes are saved': 'All changes are saved',
