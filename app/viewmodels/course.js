@@ -1,4 +1,4 @@
-﻿define(['dataContext'], function (dataContext) {
+﻿define(['dataContext', 'translation'], function (dataContext, translation) {
     "use strict";
 
     var viewModel = {
@@ -28,7 +28,7 @@
     function finish() {
         window.close();
         setTimeout(function () {
-            alert('Thank you. It is now safe to close this page.');
+            alert(translation.getTextByKey('[thank you message]'));
         }, 250);
     }
 

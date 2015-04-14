@@ -1,24 +1,16 @@
-﻿define(function () {
+﻿define(['jsonReader'], function (jsonReader) {
 
-    var ticks = new Date().getTime();
-
-    return {
-        readPublishSettings: readPublishSettings
-    };
+    function readTemplateSettings() {
+        return jsonReader.read('settings.js');
+    }
 
     function readPublishSettings() {
-        return read('publishSettings.js?_=' + ticks);
+        return jsonReader.read('publishSettings.js');
     }
 
-    function read(filename) {
-        var defer = Q.defer();
-        $.getJSON(filename).then(function (json) {
-            defer.resolve(json);
-        }).fail(function () {
-            defer.resolve({});
-        });
-
-        return defer.promise;
-    }
+    return {
+        readTemplateSettings: readTemplateSettings,
+        readPublishSettings: readPublishSettings
+    };
 
 });
