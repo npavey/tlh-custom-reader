@@ -1,12 +1,10 @@
 (function () {
-    ko.bindingHandlers.fadeVisible = {
-        init: function (element, valueAccessor) {
-            var value = valueAccessor();
-            $(element).toggle(ko.unwrap(value));
-        },
-        update: function (element, valueAccessor) {
-            var value = valueAccessor();
-            ko.unwrap(value) ? $(element).fadeIn() : $(element).fadeOut();
+
+    ko.bindingHandlers.disableDragNDrop = {
+        init: function (element) {
+            $(element).on('dragstart', function (event) {
+                event.preventDefault();
+            });
         }
     };
 
@@ -110,41 +108,13 @@
         }
     };
 
-    ko.bindingHandlers.tabs = {
-        init: function (element) {
-            var $element = $(element),
-                dataTabLink = 'data-tab-link',
-                dataTab = 'data-tab',
-                activeClass = 'active',
-                $tabLinks = $element.find('[' + dataTabLink + ']'),
-                $tabs = $element.find('[' + dataTab + ']');
-
-            $tabs.hide();
-
-            $tabLinks.first().addClass(activeClass);
-            $tabs.first().show();
-
-            $tabLinks.each(function (index, item) {
-                var $item = $(item);
-                $item.on('click', function () {
-                    var key = $item.attr(dataTabLink),
-                        currentContentTab = $element.find('[' + dataTab + '="' + key + '"]');
-                    $tabLinks.removeClass(activeClass);
-                    $item.addClass(activeClass);
-                    $tabs.hide();
-                    currentContentTab.show();
-                });
-            });
-
-        }
-    };
-
     ko.bindingHandlers.localize = {
-        init: function(element, valueAccessor) {
+        init: function (element, valueAccessor) {
             var $element = $(element),
                 key = ko.unwrap(valueAccessor());
 
             $element.html(app.localize(key));
         }
     };
+
 })();
