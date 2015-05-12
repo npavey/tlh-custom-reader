@@ -3,7 +3,7 @@ var output = "./.output";
 var
     gulp = require('gulp'),
     del = require('del'),
-    minify = require('gulp-minify-css'),
+    minifyCss = require('gulp-minify-css'),
     uglify = require('gulp-uglify'),
     durandal = require('gulp-durandal'),
     concat = require('gulp-concat'),
@@ -13,31 +13,44 @@ var
     buildVersion = +new Date();
 ;
 
-var addBuildVersion = function () {
-    var doReplace = function (file, callback) {
+function addBuildVersion() {
+    return eventStream.map(function (file, callback) {
         var fileContent = String(file.contents);
         fileContent = fileContent
-            .replace(/(\?|\&)v=([0-9]+)/gi, '')                                                                          // remove build version
-            .replace(/\.(jpeg|jpg|png|gif|css|js|html|eot|svg|ttf|woff)([?])/gi, '.$1?v=' + buildVersion + '&')          // add build version to resource with existing query param
-            .replace(/\.(jpeg|jpg|png|gif|css|js|html|eot|svg|ttf|woff)([\s\"\'\)])/gi, '.$1?v=' + buildVersion + '$2')  // add build version to resource without query param
-            .replace(/urlArgs: 'v=buildVersion'/gi, 'urlArgs: \'v=' + buildVersion + '\'');                              // replace build version for require config
+            .replace(/(\?|\&)v=([0-9]+)/gi, '') // remove build version
+            .replace(/\.(jpeg|jpg|png|gif|css|js|html|eot|svg|ttf|woff)([?])/gi, '.$1?v=' + buildVersion + '&') // add build version to resource with existing query param
+            .replace(/\.(jpeg|jpg|png|gif|css|js|html|eot|svg|ttf|woff)([\s\"\'\)])/gi, '.$1?v=' + buildVersion + '$2') // add build version to resource without query param
+            .replace(/urlArgs: 'v=buildVersion'/gi, 'urlArgs: \'v=' + buildVersion + '\''); // replace build version for require config
         file.contents = new Buffer(fileContent);
         callback(null, file);
-    }
-    return eventStream.map(doReplace);
+    });
 };
+
+function removeDebugBlocks() {
+    return eventStream.map(function (file, callback) {
+        var fileContent = String(file.contents);
+        fileContent = fileContent
+            .replace(/(\/\* DEBUG \*\/)([\s\S])*(\/\* END_DEBUG \*\/)/gmi, '') // remove all code between '/* DEBUG */' and '/* END_DEBUG */' comment tags
+            .replace(/(\/\* RELEASE)|(END_RELEASE \*\/)/gmi, ''); // remove '/* RELEASE' and 'END_RELEASE */' tags to uncomment release code
+        file.contents = new Buffer(fileContent);
+        callback(null, file);
+    });
+};
+
+gulp.task('build', ['build-app', 'build-settings'], function () {
+});
 
 gulp.task('clean', function (cb) {
     del([output], cb);
 });
 
-gulp.task('application', ['clean'], function () {
+gulp.task('build-app', ['clean'], function () {
     var assets = useref.assets();
 
     gulp.src('./index.html')
       .pipe(assets)
       .pipe(gulpif('*.js', uglify()))
-      .pipe(gulpif('*.css', minify()))
+      .pipe(gulpif('*.css', minifyCss()))
       .pipe(assets.restore())
       .pipe(useref())
       .pipe(addBuildVersion())
@@ -54,7 +67,7 @@ gulp.task('application', ['clean'], function () {
 
     gulp.src(['./css/styles.css', './css/jquery.mCustomScrollbar.min.css'])
         .pipe(addBuildVersion())
-        .pipe(minify({ keepBreaks: true }))
+        .pipe(minifyCss({ keepBreaks: true }))
         .pipe(gulp.dest(output + '/css'));
 
     gulp.src('./images/**')
@@ -74,34 +87,55 @@ gulp.task('application', ['clean'], function () {
         almond: false,
         minify: true
     }).pipe(gulp.dest(output + '/app'));
+
 });
 
-gulp.task('settings', ['clean'], function () {
+gulp.task('build-settings', ['build-design-settings', 'build-configure-settings'], function () {
+    gulp.src('settings/css/fonts/**')
+      .pipe(gulp.dest(output + '/settings/css/fonts'));
+
+    gulp.src('settings/css/img/**')
+      .pipe(gulp.dest(output + '/settings/css/img'));
+
+    gulp.src('settings/css/settings.css')
+      .pipe(minifyCss())
+      .pipe(gulp.dest(output + '/settings/css'));
+
+    gulp.src('settings/api.js')
+      .pipe(removeDebugBlocks())
+      .pipe(uglify())
+      .pipe(gulp.dest(output + '/settings'));
+
+});
+
+gulp.task('build-design-settings', ['clean'], function () {
     var assets = useref.assets();
 
-    gulp.src('./settings/settings.html')
+    gulp.src(['settings/design/design.html'])
       .pipe(assets)
       .pipe(gulpif('*.js', uglify()))
-      .pipe(gulpif('*.css', minify()))
       .pipe(assets.restore())
       .pipe(useref())
       .pipe(addBuildVersion())
-      .pipe(gulp.dest(output + '/settings'));
+      .pipe(gulp.dest(output + '/settings/design'));
 
-    gulp.src('./settings/css/fonts/**')
-      .pipe(gulp.dest(output + '/settings/css/fonts'));
+    gulp.src('settings/design/img/**')
+      .pipe(gulp.dest(output + '/settings/design/img'));
 
-    gulp.src('./settings/css/settings.css')
-      .pipe(addBuildVersion())
-      .pipe(minify())
-      .pipe(gulp.dest(output + '/settings/css'));
-
-    gulp.src('./settings/img/**')
-     .pipe(gulp.dest(output + '/settings/img'));
 });
 
+gulp.task('build-configure-settings', ['clean'], function () {
+    var assets = useref.assets();
 
+    gulp.src(['settings/configure/configure.html'])
+      .pipe(assets)
+      .pipe(gulpif('*.js', uglify()))
+      .pipe(assets.restore())
+      .pipe(useref())
+      .pipe(addBuildVersion())
+      .pipe(gulp.dest(output + '/settings/configure'));
 
-gulp.task('build', ['application', 'settings'], function () {
+    gulp.src('settings/configure/img/**')
+      .pipe(gulp.dest(output + '/settings/configure/img'));
 
 });
