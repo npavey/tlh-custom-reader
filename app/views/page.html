@@ -1,4 +1,4 @@
-﻿<section class="page">
+<section class="page">
 
     <div class="title-wrapper">
         <h2 class="objective-title" data-bind="text: objectiveTitle"></h2>
@@ -9,7 +9,7 @@
 
     <!-- ko if: isViewReady -->
     <!-- ko foreach: contents -->
-    <section class="learning-content" data-bind="html: $data"></section>
+    <section class="learning-content" data-bind="learningContent: $data"></section>
     <!-- /ko -->
     <!-- /ko -->
     <!-- ko ifnot: isViewReady -->
