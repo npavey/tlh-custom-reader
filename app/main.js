@@ -12,8 +12,8 @@ define('jquery', function () { return window.jQuery; });
 define('Q', function () { return window.Q; });
 define('_', function () { return window._; });
 
-define(['durandal/system', 'durandal/app', 'durandal/viewLocator', 'components/bootstrapper', 'dataContext', 'settingsReader', 'translation', 'templateSettings', 'modulesInitializer'],
-    function (system, app, viewLocator, bootstrapper, dataContext, settingsReader, translation, templateSettings, modulesInitializer) {
+define(['durandal/system', 'durandal/app', 'durandal/viewLocator', 'components/bootstrapper', 'settingsReader', 'translation', 'templateSettings', 'modulesInitializer'],
+    function (system, app, viewLocator, bootstrapper, settingsReader, translation, templateSettings, modulesInitializer) {
         app.title = 'easygenerator';
 
         //system.debug(true);
@@ -28,8 +28,6 @@ define(['durandal/system', 'durandal/app', 'durandal/viewLocator', 'components/b
             bootstrapper.run();
 
             Q.fcall(function () {
-                return dataContext.initialize();
-            }).then(function () {
                 return readPublishSettings().then(function (publishSettings) {
                     initIncludedModules(publishSettings);
                 });

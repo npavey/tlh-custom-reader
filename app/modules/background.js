@@ -9,16 +9,11 @@
             return;
         }
 
-        var element = $('<div />');
-        element.prependTo('body');
-
-        var image = new Image(),
-            src = settings.image.src,
+        var src = settings.image.src,
             position = '0 0',
             repeat = 'no-repeat',
             size = 'auto';
-
-
+        
         if (settings.image.type === 'repeat') {
             repeat = 'repeat';
         }
@@ -28,24 +23,22 @@
             position = 'center';
         }
 
-        image.onload = function () {
-            $(element)
-                .css({
-                    'position': 'fixed',
-                    'top': '0',
-                    'bottom': '0',
-                    'width': '100%',
-                    'height': '100%',
+        var backgroundStyles = '.background {' +
+            'background-image: url(' + src + ');' +
+            'background-position:'+ position + ';' +
+            '-webkit-background-size:' + size + ';' +
+            'background-size:' + size + ';' +
+            'background-repeat:' + repeat + ';' +
+        '}';
 
-                    'background-image': 'url(' + src + ')',
-                    'background-position': position,
-                    '-webkit-background-size': size,
-                    'background-size': size,
-                    'background-repeat': repeat
-                });
-        };
+        appendStylesToDocument(backgroundStyles);
+    }
 
-        image.src = src;
+    function appendStylesToDocument(cssStyles) {
+        var styleNode = document.createElement('style');
+        styleNode.type = 'text/css';
+        styleNode.appendChild(document.createTextNode(cssStyles));
+        document.getElementsByTagName('head')[0].appendChild(styleNode);
     }
 
 });
