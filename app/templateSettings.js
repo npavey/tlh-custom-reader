@@ -22,11 +22,21 @@
     return templateSetting;
 
     function init(settings) {
-        var fullSettings = _.defaults(settings, defaultTemplateSetting);
+        if (!settings.logo || !settings.logo.url) {
+            _.extend(settings, { logo: defaultTemplateSetting.logo });
+        }
 
-        _.extend(this, fullSettings);
+        if (!settings.languages || !settings.languages.selected) {
+            _.extend(settings, { languages: defaultTemplateSetting.languages });
+        }
 
-        return fullSettings;
+        if (!settings.background || !settings.background.image || !settings.background.image.src) {
+            _.extend(settings, { background: defaultTemplateSetting.background });
+        }
+
+        _.extend(this, settings);
+
+        return settings;
     }
 
 });
