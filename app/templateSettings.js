@@ -2,14 +2,14 @@
 
     var defaultTemplateSetting = {
         logo: {
-            url: "/css/img/reader.png"
+            url: "css/img/reader.png"
         },
         languages: {
             selected: "en"
         },
         background: {
             image: {
-                src: "/css/img/background.png",
+                src: "css/img/background.png",
                 type: "fullscreen"
             }
         }
