@@ -1024,6 +1024,22 @@ ul.unstyled {
     }
 }
 
+/*#region hotspot on an image*/
+.tl-wrapper{
+    font: 16px @body-font;
+    color: #fff;
+    background-color: rgba(29,80,98,0.95);
+    
+    &.top  .tl-arrow{
+        border-color: rgba(29,80,98,0.95) transparent transparent transparent;
+    }
+    
+    &.bottom .tl-arrow{
+        border-color: transparent transparent rgba(29,80,98,0.95) transparent;
+    }
+}
+/*#endregion hotspot on an image*/
+
 @media (max-width: 1780px) {
     .course {
         padding-top: 40px;
