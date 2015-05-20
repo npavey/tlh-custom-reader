@@ -28,11 +28,11 @@
         if (typeof translations[key] != "string") {
             throw 'Unable to localize ' + key;
         }
-		return _.unescape(translations[key]);
+        return _.unescape(translations[key]);
     }
 
     return {
         init: init,
         getTextByKey: getTextByKey
-    }
+    };
 })

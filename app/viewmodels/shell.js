@@ -1,4 +1,4 @@
-﻿define(['plugins/router', 'durandal/composition', 'durandal/app', 'modulesInitializer'], function (router, composition, app, modulesInitializer) {
+﻿define(['plugins/router', 'durandal/composition', 'durandal/app', 'modulesInitializer', 'dataContext'], function (router, composition, app, modulesInitializer, dataContext) {
 
     var viewmodel = {
         isViewReady: ko.observable(false),
@@ -32,18 +32,20 @@
 
     function activate() {
         return modulesInitializer.init().then(function () {
-            sessionStorage.removeItem('introductionWasShown');
+            return dataContext.initialize().then(function () {
+                sessionStorage.removeItem('introductionWasShown');
 
-            router.map([
-                { route: '', moduleId: 'viewmodels/course' },
-                { route: 'objective/:id*page', moduleId: 'viewmodels/objective' }
-            ]);
+                router.map([
+                    { route: '', moduleId: 'viewmodels/course' },
+                    { route: 'objective/:id*page', moduleId: 'viewmodels/objective' }
+                ]);
 
-            router.mapUnknownRoutes('viewmodels/404');
-            return router.activate().then(function () {
-                setTimeout(function () {
-                    viewmodel.isViewReady(true);
-                }, 250);
+                router.mapUnknownRoutes('viewmodels/404');
+                return router.activate().then(function () {
+                    setTimeout(function () {
+                        viewmodel.isViewReady(true);
+                    }, 250);
+                });
             });
         });
     }

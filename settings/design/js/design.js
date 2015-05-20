@@ -8,12 +8,14 @@
         isError: ko.observable(false),
 
         userAccess: null,
-        logo: null
+        logo: null,
+        background: null
     };
 
     viewModel.getCurrentSettingsData = function (settings) {
         return $.extend({}, settings || currentSettings, {
-            logo: viewModel.logo.getData()
+            logo: viewModel.logo.getData(),
+            background: viewModel.background.getData()
         });
     };
 
@@ -46,6 +48,7 @@
 
             viewModel.userAccess = new app.UserAccessModel(user);
             viewModel.logo = new app.LogoModel(settings.logo);
+            viewModel.background = new app.BackgroundModel(settings.background);
 
             currentSettings = viewModel.getCurrentSettingsData(settings);
             currentExtraData = viewModel.getCurrentExtraData();
