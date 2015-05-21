@@ -65,7 +65,10 @@ gulp.task('build-app', ['clean'], function () {
     gulp.src('./css/fonts/**')
       .pipe(gulp.dest(output + '/css/fonts'));
 
-    gulp.src(['./css/styles.css', './css/jquery.mCustomScrollbar.min.css', './js/lib/hotspotOnImagePlugin/hotspotOnImagePlugin.css'])
+    gulp.src('./css/img/**')
+      .pipe(gulp.dest(output + '/css/img'));
+
+    gulp.src(['./css/styles.css', './css/jquery.mCustomScrollbar.min.css'])
         .pipe(addBuildVersion())
         .pipe(minifyCss({ keepBreaks: true }))
         .pipe(gulp.dest(output + '/css'));
