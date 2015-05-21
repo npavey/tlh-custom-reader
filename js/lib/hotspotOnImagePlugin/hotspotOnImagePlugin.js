@@ -9,16 +9,10 @@
         top: 'top',
         bottom: 'bottom',
         infoContainer: 'info-container',
-        mouseover: 'mouseover',
-        hovered: 'hovered'
+        mouseover: 'mouseover'
     };
     
-    var hideElement = function (element) {
-            return function () {
-                element.style.display = 'none';
-            }
-        },
-        isTouchDevice = function(){
+    var isTouchDevice = function(){
             return (('ontouchstart' in window)
                     || (navigator.MaxTouchPoints > 0)
                     || (navigator.msMaxTouchPoints > 0));
@@ -33,20 +27,17 @@
             }
             return matchingElements;
         };
-    
-    
+        
     var tooltip = (function(){
         var tooltip;
         
         function init(){
             var domElement = 'div',
-                body = document.getElementsByTagName('body')[0],
                 tooltipElement = document.createElement(domElement),
                 arrowWrapper = document.createElement(domElement),
                 arrow = document.createElement(domElement),
-                textWrapper = document.createElement(domElement),
-                hide = hideElement(tooltipElement);
-
+                textWrapper = document.createElement(domElement);
+            
             tooltipElement.classList.add(classList.tooltipWrapper);
             arrowWrapper.classList.add(classList.tooltipArrowWrapper);
             arrow.classList.add(classList.tooltipArrow);
@@ -78,49 +69,79 @@
                 });
             }
 
-            body.appendChild(tooltipElement);
-            
-            hide();
-
             return {
                 show: show,
                 hide: hide,
                 element: tooltipElement
             };
             
-            function show(element, text){
+            function show(container, element, text){
                 if(text !== ''){
+                    container.appendChild(tooltipElement);
                     textWrapper.textContent = text;
                     arrow.style.display = 'block';
                     tooltipElement.style.display = 'block';
-                    var rect = element.getBoundingClientRect(),
-                        centerTop = window.scrollY + rect.top + element.offsetHeight / 2,
-                        centerLeft = rect.left + element.offsetWidth / 2,
-                        width = tooltipElement.offsetWidth,
-                        height = tooltipElement.offsetHeight,
-                        topPostion = 0,
-                        leftPosition = 0;
+                    var infoContainer = element.getElementsByClassName(classList.infoContainer)[0],
+                        infoContainerHeight = infoContainer.offsetHeight,
+                        arrowHalfWidth = arrow.offsetWidth / 2,
+                        windowWidth = window.innerWidth,
+                        spotBounds = {
+                            width: element.offsetWidth,
+                            height: element.offsetHeight,
+                            clientTop: element.getBoundingClientRect().top,
+                            clientLeft: element.getBoundingClientRect().left,
+                            top: element.offsetTop,
+                            left: element.offsetLeft,
+                            centerPosition: {
+                                top: element.offsetTop + element.offsetHeight / 2,
+                                left: element.offsetLeft + element.offsetWidth / 2
+                            }
+                        },
+                        tooltipBounds = {
+                            width: tooltipElement.offsetWidth,
+                            heigth: tooltipElement.offsetHeight,
+                            top: 0,
+                            left: 0
+                        },
+                        tooltipClientRect = null;
                     
-                    if(height < (rect.top + 30)){
+                    if (tooltipBounds.heigth < spotBounds.clientTop + infoContainerHeight){
                         tooltipElement.classList.remove(classList.bottom);
                         tooltipElement.classList.add(classList.top);
-                        topPostion = centerTop - 30 - height;
-                        tooltipElement.style.top = centerTop - 30 - height + 'px';
-                    }else{
+                        tooltipBounds.top = spotBounds.centerPosition.top - infoContainerHeight - tooltipBounds.heigth;
+                        tooltipElement.style.top = tooltipBounds.top + 'px';
+                    } else {
                         tooltipElement.classList.remove(classList.top);
                         tooltipElement.classList.add(classList.bottom);
-                        topPostion = centerTop - 30 - height;
-                        tooltipElement.style.top = centerTop + 30 + 'px';
+                        tooltipBounds.top = spotBounds.centerPosition.top + infoContainerHeight;
+                        tooltipElement.style.top = tooltipBounds.top + 'px';
                     }
-                    leftPosition = centerLeft - (width * 0.5);
                     
-                    if (leftPosition < 0){
-                        tooltipElement.style.left = 0;
-                        arrow.style.left = centerLeft - 10 + 'px';
-                    } else {
-                        tooltipElement.style.left = leftPosition + 'px';
-                        arrow.style.left = centerLeft - leftPosition - 10 + 'px';
+                    tooltipBounds.left = spotBounds.centerPosition.left - tooltipBounds.width * 0.5;
+                    arrow.style.left = spotBounds.centerPosition.left - tooltipBounds.left - 10 + 'px';
+
+                    tooltipElement.style.left = tooltipBounds.left + 'px';
+                    tooltipClientRect = tooltipElement.getBoundingClientRect();
+                    if(tooltipClientRect.bottom > window.innerHeight){
+                        tooltipElement.style.top = tooltipBounds.top - (tooltipClientRect.bottom - window.innerHeight) + 'px';
+                        arrow.style.display = 'none';
                     }
+                    if (tooltipClientRect.left < 0) {
+                        tooltipElement.style.left =  tooltipBounds.left - tooltipClientRect.left + 'px';
+                        arrow.style.left = spotBounds.centerPosition.left - tooltipBounds.left + tooltipClientRect.left - 10 + 'px';
+                    } if (tooltipClientRect.right > windowWidth){
+                        tooltipElement.style.left = tooltipBounds.left - (windowWidth - tooltipClientRect.right) + 'px';
+                        arrow.style.left = spotBounds.centerPosition.left - tooltipBounds.left + (bodyWidth - tooltipClientRect.right) - 10 + 'px';
+                    }
+                }
+            }
+            
+            function hide(){
+                var parentNode = tooltipElement.parentNode;
+                if (parentNode){
+                    parentNode.removeChild(tooltipElement);
+                } else {
+                    tooltipElement.style.display = 'block';
                 }
             }
         }
@@ -135,7 +156,7 @@
         };
     })();
     
-    var Spot = function(element, coefficient){
+    var Spot = function(element, container, coefficient){
         var that = this;
         that.element = element;
         that.defaultTopStyle = parseFloat(element.style.top);
@@ -146,7 +167,9 @@
         
         var tip = tooltip.getInstance();
         
-        that.hide = hideElement(that.element);
+        that.hide = function (){
+            element.style.display = 'none';
+        }
         
         that.show = function() {
             that.element.style.display = 'inline-block';
@@ -168,24 +191,23 @@
             that.hide();
             if (isTouchDevice()){
                 that.element.addEventListener('click', function(event){
-                    tip.show(this, that.text);
+                    tip.show(container, this, that.text);
                     event.stopPropagation();
                 });
 
             } else {
                 that.element.addEventListener('mouseover', function () {
-                    tip.show(this, that.text);
+                    tip.show(container, this, that.text);
                 });
 
                 that.element.addEventListener('mouseout', function (event) {
                     var e = event.toElement || event.relatedTarget;
-                    if (e.parentNode == this || e == this || e == tip.element) {
+                    if (e && (e.parentNode == this || e == this || e == tip.element)) {
                        return;
                     }
 
                     setTimeout(function(){
                         if (!tip.element.classList.contains(classList.mouseover)){
-                            that.element.classList.remove(classList.hovered);
                             tip.hide();
                         }
                     }, 10);
@@ -194,11 +216,10 @@
         }
     };
     
-    window.HotspotOnImage = function(element, settings) {
+    window.HotspotOnImage = function(element) {
         var that = this,
             resizeTimer,
             spotsLength;
-        that.isLoaded = false;
         that.element = element;
         that.renderedImage = that.element.getElementsByTagName('img')[0];
         that.spots = [];
@@ -217,7 +238,7 @@
             image.onload = function(){
                 that.defaultImageWidth = this.width;
                 that.coefficient = that.renderedImage.width / that.defaultImageWidth;
-                that.isLoaded = true;
+                debugger;
                 updateSpotsPosition();
             };
             image.src = that.renderedImage.getAttribute('src');
@@ -227,7 +248,7 @@
             var spots = getElementsByAttribute(that.element, 'data-id');
             spotsLength = spots.length;
             for (var i = 0; i < spotsLength; i++){
-                that.spots.push(new Spot(spots[i], that.coefficient));
+                that.spots.push(new Spot(spots[i], that.element, that.coefficient));
             }
         }
         

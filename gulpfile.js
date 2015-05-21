@@ -65,7 +65,7 @@ gulp.task('build-app', ['clean'], function () {
     gulp.src('./css/fonts/**')
       .pipe(gulp.dest(output + '/css/fonts'));
 
-    gulp.src(['./css/styles.css', './css/jquery.mCustomScrollbar.min.css'])
+    gulp.src(['./css/styles.css', './css/jquery.mCustomScrollbar.min.css', './js/lib/hotspotOnImagePlugin/hotspotOnImagePlugin.css'])
         .pipe(addBuildVersion())
         .pipe(minifyCss({ keepBreaks: true }))
         .pipe(gulp.dest(output + '/css'));
@@ -76,6 +76,12 @@ gulp.task('build-app', ['clean'], function () {
     gulp.src('./js/require.js')
       .pipe(uglify())
       .pipe(gulp.dest(output + '/js'));
+    
+     gulp.src(['./js/lib/hotspotOnImagePlugin/hotspotOnImagePlugin.css'])
+        .pipe(addBuildVersion())
+        .pipe(minifyCss({ keepBreaks: true }))
+        .pipe(gulp.dest(output + '/js/lib/hotspotOnImagePlugin'));
+
 
     gulp.src('lang/*.json')
       .pipe(gulp.dest(output + '/lang'));
