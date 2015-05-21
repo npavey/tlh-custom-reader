@@ -238,7 +238,6 @@
             image.onload = function(){
                 that.defaultImageWidth = this.width;
                 that.coefficient = that.renderedImage.width / that.defaultImageWidth;
-                debugger;
                 updateSpotsPosition();
             };
             image.src = that.renderedImage.getAttribute('src');
