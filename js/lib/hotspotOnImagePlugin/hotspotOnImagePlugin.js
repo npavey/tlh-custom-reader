@@ -28,7 +28,7 @@
             return matchingElements;
         };
         
-    var tooltip = (function(){
+    var Tooltip = (function(){
         var tooltip;
         
         function init(){
@@ -38,36 +38,9 @@
                 arrow = document.createElement(domElement),
                 textWrapper = document.createElement(domElement);
             
-            tooltipElement.classList.add(classList.tooltipWrapper);
-            arrowWrapper.classList.add(classList.tooltipArrowWrapper);
-            arrow.classList.add(classList.tooltipArrow);
-            textWrapper.classList.add(classList.tooltipTextWrapper);
-
-            arrowWrapper.appendChild(arrow);
-            tooltipElement.appendChild(arrowWrapper);
-            tooltipElement.appendChild(textWrapper);
+            buildMarkup();
             
-            if (isTouchDevice()){
-                tooltipElement.addEventListener('click', function(event){
-                    event.stopPropagation();
-                });
-                document.addEventListener('click', function(event){
-                    hide();
-                });
-            } else{
-                tooltipElement.addEventListener('mouseover', function(){
-                    tooltipElement.classList.add(classList.mouseover);
-                });
-
-                tooltipElement.addEventListener('mouseout', function(event){
-                    var e = event.toElement || event.relatedTarget;
-                    if (e && (e.parentNode == this || e == this)) {
-                       return;
-                    }
-                    tooltipElement.classList.remove(classList.mouseover);
-                    hide();
-                });
-            }
+            bindEvents();
 
             return {
                 show: show,
@@ -118,7 +91,7 @@
                     }
                     
                     tooltipBounds.left = spotBounds.centerPosition.left - tooltipBounds.width * 0.5;
-                    arrow.style.left = spotBounds.centerPosition.left - tooltipBounds.left - 10 + 'px';
+                    arrow.style.left = spotBounds.centerPosition.left - tooltipBounds.left - arrowHalfWidth + 'px';
 
                     tooltipElement.style.left = tooltipBounds.left + 'px';
                     tooltipClientRect = tooltipElement.getBoundingClientRect();
@@ -128,10 +101,10 @@
                     }
                     if (tooltipClientRect.left < 0) {
                         tooltipElement.style.left =  tooltipBounds.left - tooltipClientRect.left + 'px';
-                        arrow.style.left = spotBounds.centerPosition.left - tooltipBounds.left + tooltipClientRect.left - 10 + 'px';
+                        arrow.style.left = spotBounds.centerPosition.left - tooltipBounds.left + tooltipClientRect.left - arrowHalfWidth + 'px';
                     } if (tooltipClientRect.right > windowWidth){
-                        tooltipElement.style.left = tooltipBounds.left - (windowWidth - tooltipClientRect.right) + 'px';
-                        arrow.style.left = spotBounds.centerPosition.left - tooltipBounds.left + (bodyWidth - tooltipClientRect.right) - 10 + 'px';
+                        tooltipElement.style.left = tooltipBounds.left + (windowWidth - tooltipClientRect.right) + 'px';
+                        arrow.style.left = spotBounds.centerPosition.left - tooltipBounds.left - (windowWidth - tooltipClientRect.right) - arrowHalfWidth + 'px';
                     }
                 }
             }
@@ -142,6 +115,41 @@
                     parentNode.removeChild(tooltipElement);
                 } else {
                     tooltipElement.style.display = 'block';
+                }
+            }
+            
+            function buildMarkup(){
+                tooltipElement.classList.add(classList.tooltipWrapper);
+                arrowWrapper.classList.add(classList.tooltipArrowWrapper);
+                arrow.classList.add(classList.tooltipArrow);
+                textWrapper.classList.add(classList.tooltipTextWrapper);
+
+                arrowWrapper.appendChild(arrow);
+                tooltipElement.appendChild(arrowWrapper);
+                tooltipElement.appendChild(textWrapper);
+            }
+            
+            function bindEvents(){
+                if (isTouchDevice()){
+                    tooltipElement.addEventListener('click', function(event){
+                        event.stopPropagation();
+                    });
+                    document.addEventListener('click', function(event){
+                        hide();
+                    });
+                } else{
+                    tooltipElement.addEventListener('mouseover', function(){
+                        tooltipElement.classList.add(classList.mouseover);
+                    });
+
+                    tooltipElement.addEventListener('mouseout', function(event){
+                        var e = event.toElement || event.relatedTarget;
+                        if (e && (e.parentNode == this || e == this)) {
+                           return;
+                        }
+                        tooltipElement.classList.remove(classList.mouseover);
+                        hide();
+                    });
                 }
             }
         }
@@ -156,7 +164,7 @@
         };
     })();
     
-    var Spot = function(element, container, coefficient){
+    var Spot = function(element, container, ratio){
         var that = this;
         that.element = element;
         that.defaultTopStyle = parseFloat(element.style.top);
@@ -165,7 +173,7 @@
         that.defaultHeightStyle = parseFloat(element.style.height);
         that.text = element.getAttribute('data-text');
         
-        var tip = tooltip.getInstance();
+        var tooltip = Tooltip.getInstance();
         
         that.hide = function (){
             element.style.display = 'none';
@@ -175,11 +183,11 @@
             that.element.style.display = 'inline-block';
         };
         
-        that.updatePosition = function(coefficient){
-            that.element.style.top = that.defaultTopStyle * coefficient + 'px';
-            that.element.style.left = that.defaultLeftStyle * coefficient + 'px';
-            that.element.style.width = that.defaultWidthStyle * coefficient + 'px';
-            that.element.style.height = that.defaultHeightStyle * coefficient + 'px';
+        that.updatePosition = function(ratio){
+            that.element.style.top = that.defaultTopStyle * ratio + 'px';
+            that.element.style.left = that.defaultLeftStyle * ratio + 'px';
+            that.element.style.width = that.defaultWidthStyle * ratio + 'px';
+            that.element.style.height = that.defaultHeightStyle * ratio + 'px';
         };
         
         init();
@@ -191,24 +199,24 @@
             that.hide();
             if (isTouchDevice()){
                 that.element.addEventListener('click', function(event){
-                    tip.show(container, this, that.text);
+                    tooltip.show(container, that.element, that.text);
                     event.stopPropagation();
                 });
 
             } else {
                 that.element.addEventListener('mouseover', function () {
-                    tip.show(container, this, that.text);
+                    tooltip.show(container, that.element, that.text);
                 });
 
                 that.element.addEventListener('mouseout', function (event) {
                     var e = event.toElement || event.relatedTarget;
-                    if (e && (e.parentNode == this || e == this || e == tip.element)) {
+                    if (e && (e.parentNode == this || e == this || e == tooltip.element)) {
                        return;
                     }
 
                     setTimeout(function(){
-                        if (!tip.element.classList.contains(classList.mouseover)){
-                            tip.hide();
+                        if (!tooltip.element.classList.contains(classList.mouseover)){
+                            tooltip.hide();
                         }
                     }, 10);
                 });
@@ -219,11 +227,11 @@
     window.HotspotOnImage = function(element) {
         var that = this,
             resizeTimer,
-            spotsLength;
+            refreshRate = 250;
         that.element = element;
         that.renderedImage = that.element.getElementsByTagName('img')[0];
         that.spots = [];
-        that.coefficient = 1;
+        that.ratio = 1;
         that.defaultImageWidth = 0;
         
         init();
@@ -237,7 +245,7 @@
             var image = new Image();
             image.onload = function(){
                 that.defaultImageWidth = this.width;
-                that.coefficient = that.renderedImage.width / that.defaultImageWidth;
+                that.ratio = that.renderedImage.offsetWidth / that.defaultImageWidth;
                 updateSpotsPosition();
             };
             image.src = that.renderedImage.getAttribute('src');
@@ -245,25 +253,30 @@
         
         function generateSpots(){
             var spots = getElementsByAttribute(that.element, 'data-id');
-            spotsLength = spots.length;
-            for (var i = 0; i < spotsLength; i++){
-                that.spots.push(new Spot(spots[i], that.element, that.coefficient));
-            }
+            eachSpots(spots, function(spot){
+                that.spots.push(new Spot(spot, that.element, that.ratio));
+            });
         }
         
         function updateSpotsPosition(){
-            that.coefficient = that.renderedImage.width / that.defaultImageWidth;
+            that.ratio = that.renderedImage.offsetWidth / that.defaultImageWidth;
+            eachSpots(that.spots, function(spot){
+                spot.updatePosition(that.ratio);
+                spot.show();
+            });
+        }
+        
+        function eachSpots(spots, callback){
+            var spotsLength = spots.length;
             for (var i = 0; i < spotsLength; i++){
-                that.spots[i].updatePosition(that.coefficient);
-                that.spots[i].show();
+                if (typeof callback === 'function'){
+                    callback.call(this, spots[i]);
+                }
             }
         }
 
         window.addEventListener('resize', function(){
-            var spotsLength = that.spots.length;
-            for (var i = 0; i < spotsLength; i++){
-                that.spots[i].hide();
-            }
+            eachSpots(that.spots, function(spot){ spot.hide(); });
             clearTimeout(resizeTimer);
             resizeTimer = setTimeout(updateSpotsPosition, 250);
         });
