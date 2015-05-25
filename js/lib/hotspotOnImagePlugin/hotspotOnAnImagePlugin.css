@@ -15,6 +15,7 @@
 
 .tl-text-wrapper{
     max-height: 300px;
+	white-space: pre-line;
     overflow-y: auto;
 }
 
@@ -43,13 +44,15 @@
 .top .tl-arrow{
     top: 0;
     border-width: 10px 10px 0 10px;
-    border-color: rgba(67, 81, 96, 0.95) transparent transparent transparent;
+    border-color: transparent;
+    border-top-color: rgba(67, 81, 96, 0.95);
 }
 
 .bottom .tl-arrow{
     bottom: 0;
     border-width: 0 10px 10px 10px;
-    border-color: transparent transparent rgba(67, 81, 96, 0.95) transparent;
+    border-color: transparent;
+    border-bottom-color: rgba(67, 81, 96, 0.95);
 }
 
 .info-container {
