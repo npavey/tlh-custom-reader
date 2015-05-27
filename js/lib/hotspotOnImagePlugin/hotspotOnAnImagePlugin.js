@@ -33,6 +33,9 @@
                     callback();
                 }
             })
+        }, 
+        config = {
+            extendsBeyondLeft: 0
         };
         
     var Tooltip = (function(){
@@ -115,6 +118,12 @@
                         tooltipElement.style.left = tooltipBounds.left + (windowWidth - tooltipClientRect.right) - browserScrollWidth + 'px';
                         arrow.style.left = spotBounds.centerPosition.left - tooltipBounds.left - (windowWidth - tooltipClientRect.right) + browserScrollWidth - arrowHalfWidth + 'px';
                     }
+                    if(config.extendsBeyondLeft){
+                        if (parseInt(tooltipElement.style.left) + config.extendsBeyondLeft < 0){
+                            tooltipElement.style.left = parseInt(tooltipElement.style.left) + config.extendsBeyondLeft + 'px';
+                            arrow.style.left = parseInt(arrow.style.left) - config.extendsBeyondLeft + 'px';
+                        }
+                    }                 
                 }
             }
             
@@ -238,15 +247,20 @@
         }
     };
     
-    window.HotspotOnImage = function(element) {
+    window.HotspotOnImage = function(element, settings) {
         var that = this,
             resizeTimer,
-            refreshRate = 250;
+            refreshRate = 250,
+            settings = settings || {};
         that.element = element;
         that.renderedImage = that.element.getElementsByTagName('img')[0];
         that.spots = [];
         that.ratio = 1;
         that.defaultImageWidth = 0;
+        
+        if (typeof settings.extendsBeyondLeft !== 'undefined'){
+            config.extendsBeyondLeft = settings.extendsBeyondLeft;
+        }
         
         init();
         
