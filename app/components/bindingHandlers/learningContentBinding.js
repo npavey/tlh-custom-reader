@@ -8,9 +8,7 @@ define(['durandal/composition'], function (composition) {
             
             switch(dataType){
                 case 'hotspot': 
-                    var hotspotOnImage = new HotspotOnImage($(html)[0], {
-                        extendsBeyondLeft: 60
-                    });
+                    var hotspotOnImage = new HotspotOnImage($(html)[0]);
                     $element.html(hotspotOnImage.element);
                     break;
                 default:

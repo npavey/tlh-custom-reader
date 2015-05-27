@@ -112,18 +112,18 @@
                         arrow.style.display = 'none';
                     }
                     if (tooltipClientRect.left < 0) {
-                        tooltipElement.style.left =  tooltipBounds.left - tooltipClientRect.left + 'px';
+                        tooltipBounds.left = tooltipBounds.left - tooltipClientRect.left;
+                        tooltipElement.style.left =  tooltipBounds.left + 'px';
                         arrow.style.left = spotBounds.centerPosition.left - tooltipBounds.left + tooltipClientRect.left - arrowHalfWidth + 'px';
                     } if (tooltipClientRect.right > windowWidth){
-                        tooltipElement.style.left = tooltipBounds.left + (windowWidth - tooltipClientRect.right) - browserScrollWidth + 'px';
+                        tooltipBounds.left = tooltipBounds.left + (windowWidth - tooltipClientRect.right) - browserScrollWidth
+                        tooltipElement.style.left = tooltipElement.style.left  + 'px';
                         arrow.style.left = spotBounds.centerPosition.left - tooltipBounds.left - (windowWidth - tooltipClientRect.right) + browserScrollWidth - arrowHalfWidth + 'px';
                     }
-                    if(config.extendsBeyondLeft){
-                        if (parseInt(tooltipElement.style.left) + config.extendsBeyondLeft < 0){
-                            tooltipElement.style.left = parseInt(tooltipElement.style.left) + config.extendsBeyondLeft + 'px';
-                            arrow.style.left = parseInt(arrow.style.left) - config.extendsBeyondLeft + 'px';
-                        }
-                    }                 
+                    if (tooltipBounds.left + container.offsetLeft < 0){
+                        tooltipElement.style.left = tooltipBounds.left + container.offsetLeft + 'px';
+                        arrow.style.left = parseInt(arrow.style.left) - container.offsetLeft + 'px';
+                    }
                 }
             }
             
