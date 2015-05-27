@@ -1092,7 +1092,12 @@ ul.unstyled > li:before {
 .tl-wrapper.bottom .tl-arrow{
     border-color: transparent transparent rgba(29,80,98,0.95) transparent;
 }
+
+.mCSB_container{
+    min-height: 100%;
+}
 /*#endregion hotspot on an image*/
+
 @media (max-width: 1780px) {
   .course {
     padding-top: 40px;

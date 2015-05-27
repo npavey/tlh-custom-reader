@@ -26,6 +26,13 @@
                 }
             }
             return matchingElements;
+        },
+        defer = function(callback){
+            setTimeout(function(){
+                if (typeof callback === 'function'){
+                    callback();
+                }
+            })
         };
         
     var Tooltip = (function(){
@@ -55,7 +62,7 @@
                     arrow.style.display = 'block';
                     tooltipElement.style.display = 'block';
                     var infoContainer = element.getElementsByClassName(classList.infoContainer)[0],
-                        infoContainerHeight = infoContainer.offsetHeight,
+                        infoContainerHeight = infoContainer.offsetHeight - 10,
                         arrowHalfWidth = 0,
                         windowWidth = window.innerWidth,
                         browserScrollWidth = 20,
@@ -83,15 +90,15 @@
                         tooltipElement.classList.remove(classList.bottom);
                         tooltipElement.classList.add(classList.top);
                         tooltipBounds.top = spotBounds.centerPosition.top - infoContainerHeight - tooltipBounds.heigth;
-                        tooltipElement.style.top = tooltipBounds.top + 'px';
                     } else {
                         tooltipElement.classList.remove(classList.top);
                         tooltipElement.classList.add(classList.bottom);
                         tooltipBounds.top = spotBounds.centerPosition.top + infoContainerHeight;
-                        tooltipElement.style.top = tooltipBounds.top + 'px';
                     }
                     
-                    arrowHalfWidth = arrow.offsetWidth / 2
+                    arrowHalfWidth = arrow.offsetWidth / 2;
+                    tooltipElement.style.top = tooltipBounds.top + 'px';
+                    
                     tooltipBounds.left = spotBounds.centerPosition.left - tooltipBounds.width * 0.5;
                     arrow.style.left = spotBounds.centerPosition.left - tooltipBounds.left - arrowHalfWidth + 'px';
 
@@ -132,6 +139,10 @@
             }
             
             function bindEvents(){
+                window.addEventListener('resize', function (){
+                    hide();
+                });
+                
                 if (isTouchDevice()){
                     tooltipElement.addEventListener('click', function(event){
                         event.stopPropagation();
@@ -140,15 +151,11 @@
                         hide();
                     });
                 } else{
-                    tooltipElement.addEventListener('mouseover', function(){
+                    tooltipElement.addEventListener('mouseenter', function(){
                         tooltipElement.classList.add(classList.mouseover);
                     });
 
-                    tooltipElement.addEventListener('mouseout', function(event){
-                        var e = event.toElement || event.relatedTarget;
-                        if (e && (e.parentNode == this || e == this)) {
-                           return;
-                        }
+                    tooltipElement.addEventListener('mouseleave', function(event){
                         tooltipElement.classList.remove(classList.mouseover);
                         hide();
                     });
@@ -195,33 +202,38 @@
         init();
         
         function init(){
-            var infoElement = document.createElement('span');
-            infoElement.classList.add(classList.infoContainer);
-            that.element.appendChild(infoElement);
-            that.hide();
-            if (isTouchDevice()){
-                that.element.addEventListener('click', function(event){
-                    tooltip.show(container, that.element, that.text);
-                    event.stopPropagation();
-                });
+            if (that.text !== '' && typeof that.text !== 'undefined'){
+                var infoElement = document.createElement('span');
+                infoElement.classList.add(classList.infoContainer);
+                that.element.appendChild(infoElement);
+                that.hide();
+                if (isTouchDevice()){
+                    that.element.addEventListener('click', function(event){
+                        tooltip.show(container, that.element, that.text);
+                        event.stopPropagation();
+                    });
 
-            } else {
-                that.element.addEventListener('mouseover', function () {
-                    tooltip.show(container, that.element, that.text);
-                });
+                } else {
+                    
+                    that.element.addEventListener('mouseenter', function (event) {
+                        defer(function(){
+                            tooltip.show(container, that.element, that.text);
+                        });
+                    });
 
-                that.element.addEventListener('mouseout', function (event) {
-                    var e = event.toElement || event.relatedTarget;
-                    if (e && (e.parentNode == this || e == this || e == tooltip.element)) {
-                       return;
-                    }
-
-                    setTimeout(function(){
-                        if (!tooltip.element.classList.contains(classList.mouseover)){
-                            tooltip.hide();
+                    that.element.addEventListener('mouseleave', function (event) {
+                        var e = event.toElement || event.relatedTarget;
+                        if (e && e == tooltip.element) {
+                           return;
                         }
-                    }, 10);
-                });
+                        
+                        defer(function(){
+                            if (!tooltip.element.classList.contains(classList.mouseover)){
+                                tooltip.hide();
+                            }
+                        });
+                    });
+                }
             }
         }
     };
