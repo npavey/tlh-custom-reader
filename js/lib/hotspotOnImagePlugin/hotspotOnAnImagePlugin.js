@@ -66,7 +66,7 @@
                     arrow.style.display = 'block';
                     tooltipElement.style.display = 'block';
                     var infoContainer = element.getElementsByClassName(classList.infoContainer)[0],
-                        infoContainerHeight = infoContainer.offsetHeight - 10,
+                        infoContainerHeight = infoContainer.offsetHeight - 5,
                         arrowHalfWidth = 0,
                         windowWidth = window.innerWidth,
                         browserScrollWidth = 20,
@@ -131,12 +131,13 @@
                             arrow.style.left = parseInt(arrow.style.left) - container.offsetLeft + config.units;
                         }
                     }
-                    
                 }
             }
             
             function hide(){
                 var parentNode = tooltipElement.parentNode;
+                tooltipElement.classList.remove(classList.bottom);
+                tooltipElement.classList.remove(classList.top);
                 if (parentNode){
                     parentNode.removeChild(tooltipElement);
                 } else {
