@@ -35,7 +35,8 @@
             })
         }, 
         config = {
-            extendsBeyondLeft: 0
+            useContainerOffsetLeft: false,
+            units: 'px'
         };
         
     var Tooltip = (function(){
@@ -100,30 +101,37 @@
                     }
                     
                     arrowHalfWidth = arrow.offsetWidth / 2;
-                    tooltipElement.style.top = tooltipBounds.top + 'px';
+                    tooltipElement.style.top = tooltipBounds.top + config.units;
                     
                     tooltipBounds.left = spotBounds.centerPosition.left - tooltipBounds.width * 0.5;
-                    arrow.style.left = spotBounds.centerPosition.left - tooltipBounds.left - arrowHalfWidth + 'px';
+                    arrow.style.left = spotBounds.centerPosition.left - tooltipBounds.left - arrowHalfWidth + config.units;
 
-                    tooltipElement.style.left = tooltipBounds.left + 'px';
+                    tooltipElement.style.left = tooltipBounds.left + config.units;
                     tooltipClientRect = tooltipElement.getBoundingClientRect();
                     if(tooltipClientRect.bottom > window.innerHeight){
-                        tooltipElement.style.top = tooltipBounds.top - (tooltipClientRect.bottom - window.innerHeight) + 'px';
+                        tooltipElement.style.top = tooltipBounds.top - (tooltipClientRect.bottom - window.innerHeight) + config.units;
                         arrow.style.display = 'none';
                     }
+                    
+                    var tempLeft = tooltipBounds.left;
+                    
                     if (tooltipClientRect.left < 0) {
-                        tooltipBounds.left = tooltipBounds.left - tooltipClientRect.left;
-                        tooltipElement.style.left =  tooltipBounds.left + 'px';
-                        arrow.style.left = spotBounds.centerPosition.left - tooltipBounds.left + tooltipClientRect.left - arrowHalfWidth + 'px';
+                        tooltipBounds.left = tempLeft - tooltipClientRect.left;
+                        tooltipElement.style.left =  tooltipBounds.left + config.units;
+                        arrow.style.left = spotBounds.centerPosition.left - tempLeft + tooltipClientRect.left - arrowHalfWidth + config.units;
                     } if (tooltipClientRect.right > windowWidth){
-                        tooltipBounds.left = tooltipBounds.left + (windowWidth - tooltipClientRect.right) - browserScrollWidth
-                        tooltipElement.style.left = tooltipElement.style.left  + 'px';
-                        arrow.style.left = spotBounds.centerPosition.left - tooltipBounds.left - (windowWidth - tooltipClientRect.right) + browserScrollWidth - arrowHalfWidth + 'px';
+                        tooltipBounds.left = tempLeft + (windowWidth - tooltipClientRect.right) - browserScrollWidth;
+                        tooltipElement.style.left = tooltipBounds.left  + config.units;
+                        arrow.style.left = spotBounds.centerPosition.left - tempLeft - (windowWidth - tooltipClientRect.right) + browserScrollWidth - arrowHalfWidth + config.units;
                     }
-                    if (tooltipBounds.left + container.offsetLeft < 0){
-                        tooltipElement.style.left = tooltipBounds.left + container.offsetLeft + 'px';
-                        arrow.style.left = parseInt(arrow.style.left) - container.offsetLeft + 'px';
+                    
+                    if (config.useContainerOffsetLeft){
+                        if (tooltipBounds.left + container.offsetLeft < 0){
+                            tooltipElement.style.left = tooltipBounds.left + container.offsetLeft + config.units;
+                            arrow.style.left = parseInt(arrow.style.left) - container.offsetLeft + config.units;
+                        }
                     }
+                    
                 }
             }
             
@@ -202,10 +210,10 @@
         };
         
         that.updatePosition = function(ratio){
-            that.element.style.top = that.defaultTopStyle * ratio + 'px';
-            that.element.style.left = that.defaultLeftStyle * ratio + 'px';
-            that.element.style.width = that.defaultWidthStyle * ratio + 'px';
-            that.element.style.height = that.defaultHeightStyle * ratio + 'px';
+            that.element.style.top = that.defaultTopStyle * ratio + config.units;
+            that.element.style.left = that.defaultLeftStyle * ratio + config.units;
+            that.element.style.width = that.defaultWidthStyle * ratio + config.units;
+            that.element.style.height = that.defaultHeightStyle * ratio + config.units;
         };
         
         init();
@@ -258,8 +266,8 @@
         that.ratio = 1;
         that.defaultImageWidth = 0;
         
-        if (typeof settings.extendsBeyondLeft !== 'undefined'){
-            config.extendsBeyondLeft = settings.extendsBeyondLeft;
+        if (typeof settings.useContainerOffsetLeft !== 'undefined'){
+            config.useContainerOffsetLeft = settings.useContainerOffsetLeft;
         }
         
         init();
