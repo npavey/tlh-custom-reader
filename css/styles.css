@@ -1,4 +1,4 @@
-﻿@font-face {
+@font-face {
   font-family: 'RobotoslabRegular';
   src: url('fonts/RobotoSlab-Regular-webfont.woff') format('woff'), url('fonts/RobotoSlab-Regular-webfont.ttf') format('truetype'), url('fonts/RobotoSlab-Regular-webfont.svg#roboto_slabregular') format('svg');
   font-weight: normal;
@@ -1074,6 +1074,30 @@ ul.unstyled > li:before {
 .touch .close-button .close-button-text {
   display: none;
 }
+/*#region hotspot on an image*/
+.hotspotOnImage img{
+    margin: 0;
+    padding: 0;
+}
+.tl-wrapper{
+    font: 16px 'RobotoslabRegular';
+    color: #fff;
+    background-color: rgba(29,80,98,0.95);
+}
+
+.tl-wrapper.top .tl-arrow{
+    border-color: rgba(29,80,98,0.95) transparent transparent transparent;
+}
+
+.tl-wrapper.bottom .tl-arrow{
+    border-color: transparent transparent rgba(29,80,98,0.95) transparent;
+}
+
+.mCSB_container{
+    min-height: 100%;
+}
+/*#endregion hotspot on an image*/
+
 @media (max-width: 1780px) {
   .course {
     padding-top: 40px;
