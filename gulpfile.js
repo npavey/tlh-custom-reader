@@ -79,6 +79,12 @@ gulp.task('build-app', ['clean'], function () {
     gulp.src('./js/require.js')
       .pipe(uglify())
       .pipe(gulp.dest(output + '/js'));
+    
+     gulp.src(['./js/lib/hotspotOnImagePlugin/hotspotOnAnImagePlugin.css'])
+        .pipe(addBuildVersion())
+        .pipe(minifyCss({ keepBreaks: true }))
+        .pipe(gulp.dest(output + '/js/lib/hotspotOnImagePlugin'));
+
 
     gulp.src('lang/*.json')
       .pipe(gulp.dest(output + '/lang'));
