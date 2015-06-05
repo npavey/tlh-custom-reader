@@ -11,6 +11,7 @@ define(['durandal/composition'], function (composition) {
                     var hotspotOnImage = new HotspotOnImage($(html)[0], {
                         useContainerOffsetLeft: true
                     });
+                    $element.addClass('hotspot-on-image-container');
                     $element.html(hotspotOnImage.element);
                     break;
                 default:
