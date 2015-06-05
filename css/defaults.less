@@ -120,12 +120,23 @@ p {
 
 ul, ol {
     padding-left: 30px;
-    list-style-position: inside;
     list-style-type: none;
+
+    p, h1, h2, h3{
+        display: inline;
+    }
 }
 
 ol {
     counter-reset: ol-counter;
+
+    li:before {
+        content: counter(ol-counter) '.';
+        counter-increment: ol-counter;
+        font-size: 22px;
+        line-height: 1;
+        margin-right: 10px;
+    }
 }
 
 ul > li:before {
@@ -138,42 +149,26 @@ ul > li:before {
     width: 25px;
 }
 
-ol li {
-    position: relative;
-    padding-left: 25px;
-}
-
-ol li:before {
-    content: counter(ol-counter) + '.';
-    counter-increment: ol-counter;
-    font-size: 22px;
-    left: 0;
-    line-height: 1;
-    position: absolute;
-    top: 2px;
-}
-
 img {
     max-width: 100%;
     height: auto !important;
     margin: 40px auto;
     display: block;
-}
 
-img[style*="float:left"],
-img[style*="float: left"] {
-    margin-bottom: 10px;
-    margin-right: 30px;
-    margin-top: 10px;
-}
+    &[style*="float:left"],
+    &[style*="float: left"] {
+        margin-bottom: 10px;
+        margin-right: 30px;
+        margin-top: 10px;
+    }
 
-img[style*="float:right"],
-img[style*="float: right"] {
-    margin-bottom: 10px;
-    margin-left: 30px;
-    margin-top: 10px;
+    &[style*="float:right"],
+    &[style*="float: right"] {
+        margin-bottom: 10px;
+        margin-left: 30px;
+        margin-top: 10px;
+    }
 }
-
 
 cite {
     display: block;
@@ -184,27 +179,26 @@ cite {
     position: relative;
     white-space: pre-line;
     max-width: 640px;
-}
 
-cite:before,
-cite:after {
-    position: absolute;
-    font-size: 60px;
-    font-family: 'Ubuntu';
-    color: #57dcdb;
-    font-style: normal;
-}
+    &:before, &:after {
+        position: absolute;
+        font-size: 60px;
+        font-family: 'Ubuntu';
+        color: #57dcdb;
+        font-style: normal;
+    }
 
-cite:before {
-    content: "\201C";
-    left: -30px;
-    top: 5px;
-}
+    &:before {
+        content: "\201C";
+        left: -30px;
+        top: 5px;
+    }
 
-cite:after {
-    bottom: -23px;
-    content: "\201D";
-    margin-left: 5px;
+    &:after {
+        bottom: -23px;
+        content: "\201D";
+        margin-left: 5px;
+    }
 }
 
 a {
