@@ -13,9 +13,6 @@
         'template language': 'Template language',
 
         'xx': 'Custom',
-        'en': 'English',
-        'nl': 'Dutch',
-        'ua': 'Ukrainian',
 
         'choose language for your course': 'Choose language for your course',
         'defaultText': 'Default',
