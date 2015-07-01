@@ -52,8 +52,10 @@
 
         function init(languages, languagesSettings) {
             ko.utils.arrayForEach(languages || [], function (language) {
-                addLanguage(new LanguageModel(language.code, app.localize(language.code), language.url));
+                addLanguage(new LanguageModel(language.code, language.name, language.url));
             });
+
+            orderLanguages();
 
             var defaultLanguage = getLanguage(defaultLanguageCode);
             var customLanguage = new LanguageModel(customLanguageCode, app.localize(customLanguageCode), defaultLanguage ? defaultLanguage.resourcesUrl : null, languagesSettings ? languagesSettings.customTranslations : null);
@@ -62,6 +64,12 @@
 
             var selectedLanguageCode = (languagesSettings && languagesSettings.selected) ? languagesSettings.selected : defaultLanguageCode;
             that.selectedLanguageCode(selectedLanguageCode);
+        }
+
+        function orderLanguages() {
+            that.languages.sort(function (a, b) {
+                return a.name.localeCompare(b.name);
+            });
         }
 
         function isLanguageEditable() {
