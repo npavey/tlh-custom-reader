@@ -8,7 +8,7 @@
         this.hasStarterPlan = userData && userData.accessType > 0;
     }
 
-    function LogoModel(logoSettings) {
+    function LogoModel(logoSettings, saveChanges) {
         var that = this;
 
         that.url = ko.observable('');
@@ -17,11 +17,17 @@
         });
         that.clear = function () {
             that.url('');
+            saveChanges();
         };
         that.isError = ko.observable(false);
         that.errorText = ko.observable('');
         that.errorDescription = ko.observable('');
         that.isLoading = ko.observable(false);
+        
+        that.hasLogo = ko.computed(function () {
+            that.isError(false);
+            return that.url() !== '';
+        });
 
         that.setUrl = setUrl;
         that.getData = getData;
@@ -50,8 +56,10 @@
             }).done(function (url) {
                 setUrl(url);
                 setDefaultStatus();
+                saveChanges();
             }).fail(function (reason) {
                 setFailedStatus(reason.title, reason.description);
+                saveChanges();
             });
         }
 
@@ -84,7 +92,7 @@
         }
     }
 
-    function BackgroundModel(backgroundSettings) {
+    function BackgroundModel(backgroundSettings, saveChanges) {
         var settings = $.extend(true, {
             image: {
                 src: null,
@@ -102,12 +110,15 @@
         that.type = ko.observable(settings.image.type);
         that.type.default = function () {
             that.type('default');
+            saveChanges();
         };
         that.type.repeat = function () {
             that.type('repeat');
+            saveChanges();
         };
         that.type.fullscreen = function () {
             that.type('fullscreen');
+            saveChanges();
         };
 
         that.errorTitle = ko.observable();
@@ -133,12 +144,14 @@
                 that.errorTitle(reason.title);
                 that.errorDescription(reason.description);
             }).always(function () {
+                saveChanges();
                 that.image.isUploading(false);
             });
         };
 
         that.clearImage = function () {
             that.image(null);
+            saveChanges();
         };
 
         that.getData = function () {
