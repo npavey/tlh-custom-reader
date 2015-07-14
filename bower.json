@@ -15,5 +15,8 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "easygenerator-hotspot-on-an-image-plugin": "*"
+  }
 }
