@@ -48,46 +48,46 @@ gulp.task('build-app', ['clean'], function () {
     var assets = useref.assets();
 
     gulp.src('./index.html')
-      .pipe(assets)
-      .pipe(gulpif('*.js', uglify()))
-      .pipe(gulpif('*.css', minifyCss()))
-      .pipe(assets.restore())
-      .pipe(useref())
-      .pipe(addBuildVersion())
-      .pipe(gulp.dest(output));
+        .pipe(assets)
+        .pipe(gulpif('*.js', uglify()))
+        .pipe(gulpif('*.css', minifyCss()))
+        .pipe(assets.restore())
+        .pipe(useref())
+        .pipe(addBuildVersion())
+        .pipe(gulp.dest(output));
 
     gulp.src('./manifest.json')
-      .pipe(gulp.dest(output));
+        .pipe(gulp.dest(output));
 
     gulp.src(['./settings.js', './publishSettings.js'])
-      .pipe(gulp.dest(output));
+        .pipe(gulp.dest(output));
 
     gulp.src('./css/fonts/**')
-      .pipe(gulp.dest(output + '/css/fonts'));
+        .pipe(gulp.dest(output + '/css/fonts'));
 
     gulp.src('./css/img/**')
-      .pipe(gulp.dest(output + '/css/img'));
+        .pipe(gulp.dest(output + '/css/img'));
 
     gulp.src(['./css/styles.css', './css/jquery.mCustomScrollbar.min.css'])
         .pipe(addBuildVersion())
         .pipe(minifyCss({ keepBreaks: true }))
         .pipe(gulp.dest(output + '/css'));
 
-    gulp.src('./images/**')
-      .pipe(gulp.dest(output + '/images'));
+    gulp.src('./preview/**')
+        .pipe(gulp.dest(output + '/preview'));
 
     gulp.src('./js/require.js')
-      .pipe(uglify())
-      .pipe(gulp.dest(output + '/js'));
-    
-     gulp.src(['./js/lib/hotspotOnImagePlugin/hotspotOnAnImagePlugin.css'])
+        .pipe(uglify())
+        .pipe(gulp.dest(output + '/js'));
+
+    gulp.src(['./js/lib/hotspotOnImagePlugin/hotspotOnAnImagePlugin.css'])
         .pipe(addBuildVersion())
         .pipe(minifyCss({ keepBreaks: true }))
         .pipe(gulp.dest(output + '/js/lib/hotspotOnImagePlugin'));
 
 
     gulp.src('lang/*.json')
-      .pipe(gulp.dest(output + '/lang'));
+        .pipe(gulp.dest(output + '/lang'));
 
     return durandal({
         baseDir: 'app',
@@ -101,9 +101,9 @@ gulp.task('build-app', ['clean'], function () {
 
 gulp.task('build-settings', ['build-design-settings', 'build-configure-settings'], function () {
     gulp.src('settings/api.js')
-      .pipe(removeDebugBlocks())
-      .pipe(uglify())
-      .pipe(gulp.dest(output + '/settings'));
+        .pipe(removeDebugBlocks())
+        .pipe(uglify())
+        .pipe(gulp.dest(output + '/settings'));
 
 });
 
@@ -111,19 +111,19 @@ gulp.task('build-design-settings', ['clean'], function () {
     var assets = useref.assets();
 
     gulp.src(['settings/design/design.html'])
-      .pipe(assets)
-      .pipe(gulpif('*.js', uglify()))
-      .pipe(assets.restore())
-      .pipe(useref())
-      .pipe(addBuildVersion())
-      .pipe(gulp.dest(output + '/settings/design'));
+        .pipe(assets)
+        .pipe(gulpif('*.js', uglify()))
+        .pipe(assets.restore())
+        .pipe(useref())
+        .pipe(addBuildVersion())
+        .pipe(gulp.dest(output + '/settings/design'));
 
     gulp.src('settings/design/css/fonts/**')
-      .pipe(gulp.dest(output + '/settings/design/css/fonts'));
-    
+        .pipe(gulp.dest(output + '/settings/design/css/fonts'));
+
     gulp.src('settings/design/css/design.css')
-      .pipe(minifyCss())
-      .pipe(gulp.dest(output + '/settings/design/css'));
+        .pipe(minifyCss())
+        .pipe(gulp.dest(output + '/settings/design/css'));
 
 });
 
@@ -131,24 +131,24 @@ gulp.task('build-configure-settings', ['clean'], function () {
     var assets = useref.assets();
 
     gulp.src(['settings/configure/configure.html'])
-      .pipe(assets)
-      .pipe(gulpif('*.js', uglify()))
-      .pipe(assets.restore())
-      .pipe(useref())
-      .pipe(addBuildVersion())
-      .pipe(gulp.dest(output + '/settings/configure'));
+        .pipe(assets)
+        .pipe(gulpif('*.js', uglify()))
+        .pipe(assets.restore())
+        .pipe(useref())
+        .pipe(addBuildVersion())
+        .pipe(gulp.dest(output + '/settings/configure'));
 
     gulp.src('settings/configure/img/**')
-      .pipe(gulp.dest(output + '/settings/configure/img'));
-    
+        .pipe(gulp.dest(output + '/settings/configure/img'));
+
     gulp.src('settings/configure/css/img/**')
-      .pipe(gulp.dest(output + '/settings/configure/css/img'));
-    
+        .pipe(gulp.dest(output + '/settings/configure/css/img'));
+
     gulp.src('settings/configure/css/fonts/**')
-      .pipe(gulp.dest(output + '/settings/configure/css/fonts'));
-    
+        .pipe(gulp.dest(output + '/settings/configure/css/fonts'));
+
     gulp.src('settings/configure/css/configure.css')
-      .pipe(minifyCss())
-      .pipe(gulp.dest(output + '/settings/configure/css'));
+        .pipe(minifyCss())
+        .pipe(gulp.dest(output + '/settings/configure/css'));
 
 });
