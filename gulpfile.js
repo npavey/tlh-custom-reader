@@ -3,7 +3,10 @@ var output = "./.output";
 var
     gulp = require('gulp'),
     del = require('del'),
+    
+    less = require('gulp-less'),
     minifyCss = require('gulp-minify-css'),
+    
     uglify = require('gulp-uglify'),
     durandal = require('gulp-durandal'),
     concat = require('gulp-concat'),
@@ -37,11 +40,17 @@ function removeDebugBlocks() {
     });
 };
 
-gulp.task('build', ['build-app', 'build-settings'], function () {
+gulp.task('build', ['css', 'build-app', 'build-settings'], function () {
 });
 
 gulp.task('clean', function (cb) {
     del([output], cb);
+});
+
+gulp.task('css', ['clean'], function () {
+    gulp.src('./css/styles.less')
+        .pipe(less())
+        .pipe(gulp.dest('./css/'));
 });
 
 gulp.task('build-app', ['clean'], function () {
@@ -62,8 +71,8 @@ gulp.task('build-app', ['clean'], function () {
     gulp.src(['./settings.js', './publishSettings.js'])
         .pipe(gulp.dest(output));
 
-    gulp.src('./css/fonts/**')
-        .pipe(gulp.dest(output + '/css/fonts'));
+    gulp.src('./css/font/**')
+        .pipe(gulp.dest(output + '/css/font'));
 
     gulp.src('./css/img/**')
         .pipe(gulp.dest(output + '/css/img'));
