@@ -40,7 +40,7 @@ function removeDebugBlocks() {
     });
 };
 
-gulp.task('build', ['css', 'build-app', 'build-settings'], function () {
+gulp.task('build', ['css', 'build-app', 'build-settings', 'assets'], function () {
 });
 
 gulp.task('clean', function (cb) {
@@ -59,7 +59,7 @@ gulp.task('build-app', ['clean'], function () {
     gulp.src('./index.html')
         .pipe(assets)
         .pipe(gulpif('*.js', uglify()))
-        .pipe(gulpif('*.css', minifyCss()))
+        .pipe(gulpif('*.css', minifyCss({ keepBreaks: true })))
         .pipe(assets.restore())
         .pipe(useref())
         .pipe(addBuildVersion())
@@ -77,22 +77,12 @@ gulp.task('build-app', ['clean'], function () {
     gulp.src('./css/img/**')
         .pipe(gulp.dest(output + '/css/img'));
 
-    gulp.src(['./css/styles.css', './css/jquery.mCustomScrollbar.min.css'])
-        .pipe(addBuildVersion())
-        .pipe(minifyCss({ keepBreaks: true }))
-        .pipe(gulp.dest(output + '/css'));
-
     gulp.src('./preview/**')
         .pipe(gulp.dest(output + '/preview'));
 
     gulp.src('./js/require.js')
         .pipe(uglify())
         .pipe(gulp.dest(output + '/js'));
-
-    gulp.src(['./js/lib/hotspotOnImagePlugin/hotspotOnAnImagePlugin.css'])
-        .pipe(addBuildVersion())
-        .pipe(minifyCss({ keepBreaks: true }))
-        .pipe(gulp.dest(output + '/js/lib/hotspotOnImagePlugin'));
 
 
     gulp.src('lang/*.json')
@@ -106,6 +96,13 @@ gulp.task('build-app', ['clean'], function () {
         minify: true
     }).pipe(gulp.dest(output + '/app'));
 
+});
+
+gulp.task('assets', ['clean'], function () {
+    gulp.src('vendor/easy-supported-browser/css/img/**')
+        .pipe(gulp.dest(output + '/css/img'));
+    gulp.src('vendor/easy-supported-browser/css/font/**')
+        .pipe(gulp.dest(output + '/css/font'));
 });
 
 gulp.task('build-settings', ['build-design-settings', 'build-configure-settings'], function () {

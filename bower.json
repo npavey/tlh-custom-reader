@@ -17,6 +17,7 @@
     "tests"
   ],
   "dependencies": {
-    "easygenerator-hotspot-on-an-image-plugin": "*"
+    "easygenerator-hotspot-on-an-image-plugin": "*",
+    "easy-supported-browser": "~1.0.0"
   }
 }
