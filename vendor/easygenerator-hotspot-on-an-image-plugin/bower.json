@@ -1,0 +1,14 @@
+{
+  "name": "easygenerator-hotspot-on-an-image-plugin",
+  "version": "1.0.0",
+  "homepage": "https://github.com/LeonidPelyhivskyi/hotspot-on-an-image-plugin",
+  "authors": [
+    "LeonidPelyhivskyi <plo.91ua@gmail.com>"
+  ],
+  "description": "Plugin for learning type Hotspot on an image",
+  "main": "[hotspotOnAnImagePlugin.js,hotspotOnAnImagePlugin.css]",
+  "keywords": [
+    "easygenerator"
+  ],
+  "license": "Apache"
+}

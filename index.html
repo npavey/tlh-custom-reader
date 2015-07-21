@@ -15,9 +15,15 @@
     <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
     <meta http-equiv="pragma" content="no-cache" />
 
-    <link href="./js/lib/hotspotOnImagePlugin/hotspotOnAnImagePlugin.css" rel="stylesheet" />
-    <link href="./css/styles.css" rel="stylesheet" />
+    <!-- build:css css/vendor.css -->
+    <link href="vendor/easy-supported-browser/css/easy-supported-browser.min.css" rel="stylesheet" />
+    <link href="vendor/easygenerator-hotspot-on-an-image-plugin/hotspotOnAnImagePlugin.css" rel="stylesheet" />
     <link href="./css/jquery.mCustomScrollbar.min.css" rel="stylesheet" />
+    <!-- endbuild -->
+
+    <!-- build:css css/general.css -->
+    <link href="./css/styles.css" rel="stylesheet" />
+    <!-- endbuild -->
 
     <script type="text/javascript">
         if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
@@ -33,13 +39,69 @@
         <div class="loader"></div>
     </div>
     <!-- build:js js/vendor.min.js-->
+    <script src="vendor/easy-supported-browser/easy-supported-browser.min.js" ></script>
     <script src="js/vendor/knockout-3.1.0.js"></script>
     <script src="js/vendor/jquery-1.9.1.js"></script>
     <script src="js/vendor/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="js/vendor/q.js"></script>
     <script src="js/vendor/underscore.js"></script>
-    <script src="js/lib/hotspotOnImagePlugin/hotspotOnAnImagePlugin.js"></script>
+    <script src="vendor/easygenerator-hotspot-on-an-image-plugin/hotspotOnAnImagePlugin.js"></script>
     <!-- endbuild -->
+
+    <script type="text/javascript">
+        supportedBrowser.configure({
+            browsers: {
+                win: {
+                    chrome: {},
+                    firefox: {},
+                    msie: {}
+                },
+                mac: {
+                    safari: {},
+                    chrome: {}
+                },
+                android: {
+                    native: {
+                        title: 'Android Browser',
+                        image: 'css/img/browsers/android.png'
+                    },
+                    chrome: {
+                        version: 39
+                    }
+                },
+                ios: {
+                    safari: {},
+                    chrome: {}
+                }
+            },
+            mainAppContainerId: 'applicationHost',
+            globalBrowsersInfo: {
+                chrome: {
+                    title: 'Google Chrome',
+                    link: 'http://www.google.com/chrome',
+                    image: 'css/img/browsers/chrome.png',
+                    version: 43
+                },
+                firefox: {
+                    title: 'Mozilla Firefox',
+                    link: 'http://www.mozilla.com/firefox',
+                    image: 'css/img/browsers/firefox.png',
+                    version: 33
+                },
+                msie: {
+                    title: 'Internet Explorer',
+                    link: 'http://windows.microsoft.com/en-US/internet-explorer/download-ie',
+                    image: 'css/img/browsers/ie.png',
+                    version: 11
+                },
+                safari: {
+                    title: 'Apple Safari',
+                    link: 'http://www.apple.com/safari',
+                    image: 'css/img/browsers/safari.png'
+                }
+            }
+        }).init();
+    </script>
 
     <script src="./js/require.js" data-main="./app/main"></script>
 </body>
