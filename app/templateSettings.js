@@ -7,6 +7,9 @@
         languages: {
             selected: "en"
         },
+        theme: {
+            key: ""
+        },
         background: {
             image: {
                 src: "css/img/background.png",
@@ -28,6 +31,10 @@
 
         if (!settings.languages || !settings.languages.selected) {
             _.extend(settings, { languages: defaultTemplateSetting.languages });
+        }
+
+        if (!_.isEmpty(settings.theme.key.trim())) {
+            _.extend(settings, { theme: defaultTemplateSetting.languages });
         }
 
         if (!settings.background || !settings.background.image || !settings.background.image.src) {

@@ -53,6 +53,12 @@ gulp.task('css', ['clean'], function () {
         .pipe(gulp.dest('./css/'));
 });
 
+gulp.task('watch', function () {
+    gulp.run('css');
+    gulp.watch('./css/*.less', ['css']);
+});
+
+
 gulp.task('build-app', ['clean'], function () {
     var assets = useref.assets();
 
@@ -71,8 +77,8 @@ gulp.task('build-app', ['clean'], function () {
     gulp.src(['./settings.js', './publishSettings.js'])
         .pipe(gulp.dest(output));
 
-    gulp.src('./css/font/**')
-        .pipe(gulp.dest(output + '/css/font'));
+    gulp.src('./css/themes/**')
+        .pipe(gulp.dest(output + '/css/themes'));
 
     gulp.src('./css/img/**')
         .pipe(gulp.dest(output + '/css/img'));
@@ -80,7 +86,7 @@ gulp.task('build-app', ['clean'], function () {
     gulp.src('./preview/**')
         .pipe(gulp.dest(output + '/preview'));
 
-    gulp.src('./js/require.js')
+    gulp.src('./vendor/requirejs/require.js')
         .pipe(uglify())
         .pipe(gulp.dest(output + '/js'));
 

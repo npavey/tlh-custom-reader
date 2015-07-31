@@ -18,6 +18,12 @@
   ],
   "dependencies": {
     "easygenerator-hotspot-on-an-image-plugin": "*",
-    "easy-supported-browser": "~1.0.0"
+    "easy-supported-browser": "~1.0.0",
+    "knockout": "~3.3.0",
+    "durandal": "~2.1.0",
+    "jquery": "~2.1.4",
+    "underscore": "~1.8.3",
+    "q": "1.0.1",
+    "malihu-custom-scrollbar-plugin": "~3.0.9"
   }
 }

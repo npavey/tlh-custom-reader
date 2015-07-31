@@ -1,8 +1,8 @@
 ﻿requirejs.config({
     paths: {
-        'text': '../js/text',
-        'durandal': '../js/durandal',
-        'plugins': '../js/durandal/plugins'
+        'text': '../vendor/requirejs-text/text',
+        'durandal': '../vendor/durandal/js/',
+        'plugins': '../vendor/durandal/js//plugins'
     },
     urlArgs: 'v=' + Math.random()
 });
@@ -16,7 +16,7 @@ define(['durandal/system', 'durandal/app', 'durandal/viewLocator', 'components/b
     function (system, app, viewLocator, bootstrapper, settingsReader, translation, templateSettings, modulesInitializer) {
         app.title = 'easygenerator';
 
-        //system.debug(true);
+        system.debug(true);
 
         app.configurePlugins({
             router: true

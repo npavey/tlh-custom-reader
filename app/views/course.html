@@ -1,14 +1,9 @@
 ﻿<section>
-
     <!-- ko if: hasIntroductionContent -->
-
-
     <div class="show-introduction-button-wrapper">
         <div class="show-introduction-button" data-bind="click: showIntroduction, visible: !isIntroductionVisible()"><span class="intro-text localized" data-translate-text="[intro]" data-translate-title="[intro]">Intro</span></div>
     </div>
-
     <div class="introduction-overlay" data-bind="visible: isIntroductionVisible">
-
         <div class="introduction-content-container-wrapper background" data-bind="toggle: isIntroductionVisible">
             <div class="introduction-content-container">
                 <div class="introduction-content-wrapper-outer scrollable">
@@ -16,16 +11,17 @@
                         <img class="course-image" alt="" data-bind="attr: { src: logo }" />
                         <h1 class="course-title" data-bind="text: title"></h1>
                         <div class="course-author"><span class="localized" data-translate-text="[created by]">Created by: </span><span data-bind="text: author"></span></div>
-                        <div class="introduction-content styled-content" data-bind="html: introductionContent"></div>
+                        <div class="introduction-content styled-content" data-bind="html: introductionContent, elementsWrap: {}"></div>
                     </div>
                 </div>
                 <div class="start-button-wrapper">
-                    <button class="button primary large emphasize start" data-bind="click: hideIntroduction"><span class="button-text localized" data-translate-text="[start course]" data-translate-title="[start course]">Start&nbsp;</span><i class="chevron"></i></button>
+                    <button class="button primary medium" data-bind="click: hideIntroduction">
+                        <span class="intro-text localized" data-translate-text="[start reading]" data-translate-title="[start reading]">Start Reading</span>
+                    </button>
                 </div>
             </div>
         </div>
     </div>
-
     <!-- /ko -->
     <div class="course-wrapper scrollable">
         <button class="close-button" data-bind="click: finish">
