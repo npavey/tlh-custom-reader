@@ -14,7 +14,6 @@ var
     useref = require('gulp-useref'),
     eventStream = require('event-stream'),
     buildVersion = +new Date();
-;
 
 function addBuildVersion() {
     return eventStream.map(function (file, callback) {
