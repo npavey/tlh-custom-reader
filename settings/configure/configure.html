@@ -23,7 +23,7 @@
 </head>
 
 <body>
-    <div class="settings-container">
+    <div class="settings-container" data-bind="template: { afterRender: egApi.showSettings }">
         <!-- ko ifnot: isError -->
         <div class="settings-tab-container languages" data-bind="with: languages">
             <div class="settings-tab-wrapper">
