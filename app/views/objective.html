@@ -1,25 +1,21 @@
 ﻿<section class="objective">
-    <div class="container container-table">
-        <div class="content-table-container-wrapper" data-bind="toggle: isTableOfContentVisible">
-            <a class="back-wrapper" href="#">
-                <span class="button emphasize back">
-                    <span class="button-text localized" data-translate-text="[back to objectives]" data-translate-title="[back to objectives]">Back to objectives</span>
-                </span>
-            </a>
-            <div class="content-table-container">
-                <div class="content-table-wrapper scrollable">
-                    <div class="content-table">
-                        <div class="content-table-title localized" data-translate-text="[articles]" data-translate-title="[articles]">Articles</div>
-                        <ul class="unstyled">
+    <div class="content-tree-container">
+        <div class="content-tree-wrapper" data-bind="toggle: isTableOfContentVisible">
+            <a class="back-to-objective localized" href="#" data-translate-text="[back to objectives]" data-translate-title="[back to objectives]"></a>
+            <div class="content-tree-outer">
+                <div class="content-tree-inner scrollable">
+                    <div class="content-tree">
+                        <div class="content-tree-title localized" data-translate-text="[articles]" data-translate-title="[articles]">Articles</div>
+                        <ul>
                             <!-- ko foreach: pages -->
                             <!-- ko if: $data == $parent.currentPage() -->
-                            <li class="content-table-article-title-wrapper active">
-                                <span class="content-table-article-title active" data-bind="text: title"></span>
+                            <li class="content-tree-article-container active">
+                                <span class="content-tree-article-title active" data-bind="text: title"></span>
                             </li>
                             <!-- /ko -->
                             <!-- ko if: $data != $parent.currentPage() -->
-                            <li class="content-table-article-title-wrapper">
-                                <a href="#" class="content-table-article-title" data-bind="attr: { href: '#objective/' + $parent.id() +'/page/'+ id }, text: title"></a>
+                            <li class="content-tree-article-container">
+                                <a href="#" class="content-tree-article-title" data-bind="attr: { href: '#objective/' + $parent.id() +'/page/'+ id }, text: title"></a>
                             </li>
                             <!-- /ko -->
                             <!-- /ko -->
@@ -35,16 +31,15 @@
                         <div data-bind="router: { }"></div>
                     </div>
                 </div>
-                <a class="back-brief" data-bind="css: { visible: !isTableOfContentVisible() }" href="#"></a>
-                <button class="button toggle" data-bind="click: toggleTableOfContent"></button>
+                <a class="back-to-objective" data-bind="css: { visible: !isTableOfContentVisible() }" href="#"></a>
+                <button class="toggle-content-tree-button" data-bind="click: toggleTableOfContent, css: { collapsed: !isTableOfContentVisible() }"></button>
                 <!-- ko if: previousPage -->
-                <a href="#" class="button previous" data-bind="attr: { href: '#objective/' + id() +'/page/'+ previousPage().id, title: previousPage().title }"></a>
+                <a href="#" class="navigation-button previous" data-bind="attr: { href: '#objective/' + id() +'/page/'+ previousPage().id, title: previousPage().title }"></a>
                 <!-- /ko -->
                 <!-- ko if: nextPage -->
-                <a href="#" class="button next" data-bind="attr: { href: '#objective/' + id() +'/page/'+ nextPage().id, title: nextPage().title }"></a>
+                <a href="#" class="navigation-button next" data-bind="attr: { href: '#objective/' + id() +'/page/'+ nextPage().id, title: nextPage().title }"></a>
                 <!-- /ko -->
             </div>
         </div>
     </div>
-
 </section>

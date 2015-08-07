@@ -1,10 +1,12 @@
-﻿define(['plugins/router', 'durandal/composition', 'durandal/app', 'modulesInitializer', 'dataContext', 'themesInjector'], function (router, composition, app, modulesInitializer, dataContext, themesInjector) {
+﻿define(['plugins/router', 'durandal/composition', 'durandal/app', 'modulesInitializer', 'dataContext', 'themesInjector', 'modules/background', 'templateSettings'],
+    function (router, composition, app, modulesInitializer, dataContext, themesInjector, background, templateSettings) {
 
     var viewmodel = {
         isViewReady: ko.observable(false),
 
         router: router,
-        activate: activate
+        activate: activate,
+        compositionComplete: compositionComplete
     };
 
     router.on('router:navigation:composition-complete').then(function () {
@@ -50,6 +52,10 @@
                 });
             });
         });
+    }
+
+    function compositionComplete() {
+        background.initialize(templateSettings.background);
     }
 
 })

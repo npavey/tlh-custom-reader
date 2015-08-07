@@ -1,16 +1,27 @@
 ﻿<section>
     <!-- ko if: hasIntroductionContent -->
     <div class="show-introduction-button-wrapper">
-        <div class="show-introduction-button" data-bind="click: showIntroduction, visible: !isIntroductionVisible()"><span class="intro-text localized" data-translate-text="[intro]" data-translate-title="[intro]">Intro</span></div>
+        <button class="show-introduction-button" data-bind="click: showIntroduction, visible: !isIntroductionVisible()">
+            <span class="show-introduction-button-text localized" data-translate-text="[intro]" data-translate-title="[intro]">Intro</span>
+        </button>
     </div>
     <div class="introduction-overlay" data-bind="visible: isIntroductionVisible">
-        <div class="introduction-content-container-wrapper background" data-bind="toggle: isIntroductionVisible">
+        <div class="introduction-content-container-wrapper background default-background" data-bind="toggle: isIntroductionVisible">
             <div class="introduction-content-container">
                 <div class="introduction-content-wrapper-outer scrollable">
                     <div class="introduction-content-wrapper-inner">
-                        <img class="course-image" alt="" data-bind="attr: { src: logo }" />
-                        <h1 class="course-title" data-bind="text: title"></h1>
-                        <div class="course-author"><span class="localized" data-translate-text="[created by]">Created by: </span><span data-bind="text: author"></span></div>
+                        <div class="header-container">
+                            <div class="logo-container">
+                                <img class="logo" alt="" src="" data-bind="attr: { src: logo }" />
+                            </div>
+                            <div class="course-title-container">
+                                <div class="course-title" data-bind="text: title"></div>
+                                <div class="course-author">
+                                    <span class="localized" data-translate-text="[created by]">Created by: </span>
+                                    <span data-bind="text: author"></span>
+                                </div>
+                            </div>
+                        </div>
                         <div class="introduction-content styled-content" data-bind="html: introductionContent, elementsWrap: {}"></div>
                     </div>
                 </div>
@@ -29,52 +40,39 @@
         </button>
         <div class="course">
             <div class="container">
-                <div class="course-title-container-wrapper">
+                <div class="header-container">
+                    <div class="logo-container">
+                        <img class="logo" alt="" src="" data-bind="attr: { src: logo }" />
+                    </div>
                     <div class="course-title-container">
-                        <div class="course-image-wrapper">
-                            <img class="course-image" alt="" data-bind="attr: { src: logo }" />
-                        </div>
-                        <div class="course-title-wrapper">
-                            <h1 class="course-title" data-bind="text: title"></h1>
-                            <span class="course-author clearfix"><span class="localized" data-translate-text="[created by]">Created by: </span><span data-bind="text: author"></span></span>
+                        <div class="course-title" data-bind="text: title"></div>
+                        <div class="course-author">
+                            <span class="localized" data-translate-text="[created by]">Created by: </span>
+                            <span data-bind="text: author"></span>
                         </div>
                     </div>
                 </div>
-
-                <ul class="unstyled objectives">
+                <ul class="objectives">
                     <!-- ko foreach: objectives -->
-                    <li class="objective">
-                        <div class="objective-thumbnail-wrapper">
-                            <div class="objective-thumbnail">
-                                <div class="objective-thumbnail-image-wrapper">
-                                    <div class="objective-thumbnail-image">
-                                        <div class="objective-thumbnail-image-text" data-bind="text: title[0]"></div>
-                                    </div>
+                    <li class="objective-container">
+                        <div class="objective-wrapper">
+                            <div class="objective-thumbnail-container">
+                                <div class="objective-thumbnail">
+                                    <span class="objective-thubnail-text" data-bind="text: title[0]"></span>
+                                </div>
+                            </div>
+                            <div class="objective-title-container">
+                                <div class="objective-title" data-bind="text: title, css: { small: title.length > 200}"></div>
+                                <div class="button-container">
+                                    <button class="button small success" data-bind="click: navigateToObjective" data-translate-text="[start reading]" data-translate-title="[start reading]"></button>
                                 </div>
                             </div>
                         </div>
-                        <div class="objective-title-container-wrapper-tip">
-                            <div class="objective-title-container-wrapper">
-                                <div class="objective-title-container">
-                                    <div class="objective-title-wrapper">
-                                        <div class="objective-title">
-                                            <span data-bind="text: title"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <a class="objective-start-wrapper" href="#" data-bind=" attr: { href: '#objective/' + id, title: title }">
-                            <span class="button large emphasize primary objective-start localized" data-translate-text="[start reading]" data-translate-title="[start reading]">Start reading</span>
-                        </a>
                     </li>
                     <!-- /ko -->
-                    <li class="clearfix"></li>
                 </ul>
 
             </div>
         </div>
     </div>
-
 </section>

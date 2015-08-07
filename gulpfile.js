@@ -46,15 +46,25 @@ gulp.task('clean', function (cb) {
     del([output], cb);
 });
 
-gulp.task('css', ['clean'], function () {
+gulp.task('css', ['clean', 'build-themes'], function () {
     gulp.src('./css/styles.less')
         .pipe(less())
         .pipe(gulp.dest('./css/'));
 });
 
+gulp.task('build-themes', function() {
+    gulp.src('./css/themes/black.less')
+        .pipe(less())
+        .pipe(gulp.dest('./css/themes'));
+
+    gulp.src('./css/themes/light.less')
+        .pipe(less())
+        .pipe(gulp.dest('./css/themes'));
+});
+
 gulp.task('watch', function () {
     gulp.run('css');
-    gulp.watch('./css/*.less', ['css']);
+    gulp.watch('./css/**/*.less', ['css']);
 });
 
 
@@ -76,7 +86,7 @@ gulp.task('build-app', ['clean'], function () {
     gulp.src(['./settings.js', './publishSettings.js'])
         .pipe(gulp.dest(output));
 
-    gulp.src('./css/themes/**')
+    gulp.src('./css/themes/*.css')
         .pipe(gulp.dest(output + '/css/themes'));
 
     gulp.src('./css/img/**')

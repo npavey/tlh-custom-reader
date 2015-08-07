@@ -3,7 +3,7 @@
 
     var themesInjector = {
         themesPath: 'css/themes',
-        defaultThemeKey: 'black',
+        defaultThemeKey: 'light',
 
         init: init
     };

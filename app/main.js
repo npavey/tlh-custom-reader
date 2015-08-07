@@ -33,7 +33,6 @@ define(['durandal/system', 'durandal/app', 'durandal/viewLocator', 'components/b
                 });
             }).then(function () {
                 return readTemplateSettings().then(function (settings) {
-                    initModules(settings);
                     return initTranslations(settings);
                 });
             }).then(function () {
@@ -61,10 +60,6 @@ define(['durandal/system', 'durandal/app', 'durandal/viewLocator', 'components/b
             return settingsReader.readTemplateSettings().then(function (settings) {
                 return templateSettings.init(settings);
             });
-        }
-
-        function initModules(settings) {
-            modules['modules/background'] = settings.background;
         }
 
         function initTranslations(settings) {
