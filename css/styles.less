@@ -367,8 +367,12 @@ body {
                 left: 0;
                 display: inline-block; //IE 11 FIX http://stackoverflow.com/questions/22071038/ie11-table-cell-height-collapsing-with-position-absolute-contents
                 width: 100%;
+                height: 100%;
 
                 .content-tree-inner {
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
                     width: 100%;
                     overflow-y: auto;
                     overflow-x: hidden;
