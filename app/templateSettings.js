@@ -20,12 +20,6 @@
     return templateSetting;
 
     function init(settings) {
-        //for old user who use reader template default theme should be black
-        if (settings && !settings.theme) {
-            settings.theme = {
-                key: 'black'
-            };
-        }
         if (!settings.logo || !settings.logo.url) {
             _.extend(settings, { logo: defaultTemplateSetting.logo });
         }
