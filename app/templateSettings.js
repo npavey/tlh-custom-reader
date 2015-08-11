@@ -20,6 +20,12 @@
     return templateSetting;
 
     function init(settings) {
+        //for old user who use reader template default theme should be black
+        if (settings && !settings.theme) {
+            settings.theme = {
+                key: 'black'
+            };
+        }
         if (!settings.logo || !settings.logo.url) {
             _.extend(settings, { logo: defaultTemplateSetting.logo });
         }
@@ -29,7 +35,7 @@
         }
 
         if (!settings.theme || !settings.theme.key) {
-            _.extend(settings, { theme: defaultTemplateSetting.languages });
+            _.extend(settings, { theme: defaultTemplateSetting.key });
         }
 
         if (!settings.background || !settings.background.image || !settings.background.image.src) {

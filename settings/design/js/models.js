@@ -93,12 +93,12 @@
         }
     }
 
-    function ThemesModel(themesSettings, saveChanges) {
+    function ThemesModel(themesSettings, saveChanges, useBlackAsDefault) {
         var that = this;
 
         that.list = [
-            new ThemeModel('light', true),
-            new ThemeModel('black')
+            new ThemeModel('light', !useBlackAsDefault),
+            new ThemeModel('black', useBlackAsDefault)
         ];
 
         that.selectedThemeName = ko.computed(function () {
