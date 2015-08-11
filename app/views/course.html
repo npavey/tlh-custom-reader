@@ -1,8 +1,7 @@
 ﻿<section>
     <!-- ko if: hasIntroductionContent -->
     <div class="show-introduction-button-wrapper">
-        <button class="show-introduction-button button" data-bind="click: showIntroduction, visible: !isIntroductionVisible()">
-            <span class="show-introduction-button-text localized" data-translate-text="[intro]" data-translate-title="[intro]">Intro</span>
+        <button class="show-introduction-button button" data-bind="click: showIntroduction, visible: !isIntroductionVisible()" data-translate-text="[intro]" data-translate-title="[intro]">
         </button>
     </div>
     <div class="introduction-overlay" data-bind="visible: isIntroductionVisible">
