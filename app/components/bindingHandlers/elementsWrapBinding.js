@@ -3,10 +3,6 @@
     ko.bindingHandlers.elementsWrap = {
         init: function (element) {
             wrapElement(element);
-        },
-
-        update: function (element) {
-            wrapElement(element);
         }
     };
 

@@ -16,6 +16,7 @@ define(['durandal/composition'], function (composition) {
                     break;
                 default:
                     $element.html(html);
+                    return ko.bindingHandlers.elementsWrap.init.call(this, element, valueAccessor);
             }
         }
     };
