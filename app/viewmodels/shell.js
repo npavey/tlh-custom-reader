@@ -5,8 +5,7 @@
         isViewReady: ko.observable(false),
 
         router: router,
-        activate: activate,
-        compositionComplete: compositionComplete
+        activate: activate
     };
 
     router.on('router:navigation:composition-complete').then(function () {
@@ -27,6 +26,7 @@
                 }
             });
         }
+        background.initialize(templateSettings.background);
     });
 
 
@@ -44,18 +44,12 @@
                     ]);
 
                     router.mapUnknownRoutes('viewmodels/404');
-                    return router.activate().then(function() {
-                        setTimeout(function() {
-                            viewmodel.isViewReady(true);
-                        }, 250);
+                    return router.activate().then(function () {
+                        viewmodel.isViewReady(true);
                     });
                 });
             });
         });
-    }
-
-    function compositionComplete() {
-        background.initialize(templateSettings.background);
     }
 
 })
