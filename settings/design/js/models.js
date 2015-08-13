@@ -2,6 +2,7 @@
 
     app.UserAccessModel = UserAccessModel;
     app.LogoModel = LogoModel;
+    app.ThemesModel = ThemesModel;
     app.BackgroundModel = BackgroundModel;
 
     function UserAccessModel(userData) {
@@ -89,6 +90,86 @@
             return {
                 url: that.url()
             };
+        }
+    }
+
+    function ThemesModel(themesSettings, saveChanges) {
+        var that = this;
+
+        that.list = [
+            new ThemeModel('light', true),
+            new ThemeModel('black')
+        ];
+
+        that.selectedThemeName = ko.computed(function () {
+            var selectedName = '';
+            ko.utils.arrayForEach(that.list, function (theme) { //foreach because of we need to track selecting of all themes
+                if (theme.isSelected()) {
+                    selectedName = theme.name;
+                }
+            });
+            return selectedName;
+        }, that);
+
+        that.select = select;
+        that.selectByName = selectByName;
+        that.openDemo = openDemo;
+        that.getData = getData;
+
+        init(themesSettings);
+
+        return that;
+
+        function init(themesSettings) {
+            if (!themesSettings || !themesSettings.key) {
+                return;
+            }
+
+            that.selectByName(themesSettings.key);
+        }
+
+        function select(item) {
+            ko.utils.arrayForEach(that.list, function (theme) {
+                theme.isSelected(false);
+            });
+
+            item.isSelected(true);
+
+            saveChanges();
+        }
+
+        function selectByName(name) {
+            ko.utils.arrayForEach(that.list, function (theme) {
+                theme.isSelected(theme.name === name);
+            });
+
+        }
+
+        function openDemo() {
+            var index = location.toString().indexOf('/settings/');
+            var templateUrl = location.toString().substring(0, index);
+
+            var params = [
+                'v=' + new Date().getTime(),
+                'theme=' + that.selectedThemeName()
+            ].join('&');
+
+            window.open(templateUrl + '?' + params, '_blank');
+        }
+
+        function getData() {
+            return {
+                key: that.selectedThemeName()
+            };
+        }
+
+        function ThemeModel(name, isSelected) {
+            var that = this;
+
+            that.name = name;
+            that.isSelected = ko.observable(isSelected === true);
+
+            return that;
         }
     }
 

@@ -1,8 +1,8 @@
 ﻿requirejs.config({
     paths: {
-        'text': '../js/text',
-        'durandal': '../js/durandal',
-        'plugins': '../js/durandal/plugins'
+        'text': '../vendor/requirejs-text/text',
+        'durandal': '../vendor/durandal/js/',
+        'plugins': '../vendor/durandal/js//plugins'
     },
     urlArgs: 'v=' + Math.random()
 });
@@ -33,7 +33,6 @@ define(['durandal/system', 'durandal/app', 'durandal/viewLocator', 'components/b
                 });
             }).then(function () {
                 return readTemplateSettings().then(function (settings) {
-                    initModules(settings);
                     return initTranslations(settings);
                 });
             }).then(function () {
@@ -61,10 +60,6 @@ define(['durandal/system', 'durandal/app', 'durandal/viewLocator', 'components/b
             return settingsReader.readTemplateSettings().then(function (settings) {
                 return templateSettings.init(settings);
             });
-        }
-
-        function initModules(settings) {
-            modules['modules/background'] = settings.background;
         }
 
         function initTranslations(settings) {

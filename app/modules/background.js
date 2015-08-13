@@ -4,41 +4,44 @@
         initialize: initialize
     };
 
-    function initialize(settings) {
-        if (!settings || !settings.image || !settings.image.src) {
+    function initialize(background) {
+        var element = $('.background');
+
+        if (!background || !background.image || !background.image.src) {
+            element.addClass('default-background');
             return;
         }
 
-        var src = settings.image.src,
+        var image = new Image(),
+            src = background.image.src,
             position = '0 0',
             repeat = 'no-repeat',
             size = 'auto';
-        
-        if (settings.image.type === 'repeat') {
+
+
+        if (background.image.type === 'repeat') {
             repeat = 'repeat';
         }
 
-        if (settings.image.type === 'fullscreen') {
+        if (background.image.type === 'fullscreen') {
             size = 'cover';
             position = 'center';
         }
 
-        var backgroundStyles = '.background {' +
-            'background-image: url(' + src + ');' +
-            'background-position:'+ position + ';' +
-            '-webkit-background-size:' + size + ';' +
-            'background-size:' + size + ';' +
-            'background-repeat:' + repeat + ';' +
-        '}';
+        image.onload = function () {
+            $(element)
+                .css({
+                    'top': '0',
+                    'bottom': '0',
+                    'background-image': 'url(' + src + ')',
+                    'background-position': position,
+                    '-webkit-background-size': size,
+                    'background-size': size,
+                    'background-repeat': repeat
+                });
+        };
 
-        appendStylesToDocument(backgroundStyles);
-    }
-
-    function appendStylesToDocument(cssStyles) {
-        var styleNode = document.createElement('style');
-        styleNode.type = 'text/css';
-        styleNode.appendChild(document.createTextNode(cssStyles));
-        document.getElementsByTagName('head')[0].appendChild(styleNode);
+        image.src = src;
     }
 
 });

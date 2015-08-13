@@ -15,6 +15,7 @@
     viewModel.getCurrentSettingsData = function (settings) {
         return $.extend({}, settings || currentSettings, {
             logo: viewModel.logo.getData(),
+            theme: viewModel.themes.getData(),
             background: viewModel.background.getData()
         });
     };
@@ -48,6 +49,7 @@
 
             viewModel.userAccess = new app.UserAccessModel(user);
             viewModel.logo = new app.LogoModel(settings.logo, viewModel.saveChanges);
+            viewModel.themes = new app.ThemesModel(settings.theme, viewModel.saveChanges);
             viewModel.background = new app.BackgroundModel(settings.background, viewModel.saveChanges);
 
             currentSettings = viewModel.getCurrentSettingsData(settings);

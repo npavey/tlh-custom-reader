@@ -1,4 +1,4 @@
-﻿define(['dataContext', 'translation'], function (dataContext, translation) {
+﻿define(['dataContext', 'translation', 'plugins/router'], function (dataContext, translation, router) {
     "use strict";
 
     var viewModel = {
@@ -21,7 +21,11 @@
         viewModel.isIntroductionVisible = ko.observable(viewModel.hasIntroductionContent && !sessionStorage.getItem('introductionWasShown'));
 
         viewModel.objectives = course.objectives.map(function (objective) {
-            return { id: objective.id, title: objective.title };
+            return {
+                id: objective.id,
+                title: objective.title,
+                navigateToObjective: navigateToObjective
+            };
         });
     }
 
@@ -39,6 +43,10 @@
     function hideIntroduction() {
         viewModel.isIntroductionVisible(false);
         sessionStorage.setItem('introductionWasShown', true);
+    }
+
+    function navigateToObjective(objective) {
+        router.navigate('objective/' + objective.id);
     }
 
 })

@@ -6,11 +6,11 @@
 
         var _text;
 
-        this.text = function () {
+        this.text = function() {
             var dfd = Q.defer();
 
             if (typeof _text == typeof undefined) {
-                http.get(url, { dataType: 'html' }).then(function (response) {
+                http.get(url, { dataType: 'html' }).then(function(response) {
                     _text = response;
                     dfd.resolve(response);
                 });
@@ -19,7 +19,7 @@
             }
 
             return dfd.promise;
-        }
+        };
     };
 
     return Content;

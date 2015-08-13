@@ -1,4 +1,5 @@
-﻿define(['plugins/router', 'durandal/composition', 'durandal/app', 'modulesInitializer', 'dataContext'], function (router, composition, app, modulesInitializer, dataContext) {
+﻿define(['plugins/router', 'durandal/composition', 'durandal/app', 'modulesInitializer', 'dataContext', 'themesInjector', 'modules/background', 'templateSettings'],
+    function (router, composition, app, modulesInitializer, dataContext, themesInjector, background, templateSettings) {
 
     var viewmodel = {
         isViewReady: ko.observable(false),
@@ -25,6 +26,7 @@
                 }
             });
         }
+        background.initialize(templateSettings.background);
     });
 
 
@@ -33,18 +35,18 @@
     function activate() {
         return modulesInitializer.init().then(function () {
             return dataContext.initialize().then(function () {
-                sessionStorage.removeItem('introductionWasShown');
+                return themesInjector.init().then(function() {
+                    sessionStorage.removeItem('introductionWasShown');
 
-                router.map([
-                    { route: '', moduleId: 'viewmodels/course' },
-                    { route: 'objective/:id*page', moduleId: 'viewmodels/objective' }
-                ]);
+                    router.map([
+                        { route: '', moduleId: 'viewmodels/course' },
+                        { route: 'objective/:id*page', moduleId: 'viewmodels/objective' }
+                    ]);
 
-                router.mapUnknownRoutes('viewmodels/404');
-                return router.activate().then(function () {
-                    setTimeout(function () {
+                    router.mapUnknownRoutes('viewmodels/404');
+                    return router.activate().then(function () {
                         viewmodel.isViewReady(true);
-                    }, 250);
+                    });
                 });
             });
         });
