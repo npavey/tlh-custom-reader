@@ -12,6 +12,8 @@ var
     concat = require('gulp-concat'),
     gulpif = require('gulp-if'),
     useref = require('gulp-useref'),
+    bower = require('gulp-bower'),
+    
     eventStream = require('event-stream'),
     buildVersion = +new Date();
 
@@ -39,20 +41,23 @@ function removeDebugBlocks() {
     });
 };
 
-gulp.task('build', ['css', 'build-app', 'build-settings', 'assets'], function () {
+gulp.task('watch', function () {
+    gulp.run('css');
+    gulp.watch('./css/**/*.less', ['css']);
+});
+
+gulp.task('build', ['pre-build', 'build-app', 'build-settings'], function () {
 });
 
 gulp.task('clean', function (cb) {
     del([output], cb);
 });
 
-gulp.task('css', ['clean', 'build-themes'], function () {
-    gulp.src('./css/styles.less')
-        .pipe(less())
-        .pipe(gulp.dest('./css/'));
+gulp.task('bower', ['clean'], function () {
+    return bower({ cmd: 'update' });
 });
 
-gulp.task('build-themes', function() {
+gulp.task('build-themes', ['bower'], function() {
     gulp.src('./css/themes/black.less')
         .pipe(less())
         .pipe(gulp.dest('./css/themes'));
@@ -62,13 +67,23 @@ gulp.task('build-themes', function() {
         .pipe(gulp.dest('./css/themes'));
 });
 
-gulp.task('watch', function () {
-    gulp.run('css');
-    gulp.watch('./css/**/*.less', ['css']);
+gulp.task('css', ['clean', 'build-themes'], function () {
+    gulp.src('./css/styles.less')
+        .pipe(less())
+        .pipe(gulp.dest('./css/'));
 });
 
+gulp.task('assets', ['clean', 'bower'], function () {
+    gulp.src('vendor/easy-supported-browser/css/img/**')
+        .pipe(gulp.dest(output + '/css/img'));
+    gulp.src('vendor/easy-supported-browser/css/font/**')
+        .pipe(gulp.dest(output + '/css/font'));
+});
 
-gulp.task('build-app', ['clean'], function () {
+gulp.task('pre-build', ['clean', 'bower', 'css', 'assets'], function () {
+});
+
+gulp.task('build-app', ['pre-build'], function () {
     var assets = useref.assets();
 
     gulp.src('./index.html')
@@ -113,13 +128,6 @@ gulp.task('build-app', ['clean'], function () {
 
 });
 
-gulp.task('assets', ['clean'], function () {
-    gulp.src('vendor/easy-supported-browser/css/img/**')
-        .pipe(gulp.dest(output + '/css/img'));
-    gulp.src('vendor/easy-supported-browser/css/font/**')
-        .pipe(gulp.dest(output + '/css/font'));
-});
-
 gulp.task('build-settings', ['build-design-settings', 'build-configure-settings'], function () {
     gulp.src('settings/api.js')
         .pipe(removeDebugBlocks())
@@ -128,7 +136,7 @@ gulp.task('build-settings', ['build-design-settings', 'build-configure-settings'
 
 });
 
-gulp.task('build-design-settings', ['clean'], function () {
+gulp.task('build-design-settings', ['pre-build'], function () {
     var assets = useref.assets();
 
     gulp.src(['settings/design/design.html'])
@@ -148,7 +156,7 @@ gulp.task('build-design-settings', ['clean'], function () {
 
 });
 
-gulp.task('build-configure-settings', ['clean'], function () {
+gulp.task('build-configure-settings', ['pre-build'], function () {
     var assets = useref.assets();
 
     gulp.src(['settings/configure/configure.html'])
