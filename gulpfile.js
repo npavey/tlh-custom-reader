@@ -139,7 +139,7 @@ gulp.task('build-settings', ['build-design-settings', 'build-configure-settings'
 gulp.task('build-design-settings', ['pre-build'], function () {
     var assets = useref.assets();
 
-    gulp.src(['settings/design/design.html'])
+    gulp.src(['settings/design/branding.html', 'settings/design/layout.html'])
         .pipe(assets)
         .pipe(gulpif('*.js', uglify()))
         .pipe(assets.restore())
