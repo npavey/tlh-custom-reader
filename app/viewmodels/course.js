@@ -31,11 +31,22 @@
 
     function finish() {
         window.close();
-        setTimeout(function () {
-            alert(translation.getTextByKey('[thank you message]'));
-        }, 250);
+        if (!inIframe()){
+            setTimeout(function () {
+                alert(translation.getTextByKey('[thank you message]'));
+            }, 250);
+        }
     }
 
+    function inIframe() {
+        // browsers can block access to window.top due to same origin policy, so exception can be thrown here.
+        try {
+            return window.self !== window.top;
+        } catch (e) {
+            return true;
+        }
+    }
+        
     function showIntroduction() {
         viewModel.isIntroductionVisible(true);
     }
