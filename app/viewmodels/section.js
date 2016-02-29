@@ -11,27 +11,27 @@
         this.router = router.createChildRouter()
                 .makeRelative({
                 }).map([
-                    { route: 'objective/:objectiveId/page/:pageId', moduleId: 'viewmodels/page' }
+                    { route: 'section/:sectionId/page/:pageId', moduleId: 'viewmodels/page' }
                 ]).buildNavigationModel();
     }
 
-    ViewModel.prototype.canActivate = function (objectiveId, page) {
+    ViewModel.prototype.canActivate = function (sectionId, page) {
         if (typeof page !== "string") {
-            return { 'redirect': 'objective/' + objectiveId + '/page/' + dataContext.getObjective(objectiveId).pages[0].id };
+            return { 'redirect': 'section/' + sectionId + '/page/' + dataContext.getSection(sectionId).pages[0].id };
         }
 
-        return dataContext.getObjective(objectiveId) ? true : { 'redirect': '404' };
+        return dataContext.getSection(sectionId) ? true : { 'redirect': '404' };
     }
 
-    ViewModel.prototype.activate = function (objectiveId) {
+    ViewModel.prototype.activate = function (sectionId) {
         var
             that = this,
             url = router.activeInstruction().fragment,
-            objective = dataContext.getObjective(objectiveId)
+            section = dataContext.getSection(sectionId)
         ;
 
-        that.id(objective.id);
-        that.pages(objective.pages.map(function (page) { return { id: page.id, title: page.title } }));
+        that.id(section.id);
+        that.pages(section.pages.map(function (page) { return { id: page.id, title: page.title } }));
         that.pages().forEach(function (page, index, array) {
             if (url.indexOf(page.id, url.length - page.id.length) === -1) {
                 return;

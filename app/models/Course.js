@@ -6,7 +6,7 @@
         this.title = title;
         this.author = author;
         this.logo = null;
-        this.objectives = [];
+        this.sections = [];
         this.introductionContent = '';
     };
 

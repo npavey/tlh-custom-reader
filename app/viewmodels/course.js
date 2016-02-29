@@ -20,11 +20,11 @@
         viewModel.introductionContent = course.introductionContent;
         viewModel.isIntroductionVisible = ko.observable(viewModel.hasIntroductionContent && !sessionStorage.getItem('introductionWasShown'));
 
-        viewModel.objectives = course.objectives.map(function (objective) {
+        viewModel.sections = course.sections.map(function (section) {
             return {
-                id: objective.id,
-                title: objective.title,
-                navigateToObjective: navigateToObjective
+                id: section.id,
+                title: section.title,
+                navigateToSection: navigateToSection
             };
         });
     }
@@ -56,8 +56,8 @@
         sessionStorage.setItem('introductionWasShown', true);
     }
 
-    function navigateToObjective(objective) {
-        router.navigate('objective/' + objective.id);
+    function navigateToSection(section) {
+        router.navigate('section/' + section.id);
     }
 
 })

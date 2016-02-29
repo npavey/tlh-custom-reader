@@ -40,7 +40,7 @@
 
                     router.map([
                         { route: '', moduleId: 'viewmodels/course' },
-                        { route: 'objective/:id*page', moduleId: 'viewmodels/objective' }
+                        { route: 'section/:id*page', moduleId: 'viewmodels/section' }
                     ]);
 
                     router.mapUnknownRoutes('viewmodels/404');
