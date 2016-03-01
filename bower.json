@@ -17,8 +17,8 @@
     "tests"
   ],
   "dependencies": {
-    "easygenerator-hotspot-on-an-image-plugin": "*",
-    "easy-supported-browser": "~1.0.0",
+    "components-webfontloader": "~1.6.3",
+    "easygenerator-plugins": "*",
     "knockout": "~3.3.0",
     "durandal": "~2.1.0",
     "jquery": "~2.1.4",
