@@ -8,11 +8,14 @@ define(['durandal/composition'], function (composition) {
             
             switch(dataType){
                 case 'hotspot': 
-                    var hotspotOnImage = new HotspotOnImage($(html)[0], {
-                        useContainerOffsetLeft: true
-                    });
+					var hotspotOnImage = HotspotStorage.create($(html)[0]);
+                        
                     $element.addClass('hotspot-on-image-container');
                     $element.html(hotspotOnImage.element);
+
+                    ko.utils.domNodeDisposal.addDisposeCallback(element, function () {
+                        HotspotStorage.remove(hotspotOnImage);
+                    });
                     break;
                 default:
                     $element.html(html);
