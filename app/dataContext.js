@@ -1,11 +1,11 @@
-﻿define(['models/Course', 'models/Objective', 'models/Page', 'models/Content', 'Q', 'templateSettings'], function (Course, Objective, Page, Content, Q, templateSettings) {
+﻿define(['models/Course', 'models/Section', 'models/Page', 'models/Content', 'Q', 'templateSettings'], function (Course, Section, Page, Content, Q, templateSettings) {
     "use strict";
 
     var course;
 
     return {
         getCourse: getCourse,
-        getObjective: getObjective,
+        getSection: getSection,
         getPage: getPage,
 
         initialize: initialize
@@ -15,26 +15,26 @@
         return course;
     }
 
-    function getObjective(id) {
-        var objective = null;
-        getCourse().objectives.some(function (element) {
+    function getSection(id) {
+        var section = null;
+        getCourse().sections.some(function (element) {
             if (element.id == id) {
-                objective = element;
+                section = element;
                 return true;
             }
         });
-        return objective;
+        return section;
     }
 
-    function getPage(objectiveId, pageId) {
-        var objective = getObjective(objectiveId);
+    function getPage(sectionId, pageId) {
+        var section = getSection(sectionId);
 
-        if (!(objective instanceof Objective)) {
+        if (!(section instanceof Section)) {
             return null;
         }
 
         var page = null;
-        objective.pages.some(function (element) {
+        section.pages.some(function (element) {
             if (element.id == pageId) {
                 page = element;
                 return true;
@@ -54,9 +54,9 @@
 
             course = new Course(data.id, data.title, data.createdBy || 'Anonymous');
 
-            if (Array.isArray(data.objectives)) {
-                data.objectives.forEach(function (dobj) {
-                    var objective = new Objective(dobj.id, dobj.title);
+            if (Array.isArray(data.sections)) {
+                data.sections.forEach(function (dobj) {
+                    var section = new Section(dobj.id, dobj.title);
                     if (Array.isArray(dobj.questions)) {
                         dobj.questions.forEach(function (dq) {
                             var page = new Page(dq.id, dq.title);
@@ -66,12 +66,12 @@
                                 });
                             }
                             if (page.contents.length) {
-                                objective.pages.push(page);
+                                section.pages.push(page);
                             }
                         });
                     }
-                    if (objective.pages.length) {
-                        course.objectives.push(objective);
+                    if (section.pages.length) {
+                        course.sections.push(section);
                     }
                 });
             }

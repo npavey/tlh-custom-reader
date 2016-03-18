@@ -1,11 +1,11 @@
 ﻿define([], function () {
     "use strict";
 
-    var Objective = function (id, title) {
+    var Section = function (id, title) {
         this.id = id;
         this.title = title;
         this.pages = [];
     };
 
-    return Objective;
+    return Section;
 });

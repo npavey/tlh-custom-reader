@@ -1,26 +1,26 @@
 ﻿define(['knockout', 'Q', 'plugins/router', 'dataContext'], function (ko, Q, router, dataContext) {
 
     var ViewModel = function () {
-        this.objectiveTitle = ko.observable();
+        this.sectionTitle = ko.observable();
         this.pageTitle = ko.observable();
         this.contents = ko.observableArray([]);
 
         this.isViewReady = ko.observable(false);
     }
 
-    ViewModel.prototype.canActivate = function (objectiveId, pageId) {
-        return dataContext.getObjective(objectiveId) && dataContext.getPage(objectiveId, pageId) ? true : { 'redirect': '404' };
+    ViewModel.prototype.canActivate = function (sectionId, pageId) {
+        return dataContext.getSection(sectionId) && dataContext.getPage(sectionId, pageId) ? true : { 'redirect': '404' };
     }
 
-    ViewModel.prototype.activate = function (objectiveId, pageId) {
+    ViewModel.prototype.activate = function (sectionId, pageId) {
         var
-            objective = dataContext.getObjective(objectiveId),
-            page = dataContext.getPage(objectiveId, pageId),
+            section = dataContext.getSection(sectionId),
+            page = dataContext.getPage(sectionId, pageId),
             contents = [],
             promises = []
         ;
 
-        this.objectiveTitle(objective.title);
+        this.sectionTitle(section.title);
         this.pageTitle(page.title);
         this.isViewReady(false);
 

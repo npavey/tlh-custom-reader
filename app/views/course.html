@@ -51,19 +51,19 @@
                         </div>
                     </div>
                 </div>
-                <ul class="objectives">
-                    <!-- ko foreach: objectives -->
-                    <li class="objective-container">
-                        <div class="objective-wrapper">
-                            <div class="objective-thumbnail-container">
-                                <div class="objective-thumbnail">
-                                    <span class="objective-thubnail-text" data-bind="text: title[0]"></span>
+                <ul class="sections">
+                    <!-- ko foreach: sections -->
+                    <li class="section-container">
+                        <div class="section-wrapper">
+                            <div class="section-thumbnail-container">
+                                <div class="section-thumbnail">
+                                    <span class="section-thubnail-text" data-bind="text: title[0]"></span>
                                 </div>
                             </div>
-                            <div class="objective-title-container">
-                                <div class="objective-title" data-bind="text: title, css: { small: title.length > 200}"></div>
+                            <div class="section-title-container">
+                                <div class="section-title" data-bind="text: title, css: { small: title.length > 200}"></div>
                                 <div class="button-container">
-                                    <button class="button small success" data-bind="click: navigateToObjective" data-translate-text="[start reading]" data-translate-title="[start reading]"></button>
+                                    <button class="button small success" data-bind="click: navigateToSection" data-translate-text="[start reading]" data-translate-title="[start reading]"></button>
                                 </div>
                             </div>
                         </div>
