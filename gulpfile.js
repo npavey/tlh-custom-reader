@@ -13,7 +13,7 @@ var
     gulpif = require('gulp-if'),
     useref = require('gulp-useref'),
     bower = require('gulp-bower'),
-    
+    webserver = require('gulp-webserver'),
     eventStream = require('event-stream'),
     buildVersion = +new Date();
 
@@ -199,4 +199,18 @@ gulp.task('build-searchcontent-app', ['pre-build'], function () {
         .pipe(useref())
         .pipe(addBuildVersion())
         .pipe(gulp.dest(output + '/searchcontent'));
+});
+
+gulp.task('webserver', function () {
+    gulp.src('.')
+        .pipe(webserver({
+            livereload: {
+                enable: true,
+                filter: function (fileName) {
+                    return !fileName.match(/.css/);
+                }
+            },
+            directoryListing: true,
+            open: "index.html"
+        }));
 });
