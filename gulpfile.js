@@ -76,6 +76,10 @@ gulp.task('css', ['clean', 'build-themes'], function () {
     gulp.src('./css/styles.less')
         .pipe(less())
         .pipe(gulp.dest('./css/'));
+
+    gulp.src('./css/fonts.less')
+        .pipe(less())
+        .pipe(gulp.dest('./css/'));
 });
 
 gulp.task('assets', ['clean', 'bower'], function () {
@@ -119,9 +123,11 @@ gulp.task('build-app', ['pre-build'], function () {
         .pipe(uglify())
         .pipe(gulp.dest(output + '/js'));
 
-
     gulp.src('lang/*.json')
         .pipe(gulp.dest(output + '/lang'));
+
+    gulp.src('./css/fonts.css')
+         .pipe(gulp.dest(output + '/css'));
 
     return durandal({
         baseDir: 'app',
