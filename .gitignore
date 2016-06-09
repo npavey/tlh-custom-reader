@@ -5,3 +5,6 @@
 /vendor/
 Web.config
 /css/**/*.css
+/.vs/reader/v14/.suo
+/reader.sln
+/.vs/config/applicationhost.config
