@@ -73,11 +73,7 @@ gulp.task('build-themes', ['bower'], function() {
 });
 
 gulp.task('css', ['clean', 'build-themes'], function () {
-    gulp.src('./css/styles.less')
-        .pipe(less())
-        .pipe(gulp.dest('./css/'));
-
-    gulp.src('./css/fonts.less')
+	return gulp.src(['./css/styles.less','./css/fonts.less'])
         .pipe(less())
         .pipe(gulp.dest('./css/'));
 });
