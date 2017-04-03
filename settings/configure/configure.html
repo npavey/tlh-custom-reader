@@ -54,7 +54,7 @@
                                     <div class="input-wrapper">
                                         <!-- ko if: $parent.isLanguageEditable() -->
                                         <div class="choose-language-table-input-wrapper">
-                                            <input type="text" class="choose-language-table-input" data-bind="value: value, valueUpdate: ['afterkeydown', 'afterpaste']" />
+                                            <input autocomplete="off" type="text" class="choose-language-table-input" data-bind="value: value, valueUpdate: ['afterkeydown', 'afterpaste']" />
                                             <span class="edit-icon"></span>
                                         </div>
                                         <!-- /ko -->
