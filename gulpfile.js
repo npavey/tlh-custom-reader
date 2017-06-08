@@ -91,6 +91,9 @@ gulp.task('pre-build', ['clean', 'bower', 'css', 'assets'], function () {
 gulp.task('build-app', ['pre-build'], function () {
     var assets = useref.assets();
 
+    gulp.src('./css/font/*')
+        .pipe(gulp.dest(output + '/css/font'));
+
     gulp.src('./index.html')
         .pipe(assets)
         .pipe(gulpif('*.js', uglify()))
