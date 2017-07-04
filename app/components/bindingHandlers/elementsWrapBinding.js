@@ -13,10 +13,16 @@
 
         $('img', $element).each(function (index, image) {
             var $image = $(image),
-                $wrapper = $(imageWrapper).css('float', $image.css('float'));
+                $wrapper = $(imageWrapper).css('float', $image.css('float')),
+                $parent = $image.parent();
                 
             if ($image.closest('.cropped-image').length > 0) {
                 return;
+            }
+
+            if ($parent.prop('tagName') == "TD" && $parent[0].style.width == "") {
+                $wrapper.css('width', $image[0].style.width);
+                $wrapper.css('height', $image[0].style.height);
             }
 
             $image.height('auto');
