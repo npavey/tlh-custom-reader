@@ -9,60 +9,92 @@
     .document-editor > div {
         padding-bottom: 16px;
         border-bottom: 1px solid fade(@main-text-color, 10%);
+
         .document-container {
-            display: table;
-            width: 100%;
-            .download-document-btn {
-                padding: 10px 20px;
-                border-radius: 3px;
-                font-size: 14px;
-                white-space: nowrap;
-                text-decoration: none;
-                transition: background-color .3s;
-                color: fade(@main-text-color, 90%);
-                background-color: fade(@main-text-color, 10%);
 
-                &:hover, &:focus, &:active {
-                    color: fade(@main-text-color, 100%);
-                    background-color: fade(@main-text-color, 20%);
+            .document-info {
+                display: flex;
+                align-items: flex-start;
+                margin: 4px 0 10px 0;
+                justify-content: space-between;
+
+                .document-title-wrapper {
+                    display: flex;
+                    align-items: flex-start;
+                    padding-bottom: 10px;
+                    flex: 0 1 690px;
+
+                    .document-icon, .document-title {
+                        display: flex;
+                    }
+
+                    .document-icon {
+                        font-size: 36px;
+                        color: fade(@main-text-color, 50%);
+                        margin-right: 21px;
+                        flex: 0 0 32px;
+
+                        .icon-container {
+                            position: relative;
+
+                            .document-type-text {
+                                position: absolute;
+                                font-family: 'Arial';
+                                font-size: 13px;
+                                top: 13px;
+                                left: 0;
+                                white-space: nowrap;
+                                width: 100%;
+                                text-align: center;
+                            }
+
+                            &::after{
+                                content: '';
+                                display: block;
+                                position: absolute;
+                                top: 50%;
+                                right: 0;
+                                width: 1px;
+                                height: 22px;
+                                margin: -11px -10px 0 0;
+                                background-color: rgba(66, 81, 95, 0.1);
+                            }
+                        }
+                    }
+                    
+                    .document-title {
+                        padding: 8px 20px 0 0;
+                        font-size: 14px;
+                        color: fade(@main-text-color, 80%);
+                        word-wrap: break-word;
+                        word-break: break-word; /*Fix for Safary*/
+                        word-break: break-all; /*Fix for IE11*/
+                    }
                 }
-            }
-            .document-icon, .document-title, .download-document-btn-container, .separator {
-                display: table-cell;
-                vertical-align: middle;
-            }
-            .document-icon {
-                font-size: 36px;
-                color: fade(@main-text-color, 50%);
 
-                .icon-container {
-                    position: relative;
+                .download-document-btn-container {
+                    display: flex;
 
-                    .document-type-text {
-                        position: absolute;
-                        font-family: 'Arial';
-                        text-transform: uppercase;
-                        font-size: 10px;
-                        top: 16px;
-                        left: 6px;
-                        line-height: 1;
+                    .download-document-btn {
+                        padding: 10px 20px;
+                        border-radius: 3px;
+                        font-size: 14px;
+                        white-space: nowrap;
+                        text-decoration: none;
+                        transition: background-color .3s;
+                        color: fade(@main-text-color, 90%);
+                        background-color: fade(@main-text-color, 10%);
+
+                        &:hover, &:focus, &:active {
+                            color: fade(@main-text-color, 100%);
+                            background-color: fade(@main-text-color, 20%);
+                        }
                     }
                 }
             }
-            .separator {
-                padding: 10px;
-                &:before {
-                    content: '';
-                    display: block;
-                    width: 1px;
-                    height: 22px;
-                    background-color: fade(@main-text-color, 10%);
-                }
-            }
-            .document-title {
-                width: 100%;
-                font-size: 14px;
-                color: fade(@main-text-color, 80%);
+
+            .document-editor-frame-wrapper {
+                padding-top: 15px;
             }
         }
     }
@@ -509,6 +541,20 @@
             li {
                 &:before {
                     top: @Normal-size - 4;
+                }
+            }
+        }
+    }
+}
+
+@media(max-width: 640px) {
+    .styled-content {
+        .document-editor { 
+            &>div {
+                .document-container {
+                    .document-info {
+                        flex-wrap: wrap;
+                    }
                 }
             }
         }
