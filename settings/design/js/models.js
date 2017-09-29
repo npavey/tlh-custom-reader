@@ -13,27 +13,30 @@
         var that = this;
 
         that.url = ko.observable('');
-        that.hasLogo = ko.computed(function () {
-            return that.url() !== '';
-        });
+        that.logoUrl = ko.observable('');
         that.clear = function () {
             that.url('');
+            that.logoUrl('');
             saveChanges();
         };
         that.isError = ko.observable(false);
+        that.isValidUrl = ko.observable(true);
         that.errorText = ko.observable('');
         that.errorDescription = ko.observable('');
         that.isLoading = ko.observable(false);
         
         that.hasLogo = ko.computed(function () {
             that.isError(false);
-            return that.url() !== '';
+            return that.logoUrl() !== '';
         });
 
         that.setUrl = setUrl;
+        that.setLogoUrl = setLogoUrl;
         that.getData = getData;
 
         that.upload = upload;
+
+        that.validateUrl = validateUrl;
 
         init(logoSettings);
 
@@ -45,6 +48,7 @@
             }
 
             that.setUrl(logoSettings.url);
+            that.setLogoUrl(logoSettings.url);
         }
 
         function upload() {
@@ -56,6 +60,7 @@
                 setLoadingStatus();
             }).done(function (url) {
                 setUrl(url);
+                setLogoUrl(url);
                 setDefaultStatus();
                 saveChanges();
             }).fail(function (reason) {
@@ -86,10 +91,34 @@
             that.url(url || '');
         }
 
+        function setLogoUrl(url) {
+            that.logoUrl(url || '');
+        }
+
         function getData() {
             return {
-                url: that.url()
+                url: that.logoUrl()
             };
+        }
+
+        function validateUrl(){
+            url = that.url();
+            if(!url) {
+                that.setLogoUrl();
+                that.isValidUrl(true);
+            } else {
+                return app.validateUrl(url).then(function(validUrl) {
+                    if(!validUrl){
+                        that.isValidUrl(false);
+                        that.errorText(app.localize('httpIsNotAllowed'));
+                        return; 
+                    } 
+                    
+                    that.isValidUrl(true);
+                    that.setLogoUrl(validUrl);
+                    saveChanges();
+                });
+            }
         }
     }
 

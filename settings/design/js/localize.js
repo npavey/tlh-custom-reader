@@ -24,6 +24,7 @@
 
         'choose color scheme': 'Choose color scheme:',
         'scheme': 'Scheme:',
+        'httpIsNotAllowed': 'HTTP content is not allowed. Please use HTTPS.',
 
         //background
         'background change': 'Change background:',
