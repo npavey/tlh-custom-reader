@@ -93,6 +93,11 @@
       "code": "no",
       "name": "Norwegian",
       "url": "lang/no.json"
+    },
+    {
+      "code": "ca",
+      "name": "Catalan",
+      "url": "lang/ca.json"
     }
   ]
 }
