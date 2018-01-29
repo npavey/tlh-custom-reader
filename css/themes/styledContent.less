@@ -99,7 +99,14 @@
         }
     }
 
-    .document-block-iframe {        
+    .document-block-iframe-wrapper {
+        max-height: 550px;	
+        -webkit-overflow-scrolling: touch;
+        overflow: auto;
+    }
+
+    .document-block-iframe {
+        display: block;      
         border: 1px solid fade(@main-text-color, 10%);
     }
     /*endregion*/
