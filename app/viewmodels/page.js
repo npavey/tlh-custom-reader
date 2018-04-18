@@ -1,4 +1,4 @@
-﻿define(['knockout', 'Q', 'plugins/router', 'dataContext'], function (ko, Q, router, dataContext) {
+﻿define(['knockout', 'Q', 'plugins/http', 'plugins/router', 'dataContext'], function (ko, Q, http, router, dataContext) {
 
     var ViewModel = function () {
         this.sectionTitle = ko.observable();
@@ -15,29 +15,34 @@
     ViewModel.prototype.activate = function (sectionId, pageId) {
         var
             section = dataContext.getSection(sectionId),
-            page = dataContext.getPage(sectionId, pageId),
-            contents = [],
-            promises = []
+            page = dataContext.getPage(sectionId, pageId)
         ;
 
         this.sectionTitle(section.title);
         this.pageTitle(page.title);
         this.isViewReady(false);
 
-        page.contents.forEach(function (content, index) {
-            promises.push(content.text().then(function (text) {
-                contents[index] = text;
-            }));
-        });
-
         var that = this;
-        return Q.all(promises).then(function () {
-            that.contents(contents);
-            //setTimeout(function() {
-                that.isViewReady(true);
-            //}, 250);
-
+        return loadContents(page.contents).then(function () {
+            that.contents(page.contents);
+            that.isViewReady(true);
         });
+    }
+
+    function loadContents(items) {
+        var promises = [];
+        
+        items.forEach(function (item) {
+            if (typeof item.content === typeof undefined) {
+                promises.push(http.get(item.contentUrl, { dataType: 'html' }).then(function(content) {
+                    item.content = content;
+                }));
+            }
+
+            promises.push(loadContents(item.children));
+        });
+
+        return Q.all(promises);
     }
 
     return ViewModel;

@@ -2,18 +2,26 @@
 
     ko.bindingHandlers.toggle = {
         init: function (element, valueAccessor) {
-            toggle(element, ko.unwrap(valueAccessor()), 0);
+            toggle(element, ko.unwrap(valueAccessor().condition), 0, ko.unwrap(valueAccessor().isHorizontalDirection));
         },
         update: function (element, valueAccessor) {
-            toggle(element, ko.unwrap(valueAccessor()), 300);
+            toggle(element, ko.unwrap(valueAccessor().condition), 300, ko.unwrap(valueAccessor().isHorizontalDirection));
         }
     }
 
-    function toggle(element, condition, duration) {
+    function toggle(element, condition, duration, isHorizontalDirection) {
         if (condition) {
-            $(element).show(duration);
+            if(!isHorizontalDirection) {
+                $(element).show(duration);
+            } else {
+                $(element).slideDown(duration);
+            }
         } else {
-            $(element).hide(duration);
+            if(!isHorizontalDirection) {
+                $(element).hide(duration);
+            } else {
+                $(element).slideUp(duration);
+            }
         }
     }
 })

@@ -8,7 +8,12 @@
 
     <!-- ko if: isViewReady -->
     <!-- ko foreach: contents -->
-    <section class="learning-content styled-content" data-bind="learningContent: $data"></section>
+    <!-- ko ifnot: children.length -->
+    <section class="learning-content styled-content" data-bind="learningContent: content"></section>
+    <!-- /ko -->
+    <!-- ko if: children.length -->
+    <section class="learning-content expandable-block-wrapper" data-bind="compose: { model:'viewmodels/expandableBlock', activationData: $data }"></section>
+    <!-- /ko -->
     <!-- /ko -->
     <!-- /ko -->
     <!-- ko ifnot: isViewReady -->

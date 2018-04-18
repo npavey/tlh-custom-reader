@@ -1,4 +1,4 @@
-﻿define(['models/Course', 'models/Section', 'models/Page', 'models/Content', 'Q', 'templateSettings'], function (Course, Section, Page, Content, Q, templateSettings) {
+﻿define(['models/Course', 'models/Section', 'models/Page', 'models/ContentBlock', 'Q', 'templateSettings'], function (Course, Section, Page, ContentBlock, Q, templateSettings) {
     "use strict";
 
     var course;
@@ -61,8 +61,8 @@
                         dobj.questions.forEach(function (dq) {
                             var page = new Page(dq.id, dq.title);
                             if (Array.isArray(dq.learningContents)) {
-                                dq.learningContents.forEach(function (dc) {
-                                    page.contents.push(new Content(dc.id, 'content/' + dobj.id + '/' + dq.id + '/' + dc.id + '.html?v=' + Math.random()));
+                                dq.learningContents.forEach(function (item) {
+                                    page.contents.push(mapLearningContent(item, dobj.id, dq.id));
                                 });
                             }
                             if (page.contents.length) {
@@ -93,6 +93,15 @@
         });
 
         return dfd.promise;
+    }
+
+    function mapLearningContent(item, dobjId, dqId) {
+        var contentUrl = 'content/' + dobjId + '/' + dqId + '/' + item.id + '.html?v=' + Math.random();
+        var children = item.children.map(function (childItem) {
+            return mapLearningContent(childItem, dobjId, dqId);
+        });
+
+        return new ContentBlock(item.id, contentUrl, children);
     }
 
 });

@@ -8,3 +8,4 @@ Web.config
 /.vs/reader/v14/.suo
 /reader.sln
 /.vs/config/applicationhost.config
+.DS_Store
