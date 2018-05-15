@@ -10,17 +10,19 @@
     }
 
     function toggle(element, condition, duration, isHorizontalDirection) {
+        var $element = $(element);
+        $element.css('overflow', 'hidden');
         if (condition) {
             if(!isHorizontalDirection) {
-                $(element).show(duration);
+                $element.show(duration);
             } else {
-                $(element).slideDown(duration);
+                $element.css('height', '').hide().slideDown();
             }
         } else {
             if(!isHorizontalDirection) {
-                $(element).hide(duration);
+                $element.hide(duration);
             } else {
-                $(element).slideUp(duration);
+                $element.animate({height: 0});
             }
         }
     }
