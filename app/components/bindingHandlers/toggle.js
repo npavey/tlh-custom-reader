@@ -11,18 +11,17 @@
 
     function toggle(element, condition, duration, isHorizontalDirection) {
         var $element = $(element);
-        $element.css('overflow', 'hidden');
         if (condition) {
             if(!isHorizontalDirection) {
                 $element.show(duration);
             } else {
-                $element.css('height', '').hide().slideDown();
+                $element.css('height', '').hide().slideDown(function(){$element.css('overflow', '')});
             }
         } else {
             if(!isHorizontalDirection) {
                 $element.hide(duration);
             } else {
-                $element.animate({height: 0});
+                $element.css('overflow', 'hidden').animate({height: 0});
             }
         }
     }
