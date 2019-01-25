@@ -4,8 +4,7 @@
   "description": "Template that is used to create a formal reading",
   "main": "gulpfile.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "resources": "easyresources generate --worksheetName \"Reader\" --outputPath \"lang\""
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
