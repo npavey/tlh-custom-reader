@@ -21,7 +21,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="introduction-content styled-content" data-bind="html: introductionContent, elementsWrap: {}"></div>
+                        <!-- ko foreach: introductions -->
+                            <!-- ko ifnot: children.length -->
+                            <div data-bind="learningContent: content" class="introduction-item styled-content"></div>
+                            <!-- /ko -->
+                            <!-- ko if: children.length -->
+                                <div class="expandable-introduction-item expandable-block-wrapper" data-bind="compose: { model:'viewmodels/expandableBlock', activationData: $data }"></div>
+                            <!-- /ko -->
+                        <!-- /ko -->
                     </div>
                 </div>
                 <div class="start-button-wrapper">

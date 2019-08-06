@@ -7,7 +7,7 @@
         this.author = author;
         this.logo = null;
         this.sections = [];
-        this.introductionContent = '';
+        this.introductions = '';
     };
 
     return Course;

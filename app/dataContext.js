@@ -76,20 +76,34 @@
                 });
             }
 
-            if (data.hasIntroductionContent) {
+            if (data.introductions) {
+                data.introductions.forEach(function(item, index) {
+                  course.introductions = data.introductions;
+                  if(item.children && item.children.length) {
+                    item.children.forEach(function(child, childIndex){
+                        $.ajax({
+                            url: "content/introduction/" + child.id + ".html?v=" + Math.random(),
+                            dataType: 'html'
+                        }).then(function (response) {
+                            course.introductions[index].children[childIndex].content = response;
+                            dfd.resolve();
+                        });
+                    })
+                  }
+
                 $.ajax({
-                    url: 'content/content.html?v=' + Math.random(),
+                    url: 'content/introduction/'+ item.id +'.html?v=' + Math.random(),
                     dataType: 'html'
-                }).then(function (introductionContent) {
-                    course.introductionContent = introductionContent;
+                }).then(function (response) {
+                    course.introductions[index].content = response;
                     dfd.resolve();
                 });
-            } else {
-                dfd.resolve();
-            }
-
+                
+            });
+        } else {
+            dfd.resolve();
+        }
             course.logo = templateSettings.logo.url;
-
         });
 
         return dfd.promise;

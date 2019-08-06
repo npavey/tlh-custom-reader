@@ -16,8 +16,8 @@
         viewModel.title = course.title;
         viewModel.author = course.author;
         viewModel.logo = course.logo;
-        viewModel.hasIntroductionContent = course.introductionContent.length > 0;
-        viewModel.introductionContent = course.introductionContent;
+        viewModel.hasIntroductionContent = course.introductions.length > 0;
+        viewModel.introductions = course.introductions;
         viewModel.isIntroductionVisible = ko.observable(viewModel.hasIntroductionContent && !sessionStorage.getItem('introductionWasShown'));
 
         viewModel.sections = course.sections.map(function (section) {
