@@ -18,14 +18,14 @@
   ],
   "dependencies": {
     "components-webfontloader": "~1.6.3",
-    "easygenerator-plugins": "*",
+    "easygenerator-plugins": "#fix-chromebook-recognition",
     "knockout": "~3.3.0",
     "durandal": "~2.1.0",
     "jquery": "~2.1.4",
     "underscore": "~1.8.3",
     "q": "1.0.1",
     "malihu-custom-scrollbar-plugin": "~3.0.9",
-    "easygenerator-easystyles": "#fix-chromebook-recognition"
+    "easygenerator-easystyles": "*"
   },
   "resolutions": {
     "jquery": "~2.1.4"
