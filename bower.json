@@ -25,7 +25,7 @@
     "underscore": "~1.8.3",
     "q": "1.0.1",
     "malihu-custom-scrollbar-plugin": "~3.0.9",
-    "easygenerator-easystyles": "*"
+    "easygenerator-easystyles": "#fix-chromebook-recognition"
   },
   "resolutions": {
     "jquery": "~2.1.4"
