@@ -18,7 +18,7 @@
   ],
   "dependencies": {
     "components-webfontloader": "~1.6.3",
-    "easygenerator-plugins": "#fix-chromebook-recognition",
+    "easygenerator-plugins": "*",
     "knockout": "~3.3.0",
     "durandal": "~2.1.0",
     "jquery": "~2.1.4",
