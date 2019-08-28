@@ -76,7 +76,6 @@
                 });
             }
 
-            data.introductions = [];
             if (data.hasIntroductionContent && data.introductions) {
                 data.introductions.forEach(function(item, index) {
                   course.introductions = data.introductions;
