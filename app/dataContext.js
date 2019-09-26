@@ -76,7 +76,7 @@
                 });
             }
 
-            if (data.introductions) {
+            if (data.hasIntroductionContent && data.introductions) {
                 data.introductions.forEach(function(item, index) {
                   course.introductions = data.introductions;
                   if(item.children && item.children.length) {
