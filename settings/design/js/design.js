@@ -34,7 +34,7 @@
             return;
         }
 
-        window.egApi.saveSettings(newSettings, newExtraData, app.localize('changes are saved'), app.localize('changes are not saved'))
+        window.egApi.saveDesignSettings(newSettings, newExtraData, app.localize('changes are saved'), app.localize('changes are not saved'))
             .done(function () {
                 currentSettings = settings;
                 currentExtraData = extraData;
@@ -45,7 +45,7 @@
         var api = window.egApi;
         return api.init().then(function () {
             var user = api.getUser(),
-                settings = api.getSettings();
+                settings = api.getDesignSettings();
 
             viewModel.userAccess = new app.UserAccessModel(user);
             viewModel.logo = new app.LogoModel(settings.logo, viewModel.saveChanges);
