@@ -1,11 +1,13 @@
 {
   "name": "Reader",
-  "version": "1.0.0",
+  "version": "3.0.0",
   "description": "Template that is used to create a formal reading",
   "main": "gulpfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "resources": "easyresources generate --worksheetName \"Reader\" --outputPath \"lang\""
+    "resources": "easyresources generate --worksheetName \"Reader\" --outputPath \"lang\"",
+    "build": "gulp build",
+    "postversion": "git push && git push --tags"
   },
   "repository": {
     "type": "git",

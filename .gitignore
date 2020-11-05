@@ -9,3 +9,4 @@ Web.config
 /reader.sln
 /.vs/config/applicationhost.config
 .DS_Store
+.idea
